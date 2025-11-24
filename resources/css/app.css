@@ -1,2 +1,5 @@
-@import 'tailwindcss';
-@import '../../vendor/livewire/flux/dist/flux.css';
+@import "tailwindcss";
+
+[x-cloak] {
+    display: none !important;
+}

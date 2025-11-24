@@ -36,9 +36,9 @@ class AgencyApplicationRequest extends ApiFormRequest
             'contact_phone' => ['required', 'string', 'max:20'],
             'contact_email' => ['required', 'email', 'max:255'],
             
-            // Documents
-            'business_license_path' => ['nullable', 'max:2048'],
-            'company_logo_path' => ['nullable', 'max:2048'],
+            // Documents (files)
+            'business_license' => ['nullable', 'file', 'mimes:jpg,jpeg,png,pdf', 'max:2048'],
+            'company_logo' => ['nullable', 'file', 'mimes:jpg,jpeg,png', 'max:2048'],
             
             // Optional metadata
             'locale' => ['nullable', 'string', 'max:5'],

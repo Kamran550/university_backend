@@ -7,62 +7,68 @@
 
     <title>{{ config('app.name', 'Laravel') }} - Admin Panel</title>
 
-    @fluxAppearance
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @livewireStyles
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </head>
-<body class="min-h-screen bg-white dark:bg-zinc-800 antialiased">
-    <flux:sidebar sticky collapsible class="bg-zinc-50 dark:bg-zinc-900 border-r border-zinc-200 dark:border-zinc-700 w-64">
-        <flux:sidebar.header class="py-4">
-            <flux:sidebar.brand
-                href="#"
-                logo="https://fluxui.dev/img/demo/logo.png"
-                logo:dark="https://fluxui.dev/img/demo/dark-mode-logo.png"
-                name="{{ config('app.name', 'Online University') }}"
-            />
-            <flux:sidebar.collapse class="lg:hidden" />
-        </flux:sidebar.header>
-        <flux:sidebar.nav class="space-y-1">
-            <flux:sidebar.item icon="home" href="#" current class="py-3">Dashboard</flux:sidebar.item>
-            <flux:sidebar.item icon="academic-cap" href="#" class="py-3">Tələbələr</flux:sidebar.item>
-            <flux:sidebar.item icon="users" href="#" class="py-3">Müəllimlər</flux:sidebar.item>
-            <flux:sidebar.item icon="book-open" href="#" class="py-3">Kurslar</flux:sidebar.item>
-            <flux:sidebar.item icon="rectangle-group" href="#" class="py-3">Qruplar</flux:sidebar.item>
-            <flux:sidebar.item icon="calendar" href="#" class="py-3">Təqvim</flux:sidebar.item>
-            <flux:sidebar.item icon="inbox" badge="5" href="#" class="py-3">Mesajlar</flux:sidebar.item>
-        </flux:sidebar.nav>
-        <flux:sidebar.spacer />
-        <flux:sidebar.nav class="space-y-1">
-            <flux:sidebar.item icon="cog-6-tooth" href="#" class="py-3">Tənzimləmələr</flux:sidebar.item>
-            <flux:sidebar.item icon="information-circle" href="#" class="py-3">Yardım</flux:sidebar.item>
-        </flux:sidebar.nav>
-        <flux:dropdown position="top" align="start" class="max-lg:hidden">
-            <flux:sidebar.profile avatar="https://fluxui.dev/img/demo/user.png" name="{{ auth()->user()->name ?? 'Admin' }}" />
-            <flux:menu>
-                <flux:menu.item icon="user-circle" href="#">Profil</flux:menu.item>
-                <flux:menu.separator />
-                <flux:menu.item icon="arrow-right-start-on-rectangle" href="#">Çıxış</flux:menu.item>
-            </flux:menu>
-        </flux:dropdown>
-    </flux:sidebar>
-    <flux:header class="lg:hidden">
-        <flux:sidebar.toggle class="lg:hidden" icon="bars-2" inset="left" />
-        <flux:spacer />
-        <flux:dropdown position="top" align="start">
-            <flux:profile avatar="https://fluxui.dev/img/demo/user.png" name="{{ auth()->user()->name ?? 'Admin' }}" />
-            <flux:menu>
-                <flux:menu.item icon="user-circle" href="#">Profil</flux:menu.item>
-                <flux:menu.separator />
-                <flux:menu.item icon="arrow-right-start-on-rectangle" href="#">Çıxış</flux:menu.item>
-            </flux:menu>
-        </flux:dropdown>
-    </flux:header>
-    <flux:main>
-        {{ $slot }}
-    </flux:main>
+<body class="min-h-screen bg-gray-100 antialiased" x-data="{ sidebarOpen: false }" @keydown.escape="sidebarOpen = false">
+    
+    <!-- Sidebar -->
+    <div class="flex h-screen overflow-hidden">
+        <livewire:admin.sidebar />
+        <!-- Mobile Overlay -->
+        <div 
+            x-show="sidebarOpen" 
+            @click="sidebarOpen = false"
+            x-transition:enter="transition-opacity ease-linear duration-300"
+            x-transition:enter-start="opacity-0"
+            x-transition:enter-end="opacity-100"
+            x-transition:leave="transition-opacity ease-linear duration-300"
+            x-transition:leave-start="opacity-100"
+            x-transition:leave-end="opacity-0"
+            class="fixed inset-0 bg-gray-900 bg-opacity-50 z-40 lg:hidden"
+            style="display: none;"
+        ></div>
+        
+        <!-- Sidebar -->
+        
+        <!-- Main Content -->
+        <div class="flex-1 flex flex-col overflow-hidden lg:ml-0">
+            
+            <!-- Top Bar -->
+            <header class="bg-white shadow-sm sticky top-0 z-30">
+                <div class="px-4 sm:px-6 py-3 sm:py-4 flex items-center justify-between">
+                    <div class="flex items-center gap-3 sm:gap-4">
+                        <!-- Hamburger Menu (mobile only) -->
+                        <button 
+                            @click="sidebarOpen = true" 
+                            class="lg:hidden text-gray-600 hover:text-gray-900 focus:outline-none"
+                        >
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                            </svg>
+                        </button>
+                        <h2 class="text-lg sm:text-xl font-semibold text-gray-800">Admin Panel</h2>
+                    </div>
+                    <div class="flex items-center space-x-2 sm:space-x-4">
+                        <button class="text-gray-600 hover:text-gray-900 p-2">
+                            <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </header>
+            
+            <!-- Page Content -->
+            <main class="flex-1 overflow-y-auto bg-gray-100">
+                {{ $slot }}
+            </main>
+            
+        </div>
+    </div>
 
-    @fluxScripts
     @livewireScripts
 </body>
-
-
 </html>
+

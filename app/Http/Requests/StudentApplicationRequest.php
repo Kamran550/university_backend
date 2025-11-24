@@ -46,11 +46,11 @@ class StudentApplicationRequest extends ApiFormRequest
             'city' => ['required', 'string', 'max:100'],
             'address_line' => ['required', 'string'],
             
-            // Documents (file paths)
-            'photo_id_path' => ['nullable', 'max:255'],
-            'profile_photo_path' => ['nullable', 'max:255'],
-            'diploma_path' => ['nullable', 'max:255'],
-            'transcript_path' => ['required', 'max:255'],
+            // Documents (files)
+            'photo_id' => ['nullable', 'file', 'mimes:jpg,jpeg,png,pdf', 'max:2048'],
+            'profile_photo' => ['nullable', 'file', 'mimes:jpg,jpeg,png', 'max:2048'],
+            'diploma' => ['nullable', 'file', 'mimes:jpg,jpeg,png,pdf', 'max:2048'],
+            'transcript' => ['required', 'file', 'mimes:jpg,jpeg,png,pdf', 'max:2048'],
             
             // Optional metadata
             'locale' => ['nullable', 'string', 'max:5'],

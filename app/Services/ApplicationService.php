@@ -8,7 +8,9 @@ use App\Models\Application;
 use App\Models\Degree;
 use App\Models\Faculty;
 use App\Repositories\Interfaces\ApplicationRepositoryInterface;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class ApplicationService
 {
@@ -16,6 +18,25 @@ class ApplicationService
         protected ApplicationRepositoryInterface $applicationRepository
     ) {
         //
+    }
+
+    /**
+     * Handle file upload and return path.
+     *
+     * @param UploadedFile|null $file
+     * @param string $directory
+     * @return string|null
+     */
+    protected function handleFileUpload(?UploadedFile $file, string $directory): ?string
+    {
+        if (!$file) {
+            return null;
+        }
+
+        $filename = time() . '_' . uniqid() . '.' . $file->getClientOriginalExtension();
+        $path = $file->storeAs($directory, $filename, 'public');
+        
+        return $path;
     }
 
     /**
@@ -48,6 +69,12 @@ class ApplicationService
             // Create application
             $application = $this->applicationRepository->create($applicationData);
 
+            // Handle file uploads
+            $photoIdPath = $this->handleFileUpload($data['photo_id'] ?? null, 'applications/student/photo-ids');
+            $profilePhotoPath = $this->handleFileUpload($data['profile_photo'] ?? null, 'applications/student/profile-photos');
+            $diplomaPath = $this->handleFileUpload($data['diploma'] ?? null, 'applications/student/diplomas');
+            $transcriptPath = $this->handleFileUpload($data['transcript'] ?? null, 'applications/student/transcripts');
+
             // Prepare student application data
             $studentData = [
                 'first_name' => $data['first_name'],
@@ -63,10 +90,10 @@ class ApplicationService
                 'country' => $data['country'],
                 'city' => $data['city'],
                 'address_line' => $data['address_line'],
-                'photo_id_path' => $data['photo_id_path'],
-                'profile_photo_path' => $data['profile_photo_path'] ?? null,
-                'diploma_path' => $data['diploma_path'] ?? null,
-                'transcript_path' => $data['transcript_path'],
+                'photo_id_path' => $photoIdPath,
+                'profile_photo_path' => $profilePhotoPath,
+                'diploma_path' => $diplomaPath,
+                'transcript_path' => $transcriptPath,
             ];
 
             // Create student application
@@ -106,6 +133,10 @@ class ApplicationService
             // Create application
             $application = $this->applicationRepository->create($applicationData);
 
+            // Handle file uploads
+            $businessLicensePath = $this->handleFileUpload($data['business_license'] ?? null, 'applications/agency/business-licenses');
+            $companyLogoPath = $this->handleFileUpload($data['company_logo'] ?? null, 'applications/agency/company-logos');
+
             // Prepare agency application data
             $agencyData = [
                 'agency_name' => $data['agency_name'],
@@ -116,8 +147,8 @@ class ApplicationService
                 'contact_name' => $data['contact_name'],
                 'contact_phone' => $data['contact_phone'],
                 'contact_email' => $data['contact_email'],
-                'business_license_path' => $data['business_license_path'] ?? null,
-                'company_logo_path' => $data['company_logo_path'] ?? null,
+                'business_license_path' => $businessLicensePath,
+                'company_logo_path' => $companyLogoPath,
             ];
 
             // Create agency application
