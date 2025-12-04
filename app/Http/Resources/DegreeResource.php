@@ -14,10 +14,20 @@ class DegreeResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
+        $faculties = collect();
+        
+        if ($this->relationLoaded('programs')) {
+            $faculties = $this->programs
+                ->pluck('faculty')
+                ->filter()
+                ->unique('id')
+                ->values();
+        }
+
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'faculties' => FacultyResource::collection($this->whenLoaded('faculties')),
+            'faculties' => FacultyResource::collection($faculties),
         ];
     }
 }

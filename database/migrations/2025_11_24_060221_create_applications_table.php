@@ -1,10 +1,10 @@
 <?php
 
+use App\Enums\ApplicationStatusEnum;
+use App\Enums\ApplicationTypeEnum;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use App\Enums\ApplicationStatusEnum;
-use App\Enums\ApplicationTypeEnum;
 
 return new class extends Migration
 {
@@ -18,11 +18,7 @@ return new class extends Migration
             $table->enum('applicant_type', ApplicationTypeEnum::values())->default(ApplicationTypeEnum::STUDENT->value);
             
             // Proqram məlumatı
-            $table->foreignId('degree_id')->constrained()->onDelete('cascade');
-            $table->string('degree_name', 100);
-            $table->foreignId('faculty_id')->constrained()->onDelete('cascade');
-            $table->string('faculty_name', 100);
-            
+            $table->foreignId('program_id')->constrained()->onDelete('cascade');
             // Status
             $table->enum('status', ApplicationStatusEnum::values())->default(ApplicationStatusEnum::PENDING->value);
             $table->timestamp('submitted_at')->useCurrent();
@@ -34,12 +30,8 @@ return new class extends Migration
             $table->text('user_agent')->nullable();
             $table->string('locale', 5)->default('en');
             
+            $table->softDeletes();
             $table->timestamps();
-            
-            // Indexes
-            $table->index('status');
-            $table->index('degree_id');
-            $table->index('submitted_at');
         });
     }
 

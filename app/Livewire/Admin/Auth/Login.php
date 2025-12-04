@@ -1,0 +1,65 @@
+<?php
+
+namespace App\Livewire\Admin\Auth;
+
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Livewire\Attributes\Layout;
+use Livewire\Component;
+
+#[Layout('layouts.auth')]
+class Login extends Component
+{
+    public $email = '';
+    public $password = '';
+    public $remember = false;
+    public $error = '';
+
+    protected $rules = [
+        'email' => 'required|email',
+        'password' => 'required|min:6',
+    ];
+
+    protected $messages = [
+        'email.required' => 'Email ünvanı tələb olunur.',
+        'email.email' => 'Düzgün email ünvanı daxil edin.',
+        'password.required' => 'Şifrə tələb olunur.',
+        'password.min' => 'Şifrə ən azı 6 simvol olmalıdır.',
+    ];
+
+    public function login()
+    {
+        $this->validate();
+
+        $user = User::where('email', $this->email)->first();
+
+        if (!$user) {
+            $this->error = 'Email və ya şifrə yanlışdır.';
+            return;
+        }
+
+        // Check if user has admin role (role_id = 1)
+        if ($user->role_id !== 1) {
+            $this->error = 'Bu səhifəyə giriş üçün admin hüququ lazımdır.';
+            return;
+        }
+
+        if (!Hash::check($this->password, $user->password)) {
+            $this->error = 'Email və ya şifrə yanlışdır.';
+            return;
+        }
+
+        Auth::login($user, $this->remember);
+
+        session()->regenerate();
+
+        return $this->redirect(route('admin.dashboard'), navigate: true);
+    }
+
+    public function render()
+    {
+        return view('livewire.admin.auth.login');
+    }
+}
+

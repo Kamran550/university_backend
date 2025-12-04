@@ -4,9 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 class StudentApplication extends Model
 {
+    use HasFactory, SoftDeletes;
     protected $fillable = [
         'application_id',
         'first_name',
@@ -26,6 +28,8 @@ class StudentApplication extends Model
         'profile_photo_path',
         'diploma_path',
         'transcript_path',
+        'student_number',
+        'passport_number',
     ];
 
     protected $hidden = [
@@ -43,5 +47,18 @@ class StudentApplication extends Model
     public function application(): BelongsTo
     {
         return $this->belongsTo(Application::class);
+    }
+
+    /**
+     * Generate a unique verification code for the acceptance letter.
+     */
+
+    /**
+     * Get verification URL for the acceptance letter.
+     */
+    public function getVerificationUrl(): string
+    {
+        $domain = config('app.verify_domain', 'verify.eipu.edu.pl');
+        return "https://{$domain}";
     }
 }

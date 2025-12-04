@@ -24,10 +24,10 @@ class StudentApplicationRequest extends ApiFormRequest
     {
         return [
             // Application fields
-            'degree_id' => ['required', 'integer', 'exists:degrees,id'],
-            'faculty_id' => ['required', 'integer', 'exists:faculties,id'],
+            'program_id' => ['required', 'integer', 'exists:programs,id'],
             
             // Student personal information
+            'passport_number' => ['nullable', 'string', 'max:50'],
             'first_name' => ['required', 'string', 'max:100'],
             'last_name' => ['required', 'string', 'max:100'],
             'father_name' => ['required', 'string', 'max:100'],

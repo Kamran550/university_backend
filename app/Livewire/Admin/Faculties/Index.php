@@ -36,7 +36,7 @@ class Index extends Component
     public function render()
     {
         return view('livewire.admin.faculties.index', [
-            'faculties' => Faculty::with('degrees')->paginate(5),
+            'faculties' => Faculty::paginate(5),
         ]);
     }
 }

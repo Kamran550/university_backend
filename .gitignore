@@ -1,8 +1,12 @@
 *.log
 .DS_Store
+
+# Environment files
 .env
-.env.backup
-.env.production
+.env.*
+!.env.example
+
+# IDE files
 .phpactor.json
 .phpunit.result.cache
 /.fleet
@@ -12,13 +16,37 @@
 /.vscode
 /.zed
 /auth.json
+
+# Dependencies
 /node_modules
+/vendor
+
+# Build files
 /public/build
 /public/hot
+
+# Storage symlink (created by php artisan storage:link)
 /public/storage
+
+# Storage files (PDFs, documents, etc. - stored in Digital Ocean Spaces in production)
+/storage/app/public/applications/
+/storage/app/private/
+/storage/framework/cache/
+/storage/framework/sessions/
+/storage/framework/views/
+/storage/framework/testing/
+/storage/logs/
 /storage/*.key
 /storage/pail
-/vendor
+
+# Bootstrap cache
+/bootstrap/cache/*.php
+!/bootstrap/cache/.gitkeep
+
+# Homestead
 Homestead.json
 Homestead.yaml
+
+# OS files
 Thumbs.db
+.DS_Store

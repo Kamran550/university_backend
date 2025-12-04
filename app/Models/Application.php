@@ -5,23 +5,26 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use App\Enums\ApplicationStatusEnum;
-
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 class Application extends Model
 {
+    use HasFactory, SoftDeletes;
     protected $fillable = [
+        'program_id',
         'applicant_type',
-        'degree_id',
-        'degree_name',
-        'faculty_id',
         'faculty_name',
         'status',
         'submitted_at',
         'reviewed_at',
         'reviewed_by',
+        'user_id',
         'ip_address',
         'user_agent',
         'locale',
+        
     ];
 
     protected $hidden = [
@@ -36,19 +39,11 @@ class Application extends Model
     ];
 
     /**
-     * Get the degree that owns the application.
+     * Get the program that owns the application.
      */
-    public function degree(): BelongsTo
+    public function program(): BelongsTo
     {
-        return $this->belongsTo(Degree::class);
-    }
-
-    /**
-     * Get the faculty that owns the application.
-     */
-    public function faculty(): BelongsTo
-    {
-        return $this->belongsTo(Faculty::class);
+        return $this->belongsTo(Program::class);
     }
 
     /**
@@ -65,5 +60,17 @@ class Application extends Model
     public function agencyApplication(): HasOne
     {
         return $this->hasOne(AgencyApplication::class);
+    }
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    /**
+     * Get the document verifications for the application.
+     */
+    public function documentVerifications(): HasMany
+    {
+        return $this->hasMany(DocumentVerification::class);
     }
 }

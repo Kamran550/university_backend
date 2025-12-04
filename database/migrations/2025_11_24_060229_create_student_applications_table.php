@@ -17,6 +17,8 @@ return new class extends Migration
             $table->foreignId('application_id')->unique()->constrained()->onDelete('cascade');
             
             // Şəxsi məlumat
+            $table->string('student_number', 20)->unique();
+            $table->string('passport_number', 50)->nullable();
             $table->string('first_name', 100);
             $table->string('last_name', 100);
             $table->string('father_name', 100);
@@ -40,11 +42,13 @@ return new class extends Migration
             $table->string('profile_photo_path', 255)->nullable();
             $table->string('diploma_path', 255)->nullable();
             $table->string('transcript_path', 255);
-            
+            $table->softDeletes();
             $table->timestamps();
             
             // Indexes
             $table->index('email');
+            $table->index('student_number');
+            $table->index('passport_number');
         });
     }
 
