@@ -1,0 +1,133 @@
+<div>
+    @if($program)
+    <!-- Form -->
+    <form wire:submit="update">
+        
+        <!-- Program Name Field -->
+        <div class="mb-6">
+            <label for="edit-modal-name" class="block text-sm font-medium text-gray-700 mb-2">
+                Proqram Adı <span class="text-red-500">*</span>
+            </label>
+            <input 
+                type="text" 
+                id="edit-modal-name"
+                wire:model="name"
+                class="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-150 ease-in-out @error('name') border-red-500 @else border-gray-300 @enderror"
+                placeholder="Məsələn: Kompüter Elmləri, İqtisadiyyat, Hüquq"
+                autofocus
+            >
+            @error('name')
+                <p class="mt-2 text-sm text-red-600 flex items-center">
+                    <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
+                    {{ $message }}
+                </p>
+            @enderror
+        </div>
+
+        <!-- Degree Field -->
+        <div class="mb-6">
+            <label for="edit-modal-degree" class="block text-sm font-medium text-gray-700 mb-2">
+                Dərəcə <span class="text-red-500">*</span>
+            </label>
+            <select 
+                id="edit-modal-degree"
+                wire:model.live="degree_id"
+                class="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-150 ease-in-out @error('degree_id') border-red-500 @else border-gray-300 @enderror"
+            >
+                <option value="">Dərəcə seçin</option>
+                @foreach($degrees as $degree)
+                    <option value="{{ $degree->id }}">{{ $degree->name }}</option>
+                @endforeach
+            </select>
+            @error('degree_id')
+                <p class="mt-2 text-sm text-red-600 flex items-center">
+                    <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
+                    {{ $message }}
+                </p>
+            @enderror
+        </div>
+
+        <!-- Faculty Field -->
+        <div class="mb-6">
+            <label for="edit-modal-faculty" class="block text-sm font-medium text-gray-700 mb-2">
+                Fakültə <span class="text-red-500">*</span>
+            </label>
+            <select 
+                id="edit-modal-faculty"
+                wire:model="faculty_id"
+                class="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-150 ease-in-out @error('faculty_id') border-red-500 @else border-gray-300 @enderror"
+                @if(!$degree_id) disabled @endif
+            >
+                <option value="">@if($degree_id) Fakültə seçin @else Əvvəlcə dərəcə seçin @endif</option>
+                @if($degree_id)
+                    @foreach($faculties as $faculty)
+                        <option value="{{ $faculty->id }}">{{ $faculty->name }}</option>
+                    @endforeach
+                @endif
+            </select>
+            @error('faculty_id')
+                <p class="mt-2 text-sm text-red-600 flex items-center">
+                    <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
+                    {{ $message }}
+                </p>
+            @enderror
+        </div>
+
+        <!-- Price per Year Field -->
+        <div class="mb-6">
+            <label for="edit-modal-price" class="block text-sm font-medium text-gray-700 mb-2">
+                İllik Qiymət (₼) <span class="text-red-500">*</span>
+            </label>
+            <input 
+                type="number" 
+                id="edit-modal-price"
+                wire:model="price_per_year"
+                min="0"
+                step="1"
+                class="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-150 ease-in-out @error('price_per_year') border-red-500 @else border-gray-300 @enderror"
+                placeholder="0"
+            >
+            @error('price_per_year')
+                <p class="mt-2 text-sm text-red-600 flex items-center">
+                    <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
+                    {{ $message }}
+                </p>
+            @enderror
+        </div>
+
+        <!-- Form Actions -->
+        <div class="flex items-center justify-end gap-4 pt-6 border-t border-gray-200">
+            <button 
+                type="button"
+                @click="$dispatch('close-edit-modal')"
+                class="inline-flex items-center px-6 py-3 bg-gray-100 hover:bg-gray-200 text-gray-700 text-sm font-medium rounded-lg shadow-sm transition duration-150 ease-in-out">
+                Ləğv et
+            </button>
+            <button 
+                type="submit"
+                class="inline-flex items-center px-6 py-3 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-medium rounded-lg shadow-sm transition duration-150 ease-in-out disabled:opacity-50 disabled:cursor-not-allowed"
+                wire:loading.attr="disabled"
+            >
+                <span wire:loading.remove wire:target="update">
+                    Yadda saxla
+                </span>
+                <span wire:loading wire:target="update" class="flex items-center">
+                    <svg class="animate-spin -ml-1 mr-2 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                </span>
+            </button>
+        </div>
+
+    </form>
+    @endif
+</div>

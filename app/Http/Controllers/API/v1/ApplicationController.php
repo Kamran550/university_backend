@@ -31,7 +31,7 @@ class ApplicationController extends Controller
 
             return $this->successResponse(
                 'Student application submitted successfully',
-                $application->load('degree', 'faculty', 'studentApplication')
+                $application->load('program', 'studentApplication')
             );
         } catch (\Exception $e) {
             return $this->errorResponse(
@@ -55,7 +55,7 @@ class ApplicationController extends Controller
 
             return $this->successResponse(
                 'Agency application submitted successfully',
-                $application->load('degree', 'faculty', 'agencyApplication')
+                $application->load('program', 'agencyApplication')
             );
         } catch (\Exception $e) {
             return $this->errorResponse(

@@ -17,3 +17,7 @@ Route::domain('student.eipu.edu.pl')->group(function () {
     require base_path('routes/student.php');
 });
 
+
+Route::domain('verify.eipu.edu.pl')->group(function () {
+    require base_path(path: 'routes/verify.php');
+});

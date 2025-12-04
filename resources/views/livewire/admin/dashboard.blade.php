@@ -11,7 +11,7 @@
                 <div class="flex items-center justify-between">
                     <div>
                         <p class="text-xs sm:text-sm font-medium text-gray-600">Tələbələr</p>
-                        <p class="text-2xl sm:text-3xl font-bold text-gray-900 mt-1 sm:mt-2">1,234</p>
+                        <p class="text-2xl sm:text-3xl font-bold text-gray-900 mt-1 sm:mt-2">{{ number_format($studentsCount) }}</p>
                     </div>
                     <div class="p-2 sm:p-3 bg-blue-100 rounded-full">
                         <svg class="w-6 h-6 sm:w-8 sm:h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -19,7 +19,6 @@
                         </svg>
                     </div>
                 </div>
-                <p class="text-xs sm:text-sm text-green-600 mt-3 sm:mt-4">↑ 12% bu ayda</p>
             </div>
             
             <!-- Teachers Card -->
@@ -27,7 +26,7 @@
                 <div class="flex items-center justify-between">
                     <div>
                         <p class="text-xs sm:text-sm font-medium text-gray-600">Müəllimlər</p>
-                        <p class="text-2xl sm:text-3xl font-bold text-gray-900 mt-1 sm:mt-2">89</p>
+                        <p class="text-2xl sm:text-3xl font-bold text-gray-900 mt-1 sm:mt-2">{{ number_format($teachersCount) }}</p>
                     </div>
                     <div class="p-2 sm:p-3 bg-purple-100 rounded-full">
                         <svg class="w-6 h-6 sm:w-8 sm:h-8 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -35,15 +34,14 @@
                         </svg>
                     </div>
                 </div>
-                <p class="text-xs sm:text-sm text-green-600 mt-3 sm:mt-4">↑ 5% bu ayda</p>
             </div>
             
-            <!-- Faculties Card -->
+            <!-- Programs Card -->
             <div class="bg-white rounded-lg sm:rounded-xl shadow-lg border border-gray-200 p-4 sm:p-6">
                 <div class="flex items-center justify-between">
                     <div>
-                        <p class="text-xs sm:text-sm font-medium text-gray-600">Fakültələr</p>
-                        <p class="text-2xl sm:text-3xl font-bold text-gray-900 mt-1 sm:mt-2">24</p>
+                        <p class="text-xs sm:text-sm font-medium text-gray-600">Proqramlar</p>
+                        <p class="text-2xl sm:text-3xl font-bold text-gray-900 mt-1 sm:mt-2">{{ number_format($programsCount) }}</p>
                     </div>
                     <div class="p-2 sm:p-3 bg-indigo-100 rounded-full">
                         <svg class="w-6 h-6 sm:w-8 sm:h-8 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -51,7 +49,6 @@
                         </svg>
                     </div>
                 </div>
-                <p class="text-xs sm:text-sm text-gray-600 mt-3 sm:mt-4">Aktiv fakültələr</p>
             </div>
             
             <!-- Applications Card -->
@@ -59,7 +56,7 @@
                 <div class="flex items-center justify-between">
                     <div>
                         <p class="text-xs sm:text-sm font-medium text-gray-600">Müraciətlər</p>
-                        <p class="text-2xl sm:text-3xl font-bold text-gray-900 mt-1 sm:mt-2">156</p>
+                        <p class="text-2xl sm:text-3xl font-bold text-gray-900 mt-1 sm:mt-2">{{ number_format($applicationsCount) }}</p>
                     </div>
                     <div class="p-2 sm:p-3 bg-yellow-100 rounded-full">
                         <svg class="w-6 h-6 sm:w-8 sm:h-8 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -67,38 +64,13 @@
                         </svg>
                     </div>
                 </div>
-                <p class="text-xs sm:text-sm text-yellow-600 mt-3 sm:mt-4">12 gözləyən</p>
+                @if($pendingApplicationsCount > 0)
+                    <p class="text-xs sm:text-sm text-yellow-600 mt-3 sm:mt-4">{{ $pendingApplicationsCount }} gözləyən</p>
+                @endif
             </div>
             
         </div>
         
-        <!-- Recent Activity -->
-        <div class="bg-white rounded-lg sm:rounded-xl shadow-lg border border-gray-200 p-4 sm:p-6">
-            <h2 class="text-lg sm:text-xl font-bold text-gray-900 mb-3 sm:mb-4">Son Aktivliklər</h2>
-            <div class="space-y-3 sm:space-y-4">
-                <div class="flex items-center justify-between py-2 sm:py-3 border-b border-gray-100">
-                    <div class="flex items-center min-w-0 flex-1 mr-2">
-                        <div class="w-2 h-2 shrink-0 bg-green-500 rounded-full mr-2 sm:mr-3"></div>
-                        <span class="text-sm sm:text-base text-gray-700 truncate">Yeni tələbə qeydiyyatı</span>
-                    </div>
-                    <span class="text-xs sm:text-sm text-gray-500 whitespace-nowrap">2 dəq</span>
-                </div>
-                <div class="flex items-center justify-between py-2 sm:py-3 border-b border-gray-100">
-                    <div class="flex items-center min-w-0 flex-1 mr-2">
-                        <div class="w-2 h-2 shrink-0 bg-blue-500 rounded-full mr-2 sm:mr-3"></div>
-                        <span class="text-sm sm:text-base text-gray-700 truncate">Fakültə yeniləndi</span>
-                    </div>
-                    <span class="text-xs sm:text-sm text-gray-500 whitespace-nowrap">15 dəq</span>
-                </div>
-                <div class="flex items-center justify-between py-2 sm:py-3">
-                    <div class="flex items-center min-w-0 flex-1 mr-2">
-                        <div class="w-2 h-2 shrink-0 bg-purple-500 rounded-full mr-2 sm:mr-3"></div>
-                        <span class="text-sm sm:text-base text-gray-700 truncate">Yeni müəllim əlavə edildi</span>
-                    </div>
-                    <span class="text-xs sm:text-sm text-gray-500 whitespace-nowrap">1 saat</span>
-                </div>
-            </div>
-        </div>
         
     </div>
 </div>

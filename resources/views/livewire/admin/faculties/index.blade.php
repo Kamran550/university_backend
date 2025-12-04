@@ -1,4 +1,4 @@
-<div class="p-6 max-w-7xl mx-auto">
+<div class="p-6 max-w-7xl mx-auto" x-data="{ showModal: false, showEditModal: false, showDeleteModal: false }" @close-modal.window="showModal = false" @close-edit-modal.window="showEditModal = false" @close-delete-modal.window="showDeleteModal = false" @faculty-created.window="showModal = false; $wire.$refresh()" @faculty-updated.window="showEditModal = false; $wire.$refresh()" @faculty-deleted.window="showDeleteModal = false; $wire.$refresh()">
     
     <!-- Header -->
     <div class="mb-8 flex items-center justify-between">
@@ -6,12 +6,14 @@
             <h1 class="text-3xl font-bold text-gray-900">Fakültələr</h1>
             <p class="mt-1 text-sm text-gray-600">Bütün fakültələri və onların dərəcələrini idarə edin</p>
         </div>
-        <a href="#" class="inline-flex items-center px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-medium rounded-lg shadow-sm transition duration-150 ease-in-out">
+        <button 
+            @click="showModal = true; $nextTick(() => $dispatch('reset-form'))"
+            class="inline-flex items-center px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-medium rounded-lg shadow-sm transition duration-150 ease-in-out">
             <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
             </svg>
             Yeni Fakültə
-        </a>
+        </button>
     </div>
 
     <!-- Table Card -->
@@ -27,9 +29,6 @@
                         </th>
                         <th scope="col" class="px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
                             Fakültə Adı
-                        </th>
-                        <th scope="col" class="px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
-                            Dərəcələr
                         </th>
                         <th scope="col" class="px-6 py-4 text-center text-xs font-semibold text-gray-700 uppercase tracking-wider w-32">
                             Əməliyyatlar
@@ -61,36 +60,24 @@
                                 </div>
                             </td>
                             
-                            <!-- Degrees -->
-                            <td class="px-6 py-4">
-                                @if($faculty->degrees->count() > 0)
-                                    <div class="flex flex-wrap gap-2">
-                                        @foreach($faculty->degrees as $degree)
-                                            <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium
-                                                {{ $degree->name === 'Bachelor' ? 'bg-green-100 text-green-800' : '' }}
-                                                {{ $degree->name === 'Master' ? 'bg-blue-100 text-blue-800' : '' }}
-                                                {{ $degree->name === 'PhD' ? 'bg-purple-100 text-purple-800' : '' }}
-                                            ">
-                                                {{ $degree->name }}
-                                            </span>
-                                        @endforeach
-                                    </div>
-                                @else
-                                    <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-500">
-                                        Dərəcə təyin edilməyib
-                                    </span>
-                                @endif
-                            </td>
                             
                             <!-- Actions -->
                             <td class="px-6 py-4 whitespace-nowrap text-center">
                                 <div class="flex items-center justify-center gap-2">
-                                    <a href="#" class="inline-flex items-center px-3 py-1.5 bg-gray-100 hover:bg-gray-200 text-gray-700 text-xs font-medium rounded-md transition duration-150 ease-in-out">
+                                    <button 
+                                        @click="showEditModal = true; $dispatch('edit-faculty', { facultyId: {{ $faculty->id }} })"
+                                        class="inline-flex items-center px-3 py-1.5 bg-gray-100 hover:bg-gray-200 text-gray-700 text-xs font-medium rounded-md transition duration-150 ease-in-out">
                                         <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
                                         </svg>
-                                        Düzəliş
-                                    </a>
+                                    </button>
+                                    <button 
+                                        @click="showDeleteModal = true; $dispatch('delete-faculty', { facultyId: {{ $faculty->id }} })"
+                                        class="inline-flex items-center px-3 py-1.5 bg-red-100 hover:bg-red-200 text-red-700 text-xs font-medium rounded-md transition duration-150 ease-in-out">
+                                        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                                        </svg>
+                                    </button>
                                 </div>
                             </td>
                             
@@ -118,6 +105,165 @@
     <div class="mt-6">
         {{ $faculties->links() }}
     </div>
-@endif
+    @endif
+
+    <!-- Modal -->
+    <div 
+        x-show="showModal"
+        x-cloak
+        x-transition:enter="transition ease-out duration-300"
+        x-transition:enter-start="opacity-0"
+        x-transition:enter-end="opacity-100"
+        x-transition:leave="transition ease-in duration-200"
+        x-transition:leave-start="opacity-100"
+        x-transition:leave-end="opacity-0"
+        class="fixed inset-0 z-50 overflow-y-auto"
+        @click.self="showModal = false"
+        style="display: none;"
+    >
+        <!-- Backdrop -->
+        <div class="fixed inset-0 bg-gray-900 bg-opacity-50 transition-opacity"></div>
+        
+        <!-- Modal Panel -->
+        <div class="flex min-h-full items-center justify-center p-4">
+            <div 
+                @click.stop
+                x-show="showModal"
+                x-transition:enter="transition ease-out duration-300"
+                x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100"
+                x-transition:leave="transition ease-in duration-200"
+                x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100"
+                x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                class="relative bg-white rounded-xl shadow-xl max-w-md w-full p-6"
+            >
+                <!-- Modal Header -->
+                <div class="flex items-center justify-between mb-6">
+                    <div>
+                        <h2 class="text-2xl font-bold text-gray-900">Yeni Fakültə</h2>
+                        <p class="mt-1 text-sm text-gray-600">Yeni fakültə əlavə edin</p>
+                    </div>
+                    <button 
+                        @click="showModal = false"
+                        class="text-gray-400 hover:text-gray-600 transition duration-150 ease-in-out"
+                    >
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                        </svg>
+                    </button>
+                </div>
+
+                <!-- Modal Body -->
+                <div x-show="showModal">
+                    <livewire:admin.faculties.create />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Modal -->
+    <div 
+        x-show="showEditModal"
+        x-cloak
+        x-transition:enter="transition ease-out duration-300"
+        x-transition:enter-start="opacity-0"
+        x-transition:enter-end="opacity-100"
+        x-transition:leave="transition ease-in duration-200"
+        x-transition:leave-start="opacity-100"
+        x-transition:leave-end="opacity-0"
+        class="fixed inset-0 z-50 overflow-y-auto"
+        @click.self="showEditModal = false"
+        style="display: none;"
+    >
+        <!-- Backdrop -->
+        <div class="fixed inset-0 bg-gray-900 bg-opacity-50 transition-opacity"></div>
+        
+        <!-- Modal Panel -->
+        <div class="flex min-h-full items-center justify-center p-4">
+            <div 
+                @click.stop
+                x-show="showEditModal"
+                x-transition:enter="transition ease-out duration-300"
+                x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100"
+                x-transition:leave="transition ease-in duration-200"
+                x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100"
+                x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                class="relative bg-white rounded-xl shadow-xl max-w-md w-full p-6"
+            >
+                <!-- Modal Header -->
+                <div class="flex items-center justify-between mb-6">
+                    <div>
+                        <h2 class="text-2xl font-bold text-gray-900">Fakültəni Redaktə Et</h2>
+                        <p class="mt-1 text-sm text-gray-600">Fakültə məlumatlarını yeniləyin</p>
+                    </div>
+                    <button 
+                        @click="showEditModal = false"
+                        class="text-gray-400 hover:text-gray-600 transition duration-150 ease-in-out"
+                    >
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                        </svg>
+                    </button>
+                </div>
+
+                <!-- Modal Body -->
+                <div x-show="showEditModal">
+                    <livewire:admin.faculties.edit />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Delete Modal -->
+        <div 
+        x-show="showDeleteModal"
+        x-cloak
+        x-transition:enter="transition ease-out duration-300"
+        x-transition:enter-start="opacity-0"
+        x-transition:enter-end="opacity-100"
+        x-transition:leave="transition ease-in duration-200"
+        x-transition:leave-start="opacity-100"
+        x-transition:leave-end="opacity-0"
+        class="fixed inset-0 z-50 overflow-y-auto"
+        @click.self="showDeleteModal = false"
+        style="display: none;"
+    >
+        <!-- Backdrop -->
+        <div class="fixed inset-0 bg-gray-900 bg-opacity-50 transition-opacity"></div>
+        
+        <!-- Modal Panel -->
+        <div class="flex min-h-full items-center justify-center p-4">
+            <div 
+                @click.stop
+                x-show="showDeleteModal"
+                x-transition:enter="transition ease-out duration-300"
+                x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100"
+                x-transition:leave="transition ease-in duration-200"
+                x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100"
+                x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                class="relative bg-white rounded-xl shadow-xl max-w-md w-full p-6"
+            >
+                <!-- Modal Header -->
+                <div class="flex items-center justify-between mb-6">
+                    <h2 class="text-2xl font-bold text-gray-900">Fakültəni Sil</h2>
+                    <button 
+                        @click="showDeleteModal = false"
+                        class="text-gray-400 hover:text-gray-600 transition duration-150 ease-in-out"
+                    >
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                        </svg>
+                    </button>
+                </div>
+
+                <!-- Modal Body -->
+                <div x-show="showDeleteModal">
+                    <livewire:admin.faculties.delete />
+                </div>
+            </div>
+        </div>
+    </div>
 
 </div>

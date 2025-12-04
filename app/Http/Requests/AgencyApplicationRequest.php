@@ -38,7 +38,7 @@ class AgencyApplicationRequest extends ApiFormRequest
             
             // Documents (files)
             'business_license' => ['nullable', 'file', 'mimes:jpg,jpeg,png,pdf', 'max:2048'],
-            'company_logo' => ['nullable', 'file', 'mimes:jpg,jpeg,png', 'max:2048'],
+            'company_logo' => ['nullable', 'file', 'mimes:jpg,jpeg,png,pdf', 'max:2048'],
             
             // Optional metadata
             'locale' => ['nullable', 'string', 'max:5'],

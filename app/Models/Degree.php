@@ -3,26 +3,27 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Degree extends Model
 {
+    use HasFactory, SoftDeletes;
     protected $fillable = [
         'name',
     ];
-    
 
     protected $hidden = [
         'created_at',
         'updated_at',
-        'pivot',
     ];
 
     /**
-     * Get the faculties for the degree.
+     * Get the programs for the degree.
      */
-    public function faculties(): BelongsToMany
+    public function programs(): HasMany
     {
-        return $this->belongsToMany(Faculty::class);
+        return $this->hasMany(Program::class);
     }
 }

@@ -7,10 +7,14 @@ use App\Enums\ApplicationTypeEnum;
 use App\Models\Application;
 use App\Models\Degree;
 use App\Models\Faculty;
+use App\Models\Program;
+use App\Models\StudentApplication;
 use App\Repositories\Interfaces\ApplicationRepositoryInterface;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class ApplicationService
 {
@@ -40,6 +44,34 @@ class ApplicationService
     }
 
     /**
+     * Generate student number in format: 20251100XXXX (10 digits total)
+     * Examples: 2025110001, 2025110002, 2025110011
+     * 
+     * @return string
+     */
+    protected function generateStudentNumber(): string
+    {
+        $prefix = '20251100';
+        
+        // Get the last student application to find the highest student number
+        $lastStudent = StudentApplication::orderBy('student_number', 'desc')
+            ->where('student_number', 'like', $prefix . '%')
+            ->first();
+        
+        if ($lastStudent && $lastStudent->student_number) {
+            // Extract the sequence number from the last student number (last 4 digits)
+            $lastSequence = (int) substr($lastStudent->student_number, -4);
+            $newSequence = $lastSequence + 1;
+        } else {
+            // First student
+            $newSequence = 1;
+        }
+        
+        // Format the new student number with leading zeros (4 digits)
+        return $prefix . str_pad($newSequence, 4, '0', STR_PAD_LEFT);
+    }
+
+    /**
      * Store a student application.
      *
      * @param array $data
@@ -49,23 +81,21 @@ class ApplicationService
     {
         return DB::transaction(function () use ($data) {
             // Get degree and faculty names
-            $degree = Degree::findOrFail($data['degree_id']);
-            $faculty = Faculty::findOrFail($data['faculty_id']);
-
+            Log::info('Program ID: ' . $data['program_id']);
+            
             // Prepare application data
             $applicationData = [
                 'applicant_type' => ApplicationTypeEnum::STUDENT->value,
-                'degree_id' => $data['degree_id'],
-                'degree_name' => $degree->name,
-                'faculty_id' => $data['faculty_id'],
-                'faculty_name' => $faculty->name,
+                'program_id' => $data['program_id'],
                 'status' => ApplicationStatusEnum::PENDING->value,
                 'submitted_at' => now(),
                 'ip_address' => request()->ip(),
                 'user_agent' => request()->userAgent(),
                 'locale' => $data['locale'] ?? 'en',
             ];
+            
 
+            Log::info('Application data: ' . json_encode($applicationData));
             // Create application
             $application = $this->applicationRepository->create($applicationData);
 
@@ -75,8 +105,13 @@ class ApplicationService
             $diplomaPath = $this->handleFileUpload($data['diploma'] ?? null, 'applications/student/diplomas');
             $transcriptPath = $this->handleFileUpload($data['transcript'] ?? null, 'applications/student/transcripts');
 
+            // Generate student number
+            $studentNumber = $this->generateStudentNumber();
+
             // Prepare student application data
             $studentData = [
+                'student_number' => $studentNumber,
+                'passport_number' => $data['passport_number'] ?? null,
                 'first_name' => $data['first_name'],
                 'last_name' => $data['last_name'],
                 'father_name' => $data['father_name'],

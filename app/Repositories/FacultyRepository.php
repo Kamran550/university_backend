@@ -9,23 +9,23 @@ use Illuminate\Database\Eloquent\Collection;
 class FacultyRepository implements FacultyRepositoryInterface
 {
     /**
-     * Get all faculties.
+     * Get all faculties with their degrees through programs.
      *
      * @return Collection
      */
     public function getAll(): Collection
     {
-        return Faculty::with('degrees:id,name')->get();
+        return Faculty::with(['programs.degree:id,name'])->get();
     }
 
     /**
-     * Get a faculty by id.
+     * Get a faculty by id with its degrees through programs.
      *
      * @param int $id
      * @return Faculty|null
      */
     public function getById(int $id): ?Faculty
     {
-        return Faculty::with('degrees:id,name')->find($id);
+        return Faculty::with(['programs.degree:id,name'])->find($id);
     }
 }
