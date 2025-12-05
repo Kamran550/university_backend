@@ -11,7 +11,7 @@
         }
         
         body {
-            font-family: 'Arial', 'Helvetica', sans-serif;
+            font-family: 'Times New Roman', 'Times', 'Georgia', serif;
             font-size: 7.5pt;
             line-height: 1.3;
             color: #000;
@@ -387,7 +387,7 @@
     <!-- Signature Section -->
     <div class="signature-section">
         <div class="signature-name">
-            Soroush RAHMANIBOUKANI
+            Kanan KARİMOV
         </div>
         <div class="signature-title">
             General Secretary
@@ -419,7 +419,7 @@
                 <td style="padding-left: 10px;">
                     <div style="background: #f0f0f0; padding: 12px 15px; border-radius: 8px; font-size: 11px; line-height: 1.4;">
                         This document was e-signed for <strong>{{ strtoupper($student->first_name . ' ' . $student->last_name) }}</strong> on {{ now()->format('d/m/Y') }} with document number 
-                        <strong>{{ $student->application->documentVerification->verification_code ?? strtoupper(Str::random(12)) }}</strong>.
+                        <strong>{{ $verificationCode ?? strtoupper(Str::random(12)) }}</strong>.
                         The validity of the document can be confirmed by scanning the QR code or by document number at 
                         <strong>{{ $student->getVerificationUrl() }}</strong>.
                     </div>

@@ -28,6 +28,7 @@ class AcceptanceLetterMail extends Mailable
     public function __construct(StudentApplication $student)
     {
         $this->student = $student;
+        
     }
 
     /**
@@ -84,6 +85,7 @@ class AcceptanceLetterMail extends Mailable
             // Generate PDF from the acceptance letter blade template
             $pdf = Pdf::loadView('livewire.admin.applications.student.acceptance-letter', [
                 'student' => $this->student,
+                'verificationCode' => $verificationCode,
             ])->setPaper('a4', 'portrait');
 
             $fileName = 'Qebul_Mektubu_' . $this->student->first_name . '_' . $this->student->last_name . '_' . now()->format('Y-m-d') . '.pdf';

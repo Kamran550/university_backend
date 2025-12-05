@@ -23,14 +23,16 @@ class FinalAcceptanceLetterMail extends Mailable
 
     public StudentApplication $student;
     public User $user;
+    public ?string $plainPassword;
 
     /**
      * Create a new message instance.
      */
-    public function __construct(StudentApplication $student, User $user)
+    public function __construct(StudentApplication $student, User $user, ?string $plainPassword = null)
     {
         $this->student = $student;
         $this->user = $user;
+        $this->plainPassword = $plainPassword;
     }
 
     /**
@@ -53,6 +55,7 @@ class FinalAcceptanceLetterMail extends Mailable
             with: [
                 'student' => $this->student,
                 'user' => $this->user,
+                'plainPassword' => $this->plainPassword,
             ],
         );
     }
@@ -76,7 +79,7 @@ class FinalAcceptanceLetterMail extends Mailable
                 
                 $documentVerification = DocumentVerification::create([
                     'application_id' => $this->student->application->id,
-                    'document_type' => DocumentTypeEnum::ACCEPTANCE,
+                    'document_type' => DocumentTypeEnum::CERTIFICATE,
                     'verification_code' => $verificationCode,
                     'file_path' => null, // Will be updated after PDF is saved
                 ]);
@@ -89,6 +92,7 @@ class FinalAcceptanceLetterMail extends Mailable
             $pdf = Pdf::loadView('livewire.admin.applications.student.final-acceptance-letter', [
                 'student' => $this->student,
                 'user' => $this->user,
+                'verificationCode' => $verificationCode,
             ])->setPaper('a4', 'portrait');
 
             $fileName = 'Student_Certificate_' . $this->student->first_name . '_' . $this->student->last_name . '_' . now()->format('Y-m-d') . '.pdf';

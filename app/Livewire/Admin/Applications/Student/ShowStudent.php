@@ -127,33 +127,24 @@ class ShowStudent extends Component
             // Check if user already exists
             $user = User::where('email', $this->student->email)->first();
 
+            $plainPassword = null;
+            
             if (!$user) {
+                // Generate random password
+                $plainPassword = Str::random(12);
+                
                 // Create new user
-                $user = DB::transaction(function () {
-                    // Generate username from email or create unique username
-                    // $baseUsername = Str::before($this->student->email, '@');
-                    // $username = $baseUsername;
-                    // $counter = 1;
-                    
-                    // while (User::where('username', $username)->exists()) {
-                    //     $username = $baseUsername . $counter;
-                    //     $counter++;
-                    // }
-
-                    // Generate random password
-                    $password = Str::random(12);
-                    Log::info('Password: ' . $password);
+                $user = DB::transaction(function () use ($plainPassword) {
+                    Log::info('Password: ' . $plainPassword);
 
                     // Get student role (assuming role_id 3 is for students, adjust as needed)
-                    // If roles table doesn't have student role, you may need to create it or use null
-
                     $user = User::create([
                         'name' => $this->student->first_name,
                         'surname' => $this->student->last_name,
                         'email' => $this->student->email,
                         'username' => $this->student->student_number,
                         'phone' => $this->student->phone,
-                        'password' => Hash::make($password),
+                        'password' => Hash::make($plainPassword),
                         'role_id' => 3, // Default to first role if student role doesn't exist
                     ]);
 
@@ -182,7 +173,7 @@ class ShowStudent extends Component
             // Check mail configuration
             $mailDriver = config('mail.default');
             
-            Mail::to($this->student->email)->send(new FinalAcceptanceLetterMail($this->student, $user));
+            Mail::to($this->student->email)->send(new FinalAcceptanceLetterMail($this->student, $user, $plainPassword));
             
             if ($mailDriver === 'log') {
                 session()->flash('success', 'Tam qəbul məktubu log faylına yazıldı. SMTP konfiqurasiyası üçün .env faylında MAIL_MAILER=smtp təyin edin.');

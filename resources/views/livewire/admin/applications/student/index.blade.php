@@ -82,12 +82,7 @@
                                 
                                 <!-- Program (Hidden on tablet) -->
                                 <td class="hidden lg:table-cell px-4 sm:px-6 py-3 sm:py-4">
-                                    @if($app->application)
-                                        <div class="text-sm text-gray-900">{{ $app->application->degree_name }}</div>
-                                        <div class="text-xs text-gray-500">{{ $app->application->faculty_name }}</div>
-                                    @else
-                                        <span class="text-xs text-gray-400">N/A</span>
-                                    @endif
+                                    <div class="text-sm text-gray-900">{{ $app->application?->program?->name ?? 'N/A' }}</div>
                                 </td>
                                 
                                 <!-- Status -->

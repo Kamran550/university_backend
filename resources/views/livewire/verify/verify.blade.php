@@ -99,12 +99,12 @@
                     <div class="bg-white rounded-lg border border-gray-200 shadow-lg overflow-hidden">
                         <div class="p-4 bg-gray-50 border-b border-gray-200">
                             <h3 class="text-xl font-semibold text-gray-800">
-                                @if($application->document_type === 'acceptance')
-                                    Qəbul Məktubu
-                                @elseif($application->document_type === 'certificate')
-                                    Sertifikat
+                                @if($application->document_type === \App\Enums\DocumentTypeEnum::ACCEPTANCE)
+                                    Acceptance Letter
+                                @elseif($application->document_type === \App\Enums\DocumentTypeEnum::CERTIFICATE)
+                                    Certificate
                                 @else
-                                    Sənəd
+                                    Document
                                 @endif
                             </h3>
                         </div>
@@ -112,14 +112,14 @@
                             <iframe 
                                 src="{{ $pdfUrl }}" 
                                 class="w-full h-full border-0"
-                                title="@if($application->document_type === 'acceptance') Qəbul Məktubu @else Sertifikat @endif"
+                                title="{{ $application->document_type === \App\Enums\DocumentTypeEnum::ACCEPTANCE ? 'Acceptance Letter' : 'Certificate' }}"
                             ></iframe>
                         </div>
                     </div>
                 @else
                     <div class="p-4 rounded-lg bg-yellow-50 border border-yellow-200">
                         <p class="text-sm text-yellow-800 text-center font-medium">
-                            PDF faylı tapılmadı.
+                            PDF not found.
                         </p>
                     </div>
                 @endif
