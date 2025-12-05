@@ -11,7 +11,7 @@
         }
         
         body {
-            font-family: 'Arial', 'Helvetica', sans-serif;
+            font-family: 'Times New Roman', 'Times', 'Georgia', serif;
             font-size: 7.5pt;
             line-height: 1.3;
             color: #000;
@@ -136,7 +136,7 @@
             font-weight: bold;
             margin: 8px 0 5px 0;
             padding: 4px 6px;
-            background-color: #f0f0f0;
+            /* background-color: #fff; */
             border-left: 3px solid #000;
         }
         
@@ -158,7 +158,7 @@
             font-weight: bold;
             width: 40%;
             border: 1px solid #000;
-            background-color: #f9f9f9;
+            /* background-color: #fff; */
         }
         
         .info-value {
@@ -189,7 +189,7 @@
         }
         
         .payment-table th {
-            background-color: #f0f0f0;
+            background-color: #fff;
             color: #000;
             font-weight: bold;
             text-transform: uppercase;
@@ -225,7 +225,7 @@
             margin: 8px 0;
             padding: 6px;
             border: 1.5px solid #000;
-            background-color: #fafafa;
+            /* background-color: #fff; */
         }
         
         .important-title {
@@ -431,10 +431,6 @@
             <div class="info-value"><strong>{{ strtoupper($student->first_name . ' ' . $student->last_name) }}</strong></div>
         </div>
         <div class="info-row">
-            <div class="info-label">Passport No</div>
-            <div class="info-value">{{ $student->passport_number ?? 'N/A' }}</div>
-        </div>
-        <div class="info-row">
             <div class="info-label">Date of Birth / Citizenship</div>
             <div class="info-value">{{ $student->date_of_birth ? $student->date_of_birth->format('d/m/Y') : 'N/A' }} – {{ $student->nationality ?? 'N/A' }}</div>
         </div>
@@ -638,7 +634,7 @@
                     This document was e-signed for 
                     <strong>{{ strtoupper($student->first_name . ' ' . $student->last_name) }}</strong>
                     on {{ now()->format('d/m/Y') }} with document number 
-                    <strong>{{ $student->application->documentVerification->verification_code ?? strtoupper(\Illuminate\Support\Str::random(12)) }}</strong>.
+                    <strong>{{ $verificationCode ?? strtoupper(\Illuminate\Support\Str::random(12)) }}</strong>.
                     The validity of the document can be confirmed by scanning the QR code or by document number at 
                     <strong>{{ $student->getVerificationUrl() }}</strong>.
                 </div>

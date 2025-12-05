@@ -36,7 +36,7 @@ class Index extends Component
     public function render()
     {
         return view('livewire.admin.applications.student.index', [
-            'applications' => StudentApplication::with('application')->paginate(10),
+            'applications' => StudentApplication::with('application.program')->paginate(10),
         ]);
     }
 }
