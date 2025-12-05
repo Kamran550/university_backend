@@ -6,14 +6,14 @@
         <!-- Name Field -->
         <div class="mb-6">
             <label for="edit-modal-name" class="block text-sm font-medium text-gray-700 mb-2">
-                Fakültə Adı <span class="text-red-500">*</span>
+                Faculty Name <span class="text-red-500">*</span>
             </label>
             <input 
                 type="text" 
                 id="edit-modal-name"
                 wire:model="name"
                 class="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-150 ease-in-out @error('name') border-red-500 @else border-gray-300 @enderror"
-                placeholder="Məsələn: İnformasiya Texnologiyaları, İqtisadiyyat, Hüquq"
+                placeholder="For example: Information Technology, Economics, Law"
                 autofocus
             >
             @error('name')
@@ -32,7 +32,7 @@
                 type="button"
                 @click="$dispatch('close-edit-modal')"
                 class="inline-flex items-center px-6 py-3 bg-gray-100 hover:bg-gray-200 text-gray-700 text-sm font-medium rounded-lg shadow-sm transition duration-150 ease-in-out">
-                Ləğv et
+                Cancel
             </button>
             <button 
                 type="submit"
@@ -40,7 +40,7 @@
                 wire:loading.attr="disabled"
             >
                 <span wire:loading.remove wire:target="update">
-                    Yadda saxla
+                    Save
                 </span>
                 <span wire:loading wire:target="update" class="flex items-center">
                     <svg class="animate-spin -ml-1 mr-2 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">

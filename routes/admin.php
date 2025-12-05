@@ -9,6 +9,7 @@ use App\Livewire\Admin\Degrees\Create as DegreesCreate;
 use App\Livewire\Admin\Faculties\Index as FacultiesIndex;
 use App\Livewire\Admin\Programs\Index as ProgramsIndex;
 use App\Livewire\Admin\Students\Index as StudentsIndex;
+use App\Livewire\Admin\Students\Show as StudentsShow;
 use App\Livewire\Admin\Teachers\Index as TeachersIndex;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -43,6 +44,7 @@ Route::name('admin.')->group(function () {
 
     Route::prefix('students')->name('students.')->group(function () {
         Route::get('/', StudentsIndex::class)->name('index');
+        Route::get('/{student}', StudentsShow::class)->name('show');
     });
 
     Route::prefix('teachers')->name('teachers.')->group(function () {

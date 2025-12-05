@@ -4,12 +4,12 @@
         <!-- Header -->
         <div class="mb-6 sm:mb-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <div>
-                <h1 class="text-2xl sm:text-3xl font-bold text-gray-900">Agentlik Müraciətləri</h1>
-                <p class="mt-1 text-sm text-gray-600">Bütün agentlik müraciətlərini idarə edin</p>
+                <h1 class="text-2xl sm:text-3xl font-bold text-gray-900">Agency Applications</h1>
+                <p class="mt-1 text-sm text-gray-600">All agency applications</p>
             </div>
             <div class="flex items-center gap-3">
                 <select class="px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
-                    <option>Hamısı</option>
+                    <option>All</option>
                     <option>Pending</option>
                     <option>Under Review</option>
                     <option>Approved</option>
@@ -30,19 +30,19 @@
                                 ID
                             </th>
                             <th scope="col" class="px-4 sm:px-6 py-3 sm:py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
-                                Agentlik
+                                Agency
                             </th>
                             <th scope="col" class="hidden md:table-cell px-4 sm:px-6 py-3 sm:py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
-                                Əlaqə Şəxsi
+                                Contact Person
                             </th>
                             <th scope="col" class="hidden lg:table-cell px-4 sm:px-6 py-3 sm:py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
-                                Ünvan
+                                Address
                             </th>
                             <th scope="col" class="px-4 sm:px-6 py-3 sm:py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
                                 Status
                             </th>
                             <th scope="col" class="px-4 sm:px-6 py-3 sm:py-4 text-center text-xs font-semibold text-gray-700 uppercase tracking-wider w-24 sm:w-32">
-                                Əməliyyatlar
+                                Actions
                             </th>
                         </tr>
                     </thead>
@@ -128,8 +128,8 @@
                                     <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
                                     </svg>
-                                    <h3 class="mt-2 text-sm font-medium text-gray-900">Müraciət tapılmadı</h3>
-                                    <p class="mt-1 text-sm text-gray-500">Hələ heç bir agentlik müraciəti yoxdur.</p>
+                                    <h3 class="mt-2 text-sm font-medium text-gray-900">Application not found</h3>
+                                    <p class="mt-1 text-sm text-gray-500">There is no agency application yet.</p>
                                 </td>
                             </tr>
                         @endforelse

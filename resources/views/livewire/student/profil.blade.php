@@ -2,8 +2,8 @@
     <div class="bg-white rounded-2xl shadow-sm border border-gray-100">
         <!-- Header -->
         <div class="border-b border-gray-100 px-6 py-4">
-            <h1 class="text-2xl font-semibold text-gray-900">Profil Ayarları</h1>
-            <p class="mt-1 text-sm text-gray-500">Şəxsi məlumatlarınızı və şifrənizi yeniləyin.</p>
+            <h1 class="text-2xl font-semibold text-gray-900">Profile Settings</h1>
+            <p class="mt-1 text-sm text-gray-500">Update your personal information and password.</p>
         </div>
 
         <!-- Form -->
@@ -41,7 +41,7 @@
             <form wire:submit="updateProfile" class="space-y-6">
                 <!-- Profile Photo Section -->
                 <div class="border-b border-gray-200 pb-6">
-                    <h2 class="text-lg font-semibold text-gray-900 mb-4">Profil Şəkli</h2>
+                    <h2 class="text-lg font-semibold text-gray-900 mb-4">Profile Photo</h2>
                     <div class="flex items-center gap-6">
                         <!-- Current Photo -->
                         <div class="shrink-0">
@@ -76,19 +76,19 @@
                                     <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
                                     </svg>
-                                    Şəkil seç
+                                    Select Photo
                                 </div>
                             </label>
                             @if($profile_photo)
                                 <p class="mt-2 text-sm text-gray-500">
                                     <span wire:loading.remove wire:target="profile_photo">{{ $profile_photo->getClientOriginalName() }}</span>
-                                    <span wire:loading wire:target="profile_photo">Yüklənir...</span>
+                                    <span wire:loading wire:target="profile_photo">Sending...</span>
                                 </p>
                             @endif
                             @error('profile_photo')
                                 <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                             @enderror
-                            <p class="mt-1 text-xs text-gray-500">JPG, PNG və ya GIF. Maksimum 2MB.</p>
+                            <p class="mt-1 text-xs text-gray-500">JPG, PNG and GIF. Maximum 2MB.</p>
                         </div>
                     </div>
                 </div>
@@ -116,12 +116,12 @@
 
                 <!-- Personal Information Section -->
                 <div>
-                    <h2 class="text-lg font-semibold text-gray-900 mb-4">Şəxsi Məlumatlar</h2>
+                    <h2 class="text-lg font-semibold text-gray-900 mb-4">Personal Information</h2>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <!-- Name -->
                         <div>
                             <label for="name" class="block text-sm font-medium text-gray-700 mb-2">
-                                Ad <span class="text-red-500">*</span>
+                                First Name <span class="text-red-500">*</span>
                             </label>
                             <input 
                                 id="name" 
@@ -130,7 +130,7 @@
                                 wire:model="name"
                                 required 
                                 class="appearance-none block w-full px-4 py-3 border border-gray-300 rounded-lg placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition duration-150 @error('name') border-red-300 @enderror"
-                                placeholder="Adınızı daxil edin"
+                                placeholder="Enter your first name"
                             >
                             @error('name')
                                 <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
@@ -140,7 +140,7 @@
                         <!-- Surname -->
                         <div>
                             <label for="surname" class="block text-sm font-medium text-gray-700 mb-2">
-                                Soyad <span class="text-red-500">*</span>
+                                Last Name <span class="text-red-500">*</span>
                             </label>
                             <input 
                                 id="surname" 
@@ -149,7 +149,7 @@
                                 wire:model="surname"
                                 required 
                                 class="appearance-none block w-full px-4 py-3 border border-gray-300 rounded-lg placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition duration-150 @error('surname') border-red-300 @enderror"
-                                placeholder="Soyadınızı daxil edin"
+                                placeholder="Enter your last name"
                             >
                             @error('surname')
                                 <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
@@ -168,7 +168,7 @@
                                 wire:model="email"
                                 required 
                                 class="appearance-none block w-full px-4 py-3 border border-gray-300 rounded-lg placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition duration-150 @error('email') border-red-300 @enderror"
-                                placeholder="Email ünvanınızı daxil edin"
+                                placeholder="Enter your email"
                             >
                             @error('email')
                                 <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
@@ -178,7 +178,7 @@
                         <!-- Username -->
                         <div>
                             <label for="username" class="block text-sm font-medium text-gray-700 mb-2">
-                                İstifadəçi adı <span class="text-red-500">*</span>
+                                Username <span class="text-red-500">*</span>
                             </label>
                             <input 
                                 id="username" 
@@ -187,7 +187,7 @@
                                 wire:model="username"
                                 required 
                                 class="appearance-none block w-full px-4 py-3 border border-gray-300 rounded-lg placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition duration-150 @error('username') border-red-300 @enderror"
-                                placeholder="İstifadəçi adınızı daxil edin"
+                                placeholder="Enter your username"
                             >
                             @error('username')
                                 <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
@@ -197,7 +197,7 @@
                         <!-- Phone -->
                         <div>
                             <label for="phone" class="block text-sm font-medium text-gray-700 mb-2">
-                                Telefon
+                                Phone
                             </label>
                             <input 
                                 id="phone" 
@@ -205,7 +205,7 @@
                                 type="text" 
                                 wire:model="phone"
                                 class="appearance-none block w-full px-4 py-3 border border-gray-300 rounded-lg placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition duration-150 @error('phone') border-red-300 @enderror"
-                                placeholder="Telefon nömrənizi daxil edin"
+                                placeholder="Enter your phone number"
                             >
                             @error('phone')
                                 <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
@@ -216,12 +216,12 @@
 
                 <!-- Password Section -->
                 <div class="border-t border-gray-200 pt-6">
-                    <h2 class="text-lg font-semibold text-gray-900 mb-4">Şifrə Dəyişikliyi</h2>
+                    <h2 class="text-lg font-semibold text-gray-900 mb-4">Password Change</h2>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <!-- Current Password -->
                         <div>
                             <label for="current_password" class="block text-sm font-medium text-gray-700 mb-2">
-                                Cari şifrə
+                                Current Password
                             </label>
                             <div class="relative">
                                 <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -235,7 +235,7 @@
                                     type="password" 
                                     wire:model="current_password"
                                     class="appearance-none block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition duration-150 @error('current_password') border-red-300 @enderror"
-                                    placeholder="Cari şifrənizi daxil edin"
+                                    placeholder="Enter your current password"
                                 >
                             </div>
                             @error('current_password')
@@ -246,7 +246,7 @@
                         <!-- New Password -->
                         <div>
                             <label for="new_password" class="block text-sm font-medium text-gray-700 mb-2">
-                                Yeni şifrə
+                                New Password
                             </label>
                             <div class="relative">
                                 <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -260,19 +260,19 @@
                                     type="password" 
                                     wire:model="new_password"
                                     class="appearance-none block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition duration-150 @error('new_password') border-red-300 @enderror"
-                                    placeholder="Yeni şifrənizi daxil edin"
+                                    placeholder="Enter your new password"
                                 >
                             </div>
                             @error('new_password')
                                 <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                             @enderror
-                            <p class="mt-1 text-xs text-gray-500">Şifrə ən azı 6 simvol olmalıdır.</p>
+                            <p class="mt-1 text-xs text-gray-500">Password must be at least 6 characters long.</p>
                         </div>
 
                         <!-- Confirm New Password -->
                         <div class="md:col-span-2">
                             <label for="new_password_confirmation" class="block text-sm font-medium text-gray-700 mb-2">
-                                Yeni şifrəni təsdiqlə
+                                Confirm New Password
                             </label>
                             <div class="relative">
                                 <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -286,7 +286,7 @@
                                     type="password" 
                                     wire:model="new_password_confirmation"
                                     class="appearance-none block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition duration-150 @error('new_password_confirmation') border-red-300 @enderror"
-                                    placeholder="Yeni şifrənizi yenidən daxil edin"
+                                    placeholder="Confirm your new password"
                                 >
                             </div>
                             @error('new_password_confirmation')
@@ -301,7 +301,7 @@
                     <a 
                         href="{{ route('student.dashboard') }}"
                         class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition">
-                        Ləğv et
+                        Cancel
                     </a>
                     <button 
                         type="submit"
@@ -309,7 +309,7 @@
                         wire:target="updateProfile"
                         class="inline-flex items-center justify-center px-6 py-2 text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 rounded-lg transition duration-150 disabled:opacity-50 disabled:cursor-not-allowed">
                         <span wire:loading.remove wire:target="updateProfile">
-                            Yadda saxla
+                            Save
                         </span>
                         <span wire:loading wire:target="updateProfile" class="flex items-center">
                             <svg class="animate-spin -ml-1 mr-2 h-4 w-4 text-white" fill="none" viewBox="0 0 24 24">

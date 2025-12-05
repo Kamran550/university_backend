@@ -43,16 +43,16 @@ class Profil extends Component
     ];
 
     protected $messages = [
-        'name.required' => 'Ad tələb olunur.',
-        'surname.required' => 'Soyad tələb olunur.',
-        'email.required' => 'Email tələb olunur.',
-        'email.email' => 'Düzgün email ünvanı daxil edin.',
-        'username.required' => 'İstifadəçi adı tələb olunur.',
-        'profile_photo.image' => 'Yalnız şəkil faylları qəbul olunur.',
-        'profile_photo.max' => 'Şəkil ölçüsü 2MB-dan çox ola bilməz.',
-        'current_password.required_with' => 'Şifrə dəyişdirmək üçün cari şifrə tələb olunur.',
-        'new_password.min' => 'Yeni şifrə ən azı 6 simvol olmalıdır.',
-        'new_password.confirmed' => 'Yeni şifrə təsdiqlənmədi.',
+        'name.required' => 'Name is required.',
+        'surname.required' => 'Surname is required.',
+        'email.required' => 'Email is required.',
+        'email.email' => 'Enter a valid email address.',
+        'username.required' => 'Username is required.',
+        'profile_photo.image' => 'Only image files are accepted.',
+        'profile_photo.max' => 'Image size must be less than 2MB.',
+        'current_password.required_with' => 'To change password, current password is required.',
+        'new_password.min' => 'New password must be at least 6 characters long.',
+        'new_password.confirmed' => 'New password confirmation does not match.',
     ];
 
     public function mount()
@@ -116,13 +116,13 @@ class Profil extends Component
             ]);
 
             if (!Hash::check($this->current_password, $user->password)) {
-                $this->error = 'Cari şifrə yanlışdır.';
+                $this->error = 'Current password is incorrect.';
                 $this->success = '';
                 return;
             }
 
             if (Hash::check($this->new_password, $user->password)) {
-                $this->error = 'Yeni şifrə cari şifrədən fərqli olmalıdır.';
+                $this->error = 'New password must be different from the current password.';
                 $this->success = '';
                 return;
             }
@@ -138,7 +138,7 @@ class Profil extends Component
         $this->new_password = '';
         $this->new_password_confirmation = '';
         $this->error = '';
-        $this->success = 'Profil uğurla yeniləndi.';
+        $this->success = 'Profile updated successfully.';
     }
 
     public function render()

@@ -3,8 +3,8 @@
     <!-- Header -->
     <div class="mb-8 flex items-center justify-between">
         <div>
-            <h1 class="text-3xl font-bold text-gray-900">Proqramlar</h1>
-            <p class="mt-1 text-sm text-gray-600">Bütün proqramları idarə edin</p>
+            <h1 class="text-3xl font-bold text-gray-900">Programs</h1>
+            <p class="mt-1 text-sm text-gray-600">View and manage all programs</p>
         </div>
         <button 
             @click="showModal = true; $nextTick(() => $dispatch('reset-form'))"
@@ -12,7 +12,7 @@
             <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
             </svg>
-            Yeni Proqram
+            New Program
         </button>
     </div>
 
@@ -28,19 +28,19 @@
                             ID
                         </th>
                         <th scope="col" class="px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
-                            Proqram Adı
+                            Program Name
                         </th>
                         <th scope="col" class="px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
-                            Fakültə
+                            Faculty
                         </th>
                         <th scope="col" class="px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
-                            Dərəcə
+                            Degree
                         </th>
                         <th scope="col" class="px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
-                            İllik Qiymət
+                            Yearly Price
                         </th>
                         <th scope="col" class="px-6 py-4 text-center text-xs font-semibold text-gray-700 uppercase tracking-wider w-32">
-                            Əməliyyatlar
+                            Actions
                         </th>
                     </tr>
                 </thead>
@@ -111,8 +111,8 @@
                                 <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
                                 </svg>
-                                <h3 class="mt-2 text-sm font-medium text-gray-900">Proqram tapılmadı</h3>
-                                <p class="mt-1 text-sm text-gray-500">Başlamaq üçün yeni proqram əlavə edin.</p>
+                                <h3 class="mt-2 text-sm font-medium text-gray-900">Program not found</h3>
+                                <p class="mt-1 text-sm text-gray-500">Add a new program to start.</p>
                             </td>
                         </tr>
                     @endforelse
@@ -162,8 +162,8 @@
                 <!-- Modal Header -->
                 <div class="flex items-center justify-between mb-6">
                     <div>
-                        <h2 class="text-2xl font-bold text-gray-900">Yeni Proqram</h2>
-                        <p class="mt-1 text-sm text-gray-600">Yeni proqram əlavə edin</p>
+                        <h2 class="text-2xl font-bold text-gray-900">New Program</h2>
+                        <p class="mt-1 text-sm text-gray-600">Add a new program</p>
                     </div>
                     <button 
                         @click="showModal = false"
@@ -216,8 +216,8 @@
                 <!-- Modal Header -->
                 <div class="flex items-center justify-between mb-6">
                     <div>
-                        <h2 class="text-2xl font-bold text-gray-900">Proqramı Redaktə Et</h2>
-                        <p class="mt-1 text-sm text-gray-600">Proqram məlumatlarını yeniləyin</p>
+                        <h2 class="text-2xl font-bold text-gray-900">Edit Program</h2>
+                        <p class="mt-1 text-sm text-gray-600">Update program information</p>
                     </div>
                     <button 
                         @click="showEditModal = false"
@@ -269,7 +269,7 @@
             >
                 <!-- Modal Header -->
                 <div class="flex items-center justify-between mb-6">
-                    <h2 class="text-2xl font-bold text-gray-900">Proqramı Sil</h2>
+                    <h2 class="text-2xl font-bold text-gray-900">Delete Program</h2>
                     <button 
                         @click="showDeleteModal = false"
                         class="text-gray-400 hover:text-gray-600 transition duration-150 ease-in-out"

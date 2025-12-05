@@ -2,8 +2,8 @@
     <div class="bg-white rounded-2xl shadow-sm border border-gray-100">
         <!-- Header -->
         <div class="border-b border-gray-100 px-6 py-4">
-            <h1 class="text-2xl font-semibold text-gray-900">Şifrəni dəyiş</h1>
-            <p class="mt-1 text-sm text-gray-500">Hesabınızın təhlükəsizliyi üçün şifrənizi müntəzəm olaraq yeniləyin.</p>
+            <h1 class="text-2xl font-semibold text-gray-900">Change Password</h1>
+            <p class="mt-1 text-sm text-gray-500">For the security of your account, please regularly update your password.</p>
         </div>
 
         <!-- Form -->
@@ -42,7 +42,7 @@
                 <!-- Current Password -->
                 <div>
                     <label for="current_password" class="block text-sm font-medium text-gray-700 mb-2">
-                        Cari şifrə
+                        Current Password
                     </label>
                     <div class="relative">
                         <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -58,7 +58,7 @@
                             autocomplete="current-password" 
                             required 
                             class="appearance-none block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition duration-150 @error('current_password') border-red-300 @enderror"
-                            placeholder="Cari şifrənizi daxil edin"
+                            placeholder="Enter your current password"
                         >
                     </div>
                     @error('current_password')
@@ -69,7 +69,7 @@
                 <!-- New Password -->
                 <div>
                     <label for="new_password" class="block text-sm font-medium text-gray-700 mb-2">
-                        Yeni şifrə
+                        New Password
                     </label>
                     <div class="relative">
                         <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -85,19 +85,19 @@
                             autocomplete="new-password" 
                             required 
                             class="appearance-none block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition duration-150 @error('new_password') border-red-300 @enderror"
-                            placeholder="Yeni şifrənizi daxil edin"
+                            placeholder="Enter your new password"
                         >
                     </div>
                     @error('new_password')
                         <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                     @enderror
-                    <p class="mt-1 text-xs text-gray-500">Şifrə ən azı 6 simvol olmalıdır.</p>
+                    <p class="mt-1 text-xs text-gray-500">Password must be at least 6 characters long.</p>
                 </div>
 
                 <!-- Confirm New Password -->
                 <div>
                     <label for="new_password_confirmation" class="block text-sm font-medium text-gray-700 mb-2">
-                        Yeni şifrəni təsdiqlə
+                        Confirm New Password
                     </label>
                     <div class="relative">
                         <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -113,7 +113,7 @@
                             autocomplete="new-password" 
                             required 
                             class="appearance-none block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition duration-150 @error('new_password_confirmation') border-red-300 @enderror"
-                            placeholder="Yeni şifrənizi yenidən daxil edin"
+                            placeholder="Confirm your new password"
                         >
                     </div>
                     @error('new_password_confirmation')
@@ -126,7 +126,7 @@
                     <a 
                         href="{{ route('admin.dashboard') }}"
                         class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition">
-                        Ləğv et
+                        Cancel
                     </a>
                     <button 
                         type="submit"
@@ -134,7 +134,7 @@
                         wire:target="updatePassword"
                         class="inline-flex items-center justify-center px-4 py-2 text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 rounded-lg transition duration-150 disabled:opacity-50 disabled:cursor-not-allowed">
                         <span wire:loading.remove wire:target="updatePassword">
-                            Şifrəni dəyiş
+                            Change Password
                         </span>
                         <span wire:loading wire:target="updatePassword" class="flex items-center">
                             <svg class="animate-spin -ml-1 mr-2 h-4 w-4 text-white" fill="none" viewBox="0 0 24 24">

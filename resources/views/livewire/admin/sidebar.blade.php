@@ -43,7 +43,7 @@
                 href="{{ route('admin.students.index') }}"
                 class="flex items-center px-4 py-3 text-gray-300 hover:bg-gray-700 hover:text-white rounded-lg transition"
                 @click="sidebarOpen = false">
-                Tələbələr
+                Students
             </a>
 
             <!-- Teachers -->
@@ -51,7 +51,7 @@
                 href="{{ route('admin.teachers.index') }}"
                 class="flex items-center px-4 py-3 text-gray-300 hover:bg-gray-700 hover:text-white rounded-lg transition"
                 @click="sidebarOpen = false">
-                Müəllimlər
+                Teachers
             </a>
 
             <!-- Academics Dropdown -->
@@ -74,20 +74,20 @@
                     href="{{ route('admin.programs.index') }}"
                     class="block px-4 py-2 text-gray-400 hover:text-white hover:bg-gray-700 rounded-lg transition"
                     @click="sidebarOpen = false">
-                    Proqramlar
+                    Programs
                 </a>
 
                     <a 
                         href="{{ route('admin.degrees.index') }}"
                         class="block px-4 py-2 text-gray-400 hover:text-white hover:bg-gray-700 rounded-lg transition"
                         @click="sidebarOpen = false">
-                        Dərəcələr
+                        Degrees
                     </a>
                     <a 
                         href="{{ route('admin.faculties.index') }}"
                         class="block px-4 py-2 text-gray-400 hover:text-white hover:bg-gray-700 rounded-lg transition"
                         @click="sidebarOpen = false">
-                        Fakültələr
+                        Faculties
                     </a>
                     
                 </div>
@@ -102,7 +102,7 @@
                     class="w-full flex items-center justify-between px-4 py-3 text-gray-300 hover:bg-gray-700 hover:text-white rounded-lg transition">
 
                     <div class="flex items-center space-x-2">
-                        <span>Müraciətlər</span>
+                        <span>Applications</span>
 
                         <!-- If you want a badge -->
                         @if($studentCount + $agencyCount > 0)
@@ -128,7 +128,7 @@
                         href="{{ route('admin.applications.student.index') }}"
                         class="block px-4 py-2 text-gray-400 hover:text-white hover:bg-gray-700 rounded-lg transition"
                         @click="sidebarOpen = false">
-                        Tələbə
+                        Students
                         @if($studentCount > 0)
                             <span class="bg-red-600 text-white text-xs px-2 py-0.5 rounded-full ml-2">
                                 {{ $studentCount }}
@@ -141,7 +141,7 @@
                         href="{{ route('admin.applications.agency.index') }}"
                         class="block px-4 py-2 text-gray-400 hover:text-white hover:bg-gray-700 rounded-lg transition"
                         @click="sidebarOpen = false">
-                        Agentlik
+                        Agencies
                         @if($agencyCount > 0)
                             <span class="bg-red-600 text-white text-xs px-2 py-0.5 rounded-full ml-2">
                                 {{ $agencyCount }}
@@ -207,7 +207,7 @@
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z"/>
                         </svg>
-                        <span>Şifrəni dəyiş</span>
+                        <span>Change Password</span>
                     </a>
 
                     <!-- Divider -->

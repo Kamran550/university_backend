@@ -22,10 +22,10 @@ class Login extends Component
     ];
 
     protected $messages = [
-        'email.required' => 'Email ünvanı tələb olunur.',
-        'email.email' => 'Düzgün email ünvanı daxil edin.',
-        'password.required' => 'Şifrə tələb olunur.',
-        'password.min' => 'Şifrə ən azı 6 simvol olmalıdır.',
+        'email.required' => 'Email address is required.',
+        'email.email' => 'Enter a valid email address.',
+        'password.required' => 'Password is required.',
+        'password.min' => 'Password must be at least 6 characters long.',
     ];
 
     public function login()
@@ -35,18 +35,18 @@ class Login extends Component
         $user = User::where('email', $this->email)->first();
 
         if (!$user) {
-            $this->error = 'Email və ya şifrə yanlışdır.';
+            $this->error = 'Email or password is incorrect.';
             return;
         }
 
         // Check if user has admin role (role_id = 1)
         if ($user->role_id !== 1) {
-            $this->error = 'Bu səhifəyə giriş üçün admin hüququ lazımdır.';
+            $this->error = 'Admin permission is required to access this page.';
             return;
         }
 
         if (!Hash::check($this->password, $user->password)) {
-            $this->error = 'Email və ya şifrə yanlışdır.';
+            $this->error = 'Email or password is incorrect.';
             return;
         }
 

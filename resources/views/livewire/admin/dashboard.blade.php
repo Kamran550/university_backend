@@ -1,6 +1,6 @@
 <div class="p-4 sm:p-6 lg:p-8">
     <div class="max-w-7xl mx-auto">
-        <h1 class="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-2">Admin Panel-ə Xoş Gəlmisiniz</h1>
+        <h1 class="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-2">Welcome to the Admin Panel</h1>
         <p class="text-base sm:text-lg text-gray-600 mb-6 sm:mb-8">Bu admin idarəetmə səhifəsidir.</p>
         
         <!-- Stats Grid -->
@@ -10,7 +10,7 @@
             <div class="bg-white rounded-lg sm:rounded-xl shadow-lg border border-gray-200 p-4 sm:p-6">
                 <div class="flex items-center justify-between">
                     <div>
-                        <p class="text-xs sm:text-sm font-medium text-gray-600">Tələbələr</p>
+                        <p class="text-xs sm:text-sm font-medium text-gray-600">Students</p>
                         <p class="text-2xl sm:text-3xl font-bold text-gray-900 mt-1 sm:mt-2">{{ number_format($studentsCount) }}</p>
                     </div>
                     <div class="p-2 sm:p-3 bg-blue-100 rounded-full">
@@ -25,7 +25,7 @@
             <div class="bg-white rounded-lg sm:rounded-xl shadow-lg border border-gray-200 p-4 sm:p-6">
                 <div class="flex items-center justify-between">
                     <div>
-                        <p class="text-xs sm:text-sm font-medium text-gray-600">Müəllimlər</p>
+                        <p class="text-xs sm:text-sm font-medium text-gray-600">Teachers</p>
                         <p class="text-2xl sm:text-3xl font-bold text-gray-900 mt-1 sm:mt-2">{{ number_format($teachersCount) }}</p>
                     </div>
                     <div class="p-2 sm:p-3 bg-purple-100 rounded-full">
@@ -40,7 +40,7 @@
             <div class="bg-white rounded-lg sm:rounded-xl shadow-lg border border-gray-200 p-4 sm:p-6">
                 <div class="flex items-center justify-between">
                     <div>
-                        <p class="text-xs sm:text-sm font-medium text-gray-600">Proqramlar</p>
+                        <p class="text-xs sm:text-sm font-medium text-gray-600">Programs</p>
                         <p class="text-2xl sm:text-3xl font-bold text-gray-900 mt-1 sm:mt-2">{{ number_format($programsCount) }}</p>
                     </div>
                     <div class="p-2 sm:p-3 bg-indigo-100 rounded-full">
@@ -55,7 +55,7 @@
             <div class="bg-white rounded-lg sm:rounded-xl shadow-lg border border-gray-200 p-4 sm:p-6">
                 <div class="flex items-center justify-between">
                     <div>
-                        <p class="text-xs sm:text-sm font-medium text-gray-600">Müraciətlər</p>
+                        <p class="text-xs sm:text-sm font-medium text-gray-600">Applications</p>
                         <p class="text-2xl sm:text-3xl font-bold text-gray-900 mt-1 sm:mt-2">{{ number_format($applicationsCount) }}</p>
                     </div>
                     <div class="p-2 sm:p-3 bg-yellow-100 rounded-full">
@@ -65,7 +65,7 @@
                     </div>
                 </div>
                 @if($pendingApplicationsCount > 0)
-                    <p class="text-xs sm:text-sm text-yellow-600 mt-3 sm:mt-4">{{ $pendingApplicationsCount }} gözləyən</p>
+                    <p class="text-xs sm:text-sm text-yellow-600 mt-3 sm:mt-4">{{ $pendingApplicationsCount }} pending applications</p>
                 @endif
             </div>
             

@@ -5,11 +5,11 @@
             @if (!$paginator->onFirstPage())
                 <a wire:navigate href="{{ $paginator->previousPageUrl() }}"
                     class="relative inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 leading-5 rounded-md hover:text-gray-500 focus:outline-none focus:ring ring-blue-300 focus:border-blue-300 active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150">
-                    Əvvəlki
+                    Previous
                 </a>
             @else
                 <span class="relative inline-flex items-center px-4 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 cursor-default leading-5 rounded-md">
-                    Əvvəlki
+                    Previous
                 </span>
             @endif
 
@@ -17,11 +17,11 @@
             @if ($paginator->hasMorePages())
                 <a wire:navigate href="{{ $paginator->nextPageUrl() }}"
                     class="relative inline-flex items-center px-4 py-2 ml-3 text-sm font-medium text-gray-700 bg-white border border-gray-300 leading-5 rounded-md hover:text-gray-500 focus:outline-none focus:ring ring-blue-300 focus:border-blue-300 active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150">
-                    Növbəti
+                    Next
                 </a>
             @else
                 <span class="relative inline-flex items-center px-4 py-2 ml-3 text-sm font-medium text-gray-500 bg-white border border-gray-300 cursor-default leading-5 rounded-md">
-                    Növbəti
+                    Next
                 </span>
             @endif
         </div>
@@ -33,9 +33,9 @@
                     <span class="font-semibold text-gray-900">{{ $paginator->firstItem() }}</span>
                     -
                     <span class="font-semibold text-gray-900">{{ $paginator->lastItem() }}</span>
-                    arası göstərilir, 
+                    between is displayed, 
                     <span class="font-semibold text-indigo-600">{{ $paginator->total() }}</span>
-                    ümumi nəticə
+                    total results
                 </p>
             </div>
 
@@ -44,20 +44,20 @@
                 <span class="relative z-0 inline-flex shadow-lg rounded-lg overflow-hidden">
                     {{-- Previous Page Link --}}
                     @if ($paginator->onFirstPage())
-                        <span aria-disabled="true" aria-label="Əvvəlki">
+                        <span aria-disabled="true" aria-label="Previous">
                             <span class="relative inline-flex items-center px-4 py-2.5 text-sm font-medium text-gray-400 bg-gray-100 border border-gray-300 cursor-not-allowed" aria-hidden="true">
                                 <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
                                 </svg>
-                                Əvvəlki
+                                Previous
                             </span>
                         </span>
                     @else
-                        <a wire:navigate href="{{ $paginator->previousPageUrl() }}" rel="prev" class="relative inline-flex items-center px-4 py-2.5 text-sm font-medium text-gray-700 bg-white border border-gray-300 hover:bg-gray-50 focus:z-10 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition duration-150" aria-label="Əvvəlki">
+                        <a wire:navigate href="{{ $paginator->previousPageUrl() }}" rel="prev" class="relative inline-flex items-center px-4 py-2.5 text-sm font-medium text-gray-700 bg-white border border-gray-300 hover:bg-gray-50 focus:z-10 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition duration-150" aria-label="Previous">
                             <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
                             </svg>
-                            Əvvəlki
+                            Previous
                         </a>
                     @endif
 
@@ -78,7 +78,7 @@
                                         <span class="relative inline-flex items-center px-4 py-2.5 -ml-px text-sm font-bold text-white bg-indigo-600 border border-indigo-600 cursor-default shadow-sm">{{ $page }}</span>
                                     </span>
                                 @else
-                                    <a wire:navigate href="{{ $url }}" class="relative inline-flex items-center px-4 py-2.5 -ml-px text-sm font-medium text-gray-700 bg-white border border-gray-300 hover:bg-indigo-50 hover:text-indigo-600 hover:border-indigo-300 focus:z-10 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition duration-150" aria-label="Səhifə {{ $page }}">
+                                    <a wire:navigate href="{{ $url }}" class="relative inline-flex items-center px-4 py-2.5 -ml-px text-sm font-medium text-gray-700 bg-white border border-gray-300 hover:bg-indigo-50 hover:text-indigo-600 hover:border-indigo-300 focus:z-10 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition duration-150" aria-label="Page {{ $page }}">
                                         {{ $page }}
                                     </a>
                                 @endif
@@ -89,15 +89,15 @@
                     {{-- Next Page Link --}}
                     @if ($paginator->hasMorePages())
                         <a wire:navigate href="{{ $paginator->nextPageUrl() }}" rel="next" class="relative inline-flex items-center px-4 py-2.5 -ml-px text-sm font-medium text-gray-700 bg-white border border-gray-300 hover:bg-gray-50 focus:z-10 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition duration-150" aria-label="Növbəti">
-                            Növbəti
+                            Next
                             <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
                             </svg>
                         </a>
                     @else
-                        <span aria-disabled="true" aria-label="Növbəti">
+                        <span aria-disabled="true" aria-label="Next">
                             <span class="relative inline-flex items-center px-4 py-2.5 -ml-px text-sm font-medium text-gray-400 bg-gray-100 border border-gray-300 cursor-not-allowed" aria-hidden="true">
-                                Növbəti
+                                Next
                                 <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
                                 </svg>
