@@ -13,7 +13,7 @@
                 Admin Panel
             </h2>
             <p class="mt-2 text-sm text-gray-600">
-                Hesabınıza daxil olun
+                Login to your account
             </p>
         </div>
 
@@ -38,7 +38,7 @@
                 <!-- Email Field -->
                 <div>
                     <label for="email" class="block text-sm font-medium text-gray-700 mb-2">
-                        Email ünvanı
+                        Email Address
                     </label>
                     <div class="relative">
                         <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -54,7 +54,7 @@
                             autocomplete="email" 
                             required 
                             class="appearance-none block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition duration-150 @error('email') border-red-300 @enderror"
-                            placeholder="admin@example.com"
+                            placeholder="Enter your email address"
                         >
                     </div>
                     @error('email')
@@ -65,7 +65,7 @@
                 <!-- Password Field -->
                 <div>
                     <label for="password" class="block text-sm font-medium text-gray-700 mb-2">
-                        Şifrə
+                        Password
                     </label>
                     <div class="relative">
                         <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -100,7 +100,7 @@
                             class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
                         >
                         <label for="remember" class="ml-2 block text-sm text-gray-700">
-                            Məni xatırla
+                            Remember Me
                         </label>
                     </div>
                 </div>
@@ -114,7 +114,7 @@
                         class="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-lg text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition duration-150 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-xl"
                     >
                         <span wire:loading.remove wire:target="login">
-                            Daxil ol
+                            Login
                         </span>
                         <span wire:loading wire:target="login" class="flex items-center">
                             <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" fill="none" viewBox="0 0 24 24">
@@ -130,7 +130,7 @@
         <!-- Footer -->
         <div class="text-center">
             <p class="text-xs text-gray-500">
-                © {{ date('Y') }} {{ config('app.name') }}. Bütün hüquqlar qorunur.
+                © {{ date('Y') }} {{ config('app.name') }}. All rights reserved.
             </p>
         </div>
     </div>

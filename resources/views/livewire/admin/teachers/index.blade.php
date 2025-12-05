@@ -3,8 +3,8 @@
     <!-- Header -->
     <div class="mb-8 flex items-center justify-between">
         <div>
-            <h1 class="text-3xl font-bold text-gray-900">Müəllimlər</h1>
-            <p class="mt-1 text-sm text-gray-600">Bütün müəllimləri görüntüləyin və idarə edin</p>
+            <h1 class="text-3xl font-bold text-gray-900">Teachers</h1>
+            <p class="mt-1 text-sm text-gray-600">View and manage all teachers</p>
         </div>
     </div>
 
@@ -19,7 +19,7 @@
             <input 
                 type="text" 
                 wire:model.live.debounce.300ms="search"
-                placeholder="Ad, Soyad, Email, İstifadəçi adı və ya Telefon ilə axtarın..."
+                placeholder="Search by Name, Surname, Email, Username or Phone..."
                 class="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg leading-5 bg-white placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
             >
         </div>
@@ -37,19 +37,19 @@
                             ID
                         </th>
                         <th scope="col" class="px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
-                            Müəllim
+                            Teacher
                         </th>
                         <th scope="col" class="px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
                             Email
                         </th>
                         <th scope="col" class="px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
-                            İstifadəçi adı
+                            Username
                         </th>
                         <th scope="col" class="px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
-                            Telefon
+                            Phone
                         </th>
                         <th scope="col" class="px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
-                            Qeydiyyat tarixi
+                            Registration Date
                         </th>
                     </tr>
                 </thead>
@@ -116,12 +116,12 @@
                                 <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
                                 </svg>
-                                <h3 class="mt-2 text-sm font-medium text-gray-900">Müəllim tapılmadı</h3>
+                                <h3 class="mt-2 text-sm font-medium text-gray-900">Teacher not found</h3>
                                 <p class="mt-1 text-sm text-gray-500">
                                     @if($search)
-                                        "{{ $search }}" üçün heç bir nəticə tapılmadı.
+                                        No results found for "{{ $search }}".
                                     @else
-                                        Hələ heç bir müəllim qeydiyyatdan keçməyib.
+                                        No teachers have registered yet.
                                     @endif
                                 </p>
                             </td>

@@ -22,9 +22,9 @@ class Login extends Component
     ];
 
     protected $messages = [
-        'email.required' => 'Email və ya istifadəçi adı tələb olunur.',
-        'password.required' => 'Şifrə tələb olunur.',
-        'password.min' => 'Şifrə ən azı 6 simvol olmalıdır.',
+        'email.required' => 'Email address is required.',
+        'password.required' => 'Password is required.',
+        'password.min' => 'Password must be at least 6 characters long.',
     ];
 
     public function login()
@@ -37,19 +37,19 @@ class Login extends Component
             ->first();
 
         if (!$user) {
-            $this->error = 'Email/istifadəçi adı və ya şifrə yanlışdır.';
+            $this->error = 'Email or password is incorrect.';
             return;
         }
 
         // Check if user has student role (role_id = 3)
         $studentRole = \App\Models\Role::where('name', 'student')->first();
         if ($user->role_id !== ($studentRole?->id ?? 3)) {
-            $this->error = 'Bu səhifəyə giriş üçün tələbə hesabı lazımdır.';
+            $this->error = 'Student account is required to access this page.';
             return;
         }
 
         if (!Hash::check($this->password, $user->password)) {
-            $this->error = 'Email/istifadəçi adı və ya şifrə yanlışdır.';
+            $this->error = 'Email or password is incorrect.';
             return;
         }
 

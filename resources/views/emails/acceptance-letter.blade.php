@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Şərtli Qəbul Məktubu</title>
+    <title>Acceptance Letter</title>
 </head>
 <body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
     <div style="max-width: 600px; margin: 0 auto; padding: 20px;">
@@ -12,31 +12,31 @@
             <h2 style="color: #1a1a1a; margin-top: 0;">EUROPEAN INTERNATIONAL PEACE UNIVERSITY</h2>
         </div>
 
-        <p>Hörmətli <strong>{{ $student->first_name }} {{ $student->last_name }}</strong>,</p>
+        <p>Dear <strong>{{ $student->first_name }} {{ $student->last_name }}</strong>,</p>
 
         <p>
-            Sizə şərtli qəbul məktubunuzu göndəririk. Qəbul məktubunuz PDF formatında bu email-ə əlavə edilmişdir.
+            We are sending you the acceptance letter. The acceptance letter is attached to this email in PDF format.
         </p>
 
         <p>
-            <strong>Müraciət Nömrəsi:</strong> {{ $student->application_id ?? $student->id }}<br>
-            <strong>Dərəcə:</strong> {{ $student->application->program?->degree?->name ?? 'N/A' }}<br>
-            <strong>Fakültə:</strong> {{ $student->application->program?->faculty?->name ?? 'N/A' }}<br>
-            <strong>Proqram:</strong> {{ $student->application->program?->name ?? 'N/A' }}<br>
+            <strong>Application Number:</strong> {{ $student->application_id ?? $student->id }}<br>
+            <strong>Degree:</strong> {{ $student->application->program?->degree?->name ?? 'N/A' }}<br>
+            <strong>Faculty:</strong> {{ $student->application->program?->faculty?->name ?? 'N/A' }}<br>
+            <strong>Program:</strong> {{ $student->application->program?->name ?? 'N/A' }}<br>
         </p>
 
         <p>
-            Qəbul məktubunuzu yükləyib oxuyun və lazımi addımları yerinə yetirin.
+            Upload the acceptance letter and follow the necessary steps to complete your registration.
         </p>
 
         <p>
-            Əgər sualınız varsa, bizimlə əlaqə saxlayın.
+            If you have any questions, please contact us at <a href="mailto:international@eipu.edu.pl">international@eipu.edu.pl</a>.
         </p>
 
         <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #ddd; font-size: 12px; color: #666;">
-            <p>Hörmətlə,<br>
+            <p>Best regards,<br>
             <strong>EİPU</strong><br>
-            Qəbul Komitəsi</p>
+            Acceptance Committee</p>
         </div>
     </div>
 </body>

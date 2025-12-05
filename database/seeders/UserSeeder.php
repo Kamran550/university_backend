@@ -20,10 +20,10 @@ class UserSeeder extends Seeder
 
         User::create([
             'name'      => 'System',
-            'surname'   => 'Administrator',
+            'surname'   => 'Administrators',
             'username'  => 'admin',          // daxil olmaq üçün
-            'email'     => 'admin@eipu.edu.pl',
-            'password'  => Hash::make('password'), // dəyişmək üçün email göndərərsən
+            'email'     => 'admin@eipu.edu.az',
+            'password'  => Hash::make('password'), // to change the password, send an email
             'phone'     => '0000000000',
             'role_id'   => $adminRoleId,
         ]);

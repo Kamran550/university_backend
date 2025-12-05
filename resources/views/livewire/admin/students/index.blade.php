@@ -3,8 +3,8 @@
     <!-- Header -->
     <div class="mb-8 flex items-center justify-between">
         <div>
-            <h1 class="text-3xl font-bold text-gray-900">Tələbələr</h1>
-            <p class="mt-1 text-sm text-gray-600">Bütün tələbələri görüntüləyin və idarə edin</p>
+            <h1 class="text-3xl font-bold text-gray-900">Students</h1>
+            <p class="mt-1 text-sm text-gray-600">View and manage all students</p>
         </div>
     </div>
 
@@ -19,7 +19,7 @@
             <input 
                 type="text" 
                 wire:model.live.debounce.300ms="search"
-                placeholder="Ad, Soyad, Email, İstifadəçi adı və ya Telefon ilə axtarın..."
+                placeholder="Search by Name, Surname, Email, Username or Phone..."
                 class="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg leading-5 bg-white placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
             >
         </div>
@@ -37,19 +37,22 @@
                             ID
                         </th>
                         <th scope="col" class="px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
-                            Tələbə
+                            Student
                         </th>
                         <th scope="col" class="px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
                             Email
                         </th>
                         <th scope="col" class="px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
-                            İstifadəçi adı
+                            Username
                         </th>
                         <th scope="col" class="px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
-                            Telefon
+                            Phone
                         </th>
                         <th scope="col" class="px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
-                            Qeydiyyat tarixi
+                            Registration Date
+                        </th>
+                        <th scope="col" class="px-6 py-4 text-right text-xs font-semibold text-gray-700 uppercase tracking-wider">
+                            Actions
                         </th>
                     </tr>
                 </thead>
@@ -108,20 +111,32 @@
                                     {{ $student->created_at->format('H:i') }}
                                 </div>
                             </td>
+
+                            <!-- Actions -->
+                            <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                <a href="{{ route('admin.students.show', $student) }}" 
+                                   class="inline-flex items-center px-3 py-1.5 bg-indigo-50 text-indigo-700 rounded-lg hover:bg-indigo-100 transition duration-150 ease-in-out">
+                                    <svg class="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                                    </svg>
+                                    View
+                                </a>
+                            </td>
                             
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="6" class="px-6 py-12 text-center">
+                            <td colspan="7" class="px-6 py-12 text-center">
                                 <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/>
                                 </svg>
-                                <h3 class="mt-2 text-sm font-medium text-gray-900">Tələbə tapılmadı</h3>
+                                <h3 class="mt-2 text-sm font-medium text-gray-900">Student not found</h3>
                                 <p class="mt-1 text-sm text-gray-500">
                                     @if($search)
-                                        "{{ $search }}" üçün heç bir nəticə tapılmadı.
+                                        No results found for "{{ $search }}".
                                     @else
-                                        Hələ heç bir tələbə qeydiyyatdan keçməyib.
+                                        No students have registered yet.
                                     @endif
                                 </p>
                             </td>

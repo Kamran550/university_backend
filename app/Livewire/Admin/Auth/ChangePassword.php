@@ -24,11 +24,11 @@ class ChangePassword extends Component
     ];
 
     protected $messages = [
-        'current_password.required' => 'Cari şifrə tələb olunur.',
-        'new_password.required' => 'Yeni şifrə tələb olunur.',
-        'new_password.min' => 'Yeni şifrə ən azı 6 simvol olmalıdır.',
-        'new_password.confirmed' => 'Yeni şifrə təsdiqlənmədi.',
-        'new_password_confirmation.required' => 'Şifrə təsdiqlənməsi tələb olunur.',
+        'current_password.required' => 'Current password is required.',
+        'new_password.required' => 'New password is required.',
+        'new_password.min' => 'New password must be at least 6 characters long.',
+        'new_password.confirmed' => 'New password confirmation does not match.',
+        'new_password_confirmation.required' => 'New password confirmation is required.',
     ];
 
     public function updatePassword()
@@ -41,14 +41,14 @@ class ChangePassword extends Component
 
         // Check current password
         if (!Hash::check($this->current_password, $user->password)) {
-            $this->error = 'Cari şifrə yanlışdır.';
+            $this->error = 'Current password is incorrect.';
             $this->success = '';
             return;
         }
 
         // Check if new password is same as current
         if (Hash::check($this->new_password, $user->password)) {
-            $this->error = 'Yeni şifrə cari şifrədən fərqli olmalıdır.';
+            $this->error = 'New password must be different from the current password.';
             $this->success = '';
             return;
         }
@@ -63,7 +63,7 @@ class ChangePassword extends Component
         $this->new_password = '';
         $this->new_password_confirmation = '';
         $this->error = '';
-        $this->success = 'Şifrə uğurla dəyişdirildi.';
+        $this->success = 'Password changed successfully.';
 
         // Reset success message after 3 seconds
         $this->dispatch('password-changed');

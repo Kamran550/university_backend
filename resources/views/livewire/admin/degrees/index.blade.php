@@ -3,8 +3,8 @@
     <!-- Header -->
     <div class="mb-8 flex items-center justify-between">
         <div>
-            <h1 class="text-3xl font-bold text-gray-900">Dərəcələr</h1>
-            <p class="mt-1 text-sm text-gray-600">Bütün Dərəcələri idarə edin</p>
+            <h1 class="text-3xl font-bold text-gray-900">Degrees</h1>
+            <p class="mt-1 text-sm text-gray-600">All Degrees</p>
         </div>
         <button 
             @click="showModal = true; $nextTick(() => $dispatch('reset-form'))"
@@ -12,7 +12,7 @@
             <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
             </svg>
-            Yeni Dərəcə
+            New Degree
         </button>
     </div>
 
@@ -28,10 +28,10 @@
                             ID
                         </th>
                         <th scope="col" class="px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
-                            Dərəcə Adı
+                            Degree Name
                         </th>
                         <th scope="col" class="px-6 py-4 text-center text-xs font-semibold text-gray-700 uppercase tracking-wider w-32">
-                            Əməliyyatlar
+                            Actions
                         </th>
                     </tr>
                 </thead>
@@ -87,8 +87,8 @@
                                 <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"/>
                                 </svg>
-                                <h3 class="mt-2 text-sm font-medium text-gray-900">Dərəcə tapılmadı</h3>
-                                <p class="mt-1 text-sm text-gray-500">Başlamaq üçün yeni dərəcə əlavə edin.</p>
+                                <h3 class="mt-2 text-sm font-medium text-gray-900">Degree not found</h3>
+                                <p class="mt-1 text-sm text-gray-500">Add a new degree to start.</p>
                             </td>
                         </tr>
                     @endforelse
@@ -139,8 +139,8 @@
                 <!-- Modal Header -->
                 <div class="flex items-center justify-between mb-6">
                     <div>
-                        <h2 class="text-2xl font-bold text-gray-900">Yeni Dərəcə</h2>
-                        <p class="mt-1 text-sm text-gray-600">Yeni dərəcə əlavə edin</p>
+                        <h2 class="text-2xl font-bold text-gray-900">New Degree</h2>
+                        <p class="mt-1 text-sm text-gray-600">Add a new degree</p>
                     </div>
                     <button 
                         @click="showModal = false"
@@ -193,8 +193,8 @@
                 <!-- Modal Header -->
                 <div class="flex items-center justify-between mb-6">
                     <div>
-                        <h2 class="text-2xl font-bold text-gray-900">Dərəcəni Redaktə Et</h2>
-                        <p class="mt-1 text-sm text-gray-600">Dərəcə məlumatlarını yeniləyin</p>
+                        <h2 class="text-2xl font-bold text-gray-900">Edit Degree</h2>
+                        <p class="mt-1 text-sm text-gray-600">Update degree information</p>
                     </div>
                     <button 
                         @click="showEditModal = false"
@@ -246,7 +246,7 @@
             >
                 <!-- Modal Header -->
                 <div class="flex items-center justify-between mb-6">
-                    <h2 class="text-2xl font-bold text-gray-900">Dərəcəni Sil</h2>
+                    <h2 class="text-2xl font-bold text-gray-900">Delete Degree</h2>
                     <button 
                         @click="showDeleteModal = false"
                         class="text-gray-400 hover:text-gray-600 transition duration-150 ease-in-out"

@@ -4,12 +4,12 @@
         <!-- Header -->
         <div class="mb-6 sm:mb-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <div>
-                <h1 class="text-2xl sm:text-3xl font-bold text-gray-900">Tələbə Müraciətləri</h1>
-                <p class="mt-1 text-sm text-gray-600">Bütün tələbə müraciətlərini idarə edin</p>
+                <h1 class="text-2xl sm:text-3xl font-bold text-gray-900">Student Applications</h1>
+                <p class="mt-1 text-sm text-gray-600">All student applications</p>
             </div>
             <div class="flex items-center gap-3">
                 <select class="px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
-                    <option>Hamısı</option>
+                    <option>All</option>
                     <option>Pending</option>
                     <option>Under Review</option>
                     <option>Approved</option>
@@ -30,19 +30,19 @@
                                 ID
                             </th>
                             <th scope="col" class="px-4 sm:px-6 py-3 sm:py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
-                                Tələbə
+                                Student
                             </th>
                             <th scope="col" class="hidden md:table-cell px-4 sm:px-6 py-3 sm:py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
-                                Əlaqə
+                                Contact
                             </th>
                             <th scope="col" class="hidden lg:table-cell px-4 sm:px-6 py-3 sm:py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
-                                Proqram
+                                Program
                             </th>
                             <th scope="col" class="px-4 sm:px-6 py-3 sm:py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
                                 Status
                             </th>
                             <th scope="col" class="px-4 sm:px-6 py-3 sm:py-4 text-center text-xs font-semibold text-gray-700 uppercase tracking-wider w-24 sm:w-32">
-                                Əməliyyatlar
+                                Actions
                             </th>
                         </tr>
                     </thead>
@@ -127,8 +127,8 @@
                                     <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
                                     </svg>
-                                    <h3 class="mt-2 text-sm font-medium text-gray-900">Müraciət tapılmadı</h3>
-                                    <p class="mt-1 text-sm text-gray-500">Hələ heç bir tələbə müraciəti yoxdur.</p>
+                                    <h3 class="mt-2 text-sm font-medium text-gray-900">Application not found</h3>
+                                    <p class="mt-1 text-sm text-gray-500">There is no application yet.</p>
                                 </td>
                             </tr>
                         @endforelse
