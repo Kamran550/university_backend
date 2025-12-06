@@ -91,8 +91,8 @@ class AcceptanceLetterMail extends Mailable
             $fileName = 'Qebul_Mektubu_' . $this->student->first_name . '_' . $this->student->last_name . '_' . now()->format('Y-m-d') . '.pdf';
             $filePath = 'applications/acceptance-letters/' . $fileName;
 
-            // Save PDF to storage
-            Storage::disk('public')->put($filePath, $pdf->output());
+            // Save PDF to storage (uses default disk - local or DO Spaces based on env)
+            Storage::put($filePath, $pdf->output());
             if ($this->student->application && isset($documentVerification)) {
                 $documentVerification->update([
                     'file_path' => $filePath,

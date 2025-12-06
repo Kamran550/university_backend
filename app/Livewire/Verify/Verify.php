@@ -64,11 +64,11 @@ class Verify extends Component
             return null;
         }
 
-        if (!Storage::disk('public')->exists($this->application->file_path)) {
+        if (!Storage::exists($this->application->file_path)) {
             return null;
         }
 
-        return asset('storage/' . $this->application->file_path);
+        return Storage::url($this->application->file_path);
     }
 
     public function render()

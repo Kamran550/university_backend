@@ -63,7 +63,7 @@ class Profil extends Component
         $this->email = $user->email;
         $this->username = $user->username;
         $this->phone = $user->phone;
-        $this->profile_photo_preview = $user->profile_photo ? asset('storage/' . $user->profile_photo) : '';
+        $this->profile_photo_preview = $user->profile_photo ? Storage::url($user->profile_photo) : '';
     }
 
     public function updatedProfilePhoto()
@@ -98,14 +98,14 @@ class Profil extends Component
         // Handle profile photo upload
         if ($this->profile_photo) {
             // Delete old photo if exists
-            if ($user->profile_photo && Storage::disk('public')->exists($user->profile_photo)) {
-                Storage::disk('public')->delete($user->profile_photo);
+            if ($user->profile_photo && Storage::exists($user->profile_photo)) {
+                Storage::delete($user->profile_photo);
             }
 
-            // Store new photo
-            $path = $this->profile_photo->store('profile-photos', 'public');
+            // Store new photo (uses default disk - local or DO Spaces based on env)
+            $path = $this->profile_photo->store('profile-photos');
             $updateData['profile_photo'] = $path;
-            $this->profile_photo_preview = asset('storage/' . $path);
+            $this->profile_photo_preview = Storage::url($path);
         }
 
         // Update password if provided
