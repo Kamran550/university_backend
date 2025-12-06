@@ -342,7 +342,7 @@
                 $photoMime = null;
                 
                 if($student->profile_photo_path) {
-                    $fullPath = public_path('storage/' . $student->profile_photo_path);
+                    $fullPath = Storage::url($student->profile_photo_path);
                     if(file_exists($fullPath)) {
                         $photoPath = $fullPath;
                         $photoData = base64_encode(file_get_contents($fullPath));

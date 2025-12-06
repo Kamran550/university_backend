@@ -26,6 +26,7 @@ class ApplicationService
 
     /**
      * Handle file upload and return path.
+     * Uses default disk (local or DO Spaces based on FILESYSTEM_DISK env)
      *
      * @param UploadedFile|null $file
      * @param string $directory
@@ -38,7 +39,7 @@ class ApplicationService
         }
 
         $filename = time() . '_' . uniqid() . '.' . $file->getClientOriginalExtension();
-        $path = $file->storeAs($directory, $filename, 'public');
+        $path = $file->storeAs($directory, $filename);
         
         return $path;
     }

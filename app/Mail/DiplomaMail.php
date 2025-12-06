@@ -128,8 +128,8 @@ class DiplomaMail extends Mailable
             // Generate PDF output once
             $pdfOutput = $pdf->output();
 
-            // Save PDF to storage
-            Storage::disk('public')->put($filePath, $pdfOutput);
+            // Save PDF to storage (uses default disk - local or DO Spaces based on env)
+            Storage::put($filePath, $pdfOutput);
 
             Log::info('PDF storage-a saxlanıldı', [
                 'file_path' => $filePath,

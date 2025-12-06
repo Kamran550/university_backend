@@ -11,9 +11,12 @@ return [
     | by the framework. The "local" disk, as well as a variety of cloud
     | based disks are available to your application for file storage.
     |
+    | Local: 'public'
+    | Production: 'do_spaces'
+    |
     */
 
-    'default' => env('FILESYSTEM_DISK', 'local'),
+    'default' => env('FILESYSTEM_DISK', 'public'),
 
     /*
     |--------------------------------------------------------------------------
@@ -43,6 +46,29 @@ return [
             'root' => storage_path('app/public'),
             'url' => env('APP_URL').'/storage',
             'visibility' => 'public',
+            'throw' => false,
+            'report' => false,
+        ],
+
+        /*
+        |--------------------------------------------------------------------------
+        | Digital Ocean Spaces
+        |--------------------------------------------------------------------------
+        |
+        | S3-compatible object storage for production.
+        | CDN URL enabled for faster content delivery.
+        |
+        */
+        'do_spaces' => [
+            'driver' => 's3',
+            'key' => env('DO_SPACES_KEY'),
+            'secret' => env('DO_SPACES_SECRET'),
+            'region' => env('DO_SPACES_REGION', 'fra1'),
+            'bucket' => env('DO_SPACES_BUCKET'),
+            'endpoint' => env('DO_SPACES_ENDPOINT'),
+            'url' => env('DO_SPACES_CDN_URL'), // CDN URL for faster delivery
+            'visibility' => 'public',
+            'use_path_style_endpoint' => false,
             'throw' => false,
             'report' => false,
         ],

@@ -72,7 +72,7 @@
                                 <div class="flex items-center">
                                     <div class="shrink-0 h-10 w-10 bg-indigo-100 rounded-full flex items-center justify-center">
                                         @if($student->profile_photo)
-                                            <img src="{{ asset('storage/' . $student->profile_photo) }}" alt="{{ $student->name }}" class="h-10 w-10 rounded-full object-cover">
+                                            <img src="{{ Storage::url($student->profile_photo) }}" alt="{{ $student->name }}" class="h-10 w-10 rounded-full object-cover">
                                         @else
                                             <span class="text-indigo-600 font-semibold text-sm">
                                                 {{ strtoupper(substr($student->name, 0, 1)) }}{{ strtoupper(substr($student->surname ?? '', 0, 1)) }}
