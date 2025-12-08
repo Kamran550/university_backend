@@ -39,11 +39,27 @@ class ApplicationService
         }
 
         $filename = time() . '_' . uniqid() . '.' . $file->getClientOriginalExtension();
-        // $path = $file->storeAs($directory, $filename);
         
         $disk = config('filesystems.default');
-        $path = Storage::disk($disk)->putFileAs($directory, $file, $filename,'public');
-        return $path;
+        
+        Log::info('File upload attempt', [
+            'disk' => $disk,
+            'directory' => $directory,
+            'filename' => $filename,
+            'original_name' => $file->getClientOriginalName(),
+        ]);
+        
+        try {
+            $path = Storage::disk($disk)->putFileAs($directory, $file, $filename, 'public');
+            Log::info('File uploaded successfully', ['path' => $path]);
+            return $path;
+        } catch (\Exception $e) {
+            Log::error('File upload failed', [
+                'error' => $e->getMessage(),
+                'disk' => $disk,
+            ]);
+            throw $e;
+        }
     }
 
     /**
