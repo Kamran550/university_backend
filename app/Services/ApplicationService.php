@@ -39,8 +39,10 @@ class ApplicationService
         }
 
         $filename = time() . '_' . uniqid() . '.' . $file->getClientOriginalExtension();
-        $path = $file->storeAs($directory, $filename);
+        // $path = $file->storeAs($directory, $filename);
         
+        $disk = config('filesystems.default');
+        $path = Storage::disk($disk)->putFileAs($directory, $file, $filename,'public');
         return $path;
     }
 

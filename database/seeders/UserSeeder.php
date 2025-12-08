@@ -22,8 +22,8 @@ class UserSeeder extends Seeder
             'name'      => 'System',
             'surname'   => 'Administrators',
             'username'  => 'admin',          // daxil olmaq üçün
-            'email'     => 'admin@eipu.edu.az',
-            'password'  => Hash::make('password'), // to change the password, send an email
+            'email'     => 'admin@eipu.edu.pl',
+            'password'  => Hash::make('Qe7@Nf#rA92!ptXz'), // to change the password, send an email
             'phone'     => '0000000000',
             'role_id'   => $adminRoleId,
         ]);
