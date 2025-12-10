@@ -196,6 +196,49 @@
             font-size: 6pt;
         }
         
+        .proficiency-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 10px 0;
+            font-size: 6pt;
+        }
+        
+        .proficiency-table th,
+        .proficiency-table td {
+            padding: 4px 5px;
+            border: 1px solid #000;
+            text-align: left;
+            vertical-align: top;
+        }
+        
+        .proficiency-table th {
+            background-color: #fff;
+            color: #000;
+            font-weight: bold;
+            font-size: 5.5pt;
+        }
+        
+        .proficiency-table td {
+            font-size: 5.5pt;
+            line-height: 1.2;
+        }
+        
+        .required-documents-list {
+            margin: 8px 0;
+            padding-left: 20px;
+        }
+        
+        .required-documents-list li {
+            margin: 3px 0;
+            font-size: 6.5pt;
+            line-height: 1.3;
+        }
+        
+        .closing-section {
+            margin-top: 15px;
+            margin-bottom: 0px;
+        }
+        
         .dates-grid {
             display: table;
             width: 100%;
@@ -377,7 +420,7 @@
             @endif
             <div class="university-name-container">
                 <div class="university-name">
-                    European International Peace University
+                    EUROPEAN INTERNATIONAL PEACE UNIVERSITY
                 </div>
                 <div class="directorate-name">
                     Directorate of International Relations
@@ -391,13 +434,13 @@
         <!-- Subject and Application Code -->
         <div class="subject-info">
             <div class="subject-info-row">
-                Subject: {{ $student->application->program?->degree?->name ?? 'N/A' }} degree
+                Subject: {{ $student->application->program?->degree?->name ?? 'N/A' }} Degree - CONDITIONAL ACCEPTANCE LETTER
             </div>
             <div class="subject-info-row">
                 Application Code: EIPU{{ $student->application_id ?? $student->id }}
             </div>
             <div class="subject-info-row">
-                Dear {{ strtoupper($student->first_name . ' ' . $student->last_name) }}, Date: {{ now()->format('d.m.Y') }}
+                Dear {{ strtoupper($student->first_name . ' ' . $student->last_name) }}
             </div>
         
         </div>
@@ -448,7 +491,7 @@
         </div>
         <div class="info-row">
             <div class="info-label">Education Language</div>
-            <div class="info-value">{{ $student->native_language ?? 'English' }}</div>
+            <div class="info-value">{{ $student->native_languag ?? 'English' }}</div>
         </div>
     </div>
 
@@ -457,19 +500,25 @@
     
     <div class="info-grid">
         <div class="info-row">
-            <div class="info-label">Annual Tuition Fee (%90)</div>
-            <div class="info-value"><strong>{{ $student->application->program?->price_per_year ?? 'N/A' }}</strong></div>
+            <div class="info-label">Annual Program Tuition Fee</div>
+            <div class="info-value"><strong>4000 EUR</strong></div>
+        </div>
+        <div class="info-row">
+            <div class="info-label">Tuition Fee with Discount</div>
+            <div class="info-value"><strong>1000 EUR</strong></div>
+        </div>
+        <div class="info-row">
+            <div class="info-label">Scholarship</div>
+            <div class="info-value"><strong>75%</strong></div>
         </div>
         <div class="info-row">
             <div class="info-label">Amount of Deposit Payment</div>
-            <div class="info-value"><strong>1300 USD</strong></div>
+            <div class="info-value"><strong>1000 EUR</strong></div>
         </div>
     </div>
     <!-- Section 1 -->
     {{-- <div class="section-header">1. Condition for Issuing the Acceptance Letter</div> --}}
     <br>
-    <br>
-
     <div class="subsection-title">1.1. Deposit Payment</div>
     <div class="content">
         <p>
@@ -525,28 +574,135 @@
 
     <br>
     <br>
-    <!-- Section 2 -->
-    <div class="section-header">2. Conditions of Registration Upon Arrival at EIPU</div>
+
+    <!-- English Language Proficiency Requirements -->
+    <div class="section-header">English Language Proficiency Requirements</div>
+    
+    <table class="proficiency-table">
+        <thead>
+            <tr>
+                <th style="width: 18%;">Test Name</th>
+                <th style="width: 20%;">Requirement Level 1</th>
+                <th style="width: 20%;">Requirement Level 2</th>
+                <th style="width: 20%;">Requirement Level 3</th>
+                <th style="width: 18%;">Requirement Level 4</th>
+                <th style="width: 10%;">Validity</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>PTE Academic</strong><br>(Pearson Test of English Academic)</td>
+                <td>At least 69 overall with a minimum of 59 in all communicative skills.</td>
+                <td>At least 69 overall with a minimum of 62 in all communicative skills.</td>
+                <td>At least 76 overall with a minimum of 62 in all communicative skills.</td>
+                <td>At least 80 overall with a minimum of 80 in all communicative skills.</td>
+                <td>Two calendar years</td>
+            </tr>
+            <tr>
+                <td><strong>TOEFL iBT</strong><br>(including Home Edition)</td>
+                <td>At least 90 overall with minimum scores of 17 for writing, 17 for listening, 18 for reading, and 20 for speaking.</td>
+                <td>At least 90 overall with a minimum of 20 in each subskill.</td>
+                <td>At least 100 overall with a minimum of 20 in each subskill.</td>
+                <td>At least 109 overall with a minimum of 26 in speaking and 24 in all other subskills.</td>
+                <td>Two calendar years</td>
+            </tr>
+            <tr>
+                <td><strong>IELTS (Academic)</strong><br>test from a recognized IELTS test centre (including one skill retake).</td>
+                <td>At least 6.5 overall with a minimum of 5.5 in each subskill.</td>
+                <td>At least 6.5 overall with a minimum of 6.0 in each subskill.</td>
+                <td>At least 7.0 overall with at least 6.0 in each subskill.</td>
+                <td>At least 7.5 overall with at least 7.5 in each subskill.</td>
+                <td>Two calendar years</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <br>
+
+    <!-- English Proficiency and Preparatory Exam -->
+    <div class="subsection-title">English Proficiency and Preparatory Exam</div>
+    <div class="content">
+        <p>
+            Students who do not have an English proficiency certificate, or those who will study in Turkish, must take a proficiency exam. 
+            The tuition fees of students who register for their departments but fail the preparatory exam will be counted towards the preparatory 
+            class fee, and any remaining balance will be collected at the beginning of the academic year. For more information, please visit: 
+            <strong>https://eipu.edu.pl/preparatory-class</strong>
+        </p>
+    </div>
+
+    <br>
+
+    <!-- Scholarship Information -->
+    <div class="subsection-title">Scholarship Information</div>
+    <div class="content">
+        <p>
+            The scholarship only covers the annual/program tuition fee and does not include accommodation, transportation, meals, books, 
+            other educational needs, and healthcare expenses.
+        </p>
+    </div>
+
+    <br>
+
+    <!-- Required Documents for Final Registration -->
+    <div class="section-header">Required Documents for Final Registration</div>
+    
+    <ol class="required-documents-list">
+        <li>Notarized, English-Translated (Wet-Signed and Stamped) Master's Degree Diploma (if applicable)</li>
+        <li>Notarized, English-Translated (Wet-Signed and Stamped) Master's Degree Transcript (if applicable)</li>
+        <li>Notarized, English-Translated (Wet-Signed and Stamped) Bachelor's Degree Diploma (if applicable)</li>
+        <li>Notarized, English-Translated (Wet-Signed and Stamped) Bachelor's Degree Transcript (if applicable)</li>
+        <li>Notarized, English-Translated (Wet-Signed and Stamped) High School Diploma</li>
+        <li>Notarized, English-Translated (Wet-Signed and Stamped) High School Transcript</li>
+        <li>Passport</li>
+        <li>English/Turkish Language Proficiency Exam Result Certificate (if available)</li>
+        <li>Payment Receipt</li>
+        <li>1 Biometric Photograph</li>
+        <li>Final Acceptance Letter</li>
+    </ol>
+
+    <br>
+
+    <!-- Additional Information -->
+    <div class="content">
+        <p>
+            Please follow our website at <strong>www.eipu.edu.pl</strong> for updates on registrations, academic calendar, and other developments.
+        </p>
+        <p>
+            For inquiries regarding application, payment, registration, etc., please contact us at: <strong>international@eipu.edu.pl</strong>
+        </p>
+    </div>
+
+    <br>
+    <br>
+
+    <!-- Closing -->
+    <div class="closing-section">
+        <p>Sincerely,</p>
+        <p><strong>International Admissions Office</strong></p>
+    </div>
+
+    <!-- Section 2  2 ci sehifenin baslangici -->
+    {{-- <div class="section-header">2. Conditions of Registration Upon Arrival at EIPU</div>
     <div class="content">
         <p>
             You can download your official Acceptance Letter from the EIPU Application platform after completing the procedures listed there. Please carefully
             review the conditions and instructions below before registering to ensure a smooth registration process. We eagerly anticipate the completion of your admission process and look forward to welcoming you as a student in the upcoming Fall Semester of the 2025-2026 Academic Year.
         </p>
-    </div>
+    </div> --}}
 
-    <div class="subsection-title">2.1. English Language Requirement</div>
+    {{-- <div class="subsection-title">2.1. English Language Requirement</div>
     <div class="content">
         <p>
             Students who are unable to provide valid proof of English proficiency (TOEFL iBT – 78, IELTS – 6.0, or PTE – 55) will be required to take the English
             Proficiency Test upon arrival at the University. Those who pass the assessment conducted by the English Preparatory School will be allowed to proceed to
             their undergraduate program.
         </p>
-    </div>
-    <br>
-    <!-- Important Dates -->
-    <div class="section-header">Important Dates</div>
+    </div> --}}
     
-    <div class="dates-grid">
+    <!-- Important Dates -->
+    {{-- <div class="section-header">Important Dates</div> --}}
+    
+    {{-- <div class="dates-grid">
         <div class="dates-row">
             <div class="dates-label">Course registration period</div>
             <div class="dates-value">15/09/2025 – 19/09/2025</div>
@@ -571,11 +727,10 @@
             <div class="dates-label">Late registration date</div>
             <div class="dates-value">31/10/2025</div>
         </div>
-    </div>
-    <br>
+    </div> --}}
     
     <!-- Important Information -->
-    <div class="important-box">
+    {{-- <div class="important-box">
         <div class="important-title">Important Informations</div>
         <ol>
             <li>Please note that the Airport Immigration Office will not permit entry into North Cyprus with a Conditional Acceptance Letter.</li>
@@ -585,12 +740,12 @@
             <li>The deposit payment is non-refundable and will be credited toward the total fees for the first semester.</li>
             <li>Starting from 20 September 2025, students who register will be charged a late registration fee of EUR 15 per day.</li>
         </ol>
-    </div>
+    </div> --}}
 
     <!-- End Line -->
-    <div class="end-line">
+    {{-- <div class="end-line">
         ***THIS IS THE LAST LINE. NO INFORMATION WAS PRINTED AFTER THIS LINE. ***
-    </div>
+    </div> --}}
 
     <!-- Footer Section -->
     <div class="verification-footer">
@@ -618,15 +773,6 @@
      <table style="width: 100%; margin-bottom: 15px;">
         <tr>
             <!-- QR Code -->
-            <td style="width: 80px; vertical-align: top;">
-                @php
-                    $qrCode = \SimpleSoftwareIO\QrCode\Facades\QrCode::format('svg')->size(70)->generate($student->getVerificationUrl());
-                    $qrCodeBase64 = base64_encode($qrCode);
-                @endphp
-    
-                <img src="data:image/svg+xml;base64,{{ $qrCodeBase64 }}" 
-                     style="width: 70px; height: 70px;" />
-            </td>
     
             <!-- Text Box -->
             <td style="padding-left: 10px;">
@@ -639,6 +785,16 @@
                     <strong>{{ $student->getVerificationUrl() }}</strong>.
                 </div>
             </td>
+            <td style="width: 80px; vertical-align: top;">
+                @php
+                    $qrCode = \SimpleSoftwareIO\QrCode\Facades\QrCode::format('svg')->size(70)->generate($student->getVerificationUrl());
+                    $qrCodeBase64 = base64_encode($qrCode);
+                @endphp
+    
+                <img src="data:image/svg+xml;base64,{{ $qrCodeBase64 }}" 
+                     style="width: 70px; height: 70px;" />
+            </td>
+
         </tr>
     </table>
     

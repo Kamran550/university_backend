@@ -6,6 +6,8 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>Document Verification - {{ config('app.name', 'EIPU') }}</title>
+    
+    <link rel="icon" type="image/png" href="{{ asset('images/EIPU-simvol.png') }}">
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @livewireStyles
