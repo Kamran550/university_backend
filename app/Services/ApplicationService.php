@@ -39,16 +39,16 @@ class ApplicationService
         }
 
         $filename = time() . '_' . uniqid() . '.' . $file->getClientOriginalExtension();
-        
+
         $disk = config('filesystems.default');
-        
+
         Log::info('File upload attempt', [
             'disk' => $disk,
             'directory' => $directory,
             'filename' => $filename,
             'original_name' => $file->getClientOriginalName(),
         ]);
-        
+
         try {
             $path = Storage::disk($disk)->putFileAs($directory, $file, $filename, 'public');
             Log::info('File uploaded successfully', ['path' => $path]);
@@ -63,30 +63,32 @@ class ApplicationService
     }
 
     /**
-     * Generate student number in format: 20251100XXXX (10 digits total)
-     * Examples: 2025110001, 2025110002, 2025110011
+     * Generate student number in format: YYYYMMNNNN (10 digits total)
+     * Format: Year (4) + Month (2) + Sequence (4)
+     * Examples: 2025120001, 2025120002, 2025120099, 2025120100
      * 
      * @return string
      */
     protected function generateStudentNumber(): string
     {
-        $prefix = '20251100';
-        
-        // Get the last student application to find the highest student number
+        // Generate prefix: YYYYMM (current year and month)
+        $prefix = date('Y') . date('m'); // e.g., 202512
+
+        // Get the last student application with the same prefix (same year and month)
         $lastStudent = StudentApplication::orderBy('student_number', 'desc')
             ->where('student_number', 'like', $prefix . '%')
             ->first();
-        
+
         if ($lastStudent && $lastStudent->student_number) {
             // Extract the sequence number from the last student number (last 4 digits)
             $lastSequence = (int) substr($lastStudent->student_number, -4);
             $newSequence = $lastSequence + 1;
         } else {
-            // First student
+            // First student for this month
             $newSequence = 1;
         }
-        
-        // Format the new student number with leading zeros (4 digits)
+
+        // Format the new student number: YYYYMM + 4-digit sequence with leading zeros
         return $prefix . str_pad($newSequence, 4, '0', STR_PAD_LEFT);
     }
 
@@ -101,7 +103,7 @@ class ApplicationService
         return DB::transaction(function () use ($data) {
             // Get degree and faculty names
             Log::info('Program ID: ' . $data['program_id']);
-            
+
             // Prepare application data
             $applicationData = [
                 'applicant_type' => ApplicationTypeEnum::STUDENT->value,
@@ -112,7 +114,7 @@ class ApplicationService
                 'user_agent' => request()->userAgent(),
                 'locale' => $data['locale'] ?? 'en',
             ];
-            
+
 
             Log::info('Application data: ' . json_encode($applicationData));
             // Create application
@@ -148,6 +150,7 @@ class ApplicationService
                 'profile_photo_path' => $profilePhotoPath,
                 'diploma_path' => $diplomaPath,
                 'transcript_path' => $transcriptPath,
+                'study_language' => $data['teachingLanguage'],
             ];
 
             // Create student application
@@ -212,4 +215,3 @@ class ApplicationService
         });
     }
 }
-

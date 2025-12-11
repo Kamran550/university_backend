@@ -1,0 +1,27 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+
+class ProgramStudyLanguage extends Model
+{
+    //
+    use HasFactory, SoftDeletes;
+
+    protected $table = 'program_study_language';
+
+    protected $fillable = [
+        'program_id',
+        'language',
+        'is_available',
+    ];
+
+    public function program(): BelongsTo
+    {
+        return $this->belongsTo(Program::class);
+    }
+}

@@ -25,4 +25,16 @@ class Faculty extends Model
     {
         return $this->hasMany(Program::class);
     }
+    public function translations()
+    {
+        return $this->hasMany(FacultyTranslation::class);
+    }
+
+    public function getName($lang = 'EN')
+    {
+        return $this->translations
+            ->where('language', strtoupper($lang))
+            ->first()
+            ->name ?? '';
+    }
 }

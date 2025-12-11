@@ -42,6 +42,7 @@ return new class extends Migration
             $table->string('profile_photo_path', 255)->nullable();
             $table->string('diploma_path', 255)->nullable();
             $table->string('transcript_path', 255);
+            $table->string('study_language', 50);
             $table->softDeletes();
             $table->timestamps();
             

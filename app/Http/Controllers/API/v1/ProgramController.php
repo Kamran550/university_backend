@@ -46,8 +46,9 @@ class ProgramController extends Controller
     {
         $degreeId = $request->query('degree_id') ? (int) $request->query('degree_id') : null;
         $facultyId = $request->query('faculty_id') ? (int) $request->query('faculty_id') : null;
+        $lang = $request->query('lang') ? strtoupper($request->query('lang')) : null;
 
-        $programs = $this->programService->getFiltered($degreeId, $facultyId);
+        $programs = $this->programService->getFiltered($degreeId, $facultyId, $lang);
 
         if (empty($programs) || $programs->isEmpty()) {
             return $this->notFoundResponse('No programs found');

@@ -250,10 +250,10 @@
             @endif
             <div class="university-name-container">
                 <div class="university-name">
-                    European International Peace University
+                    EUROPEAN INTERNATIONAL PEACE UNIVERSITY
                 </div>
                 <div class="directorate-name">
-                    Directorate of International Relations
+                    STUDENT AFFAIRS DEPARTMENT
                 </div>
             </div>
         </div>
@@ -307,7 +307,7 @@
                 </div>
                 <div class="info-row">
                     <div class="info-label">Education Level</div>
-                    <div class="info-value">{{ strtoupper($student->application->program?->degree?->name ?? 'N/A') }}</div>
+                    <div class="info-value">{{ strtoupper($student->application->program?->degree?->description ?? $student->application->program?->degree?->name ?? 'N/A') }}</div>
                 </div>
                 <div class="info-row">
                     <div class="info-label">Institue / Faculty</div>
@@ -327,7 +327,7 @@
                 </div>
                 <div class="info-row">
                     <div class="info-label">Class</div>
-                    <div class="info-value">Lesson Phase</div>
+                    <div class="info-value">1st Grade</div>
                 </div>
                 <div class="info-row">
                     <div class="info-label">Date of Registration</div>
@@ -371,7 +371,7 @@
             * The person whose identity information is provided above is our student.
         </div>
         <div class="footer-note">
-            * The education period for the specified program is 4 years.
+            * The education period for the specified program is {{ $student->application->program?->degree?->duration ?? 4 }} years.
         </div>
         <div class="footer-note">
             * In accordance with the relevant articles of the Graduate Education and Training Directive, individuals registered in the program must fulfill all attendance, participation, and exam conditions for courses completely and as a whole in order to benefit from student rights. Otherwise, the person's relationship with the program will be terminated.

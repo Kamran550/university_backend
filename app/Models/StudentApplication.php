@@ -30,6 +30,7 @@ class StudentApplication extends Model
         'transcript_path',
         'student_number',
         'passport_number',
+        'study_language',
     ];
 
     protected $hidden = [

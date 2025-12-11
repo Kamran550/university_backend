@@ -217,49 +217,52 @@
             margin-top: 1mm;
         }
         
-        /* Signatures Section */
-        .signatures {
+        /* Partner Logos Section */
+        .partner-logos {
             width: 100%;
-            display: table;
             margin-top: 5mm;
+            padding: 3mm 0;
         }
         
-        .signatures-row {
+        .partner-logos-title {
+            font-size: 9pt;
+            color: #555;
+            text-align: center;
+            margin-bottom: 3mm;
+            font-style: italic;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .partner-logos-grid {
+            display: table;
+            width: 100%;
+            table-layout: auto;
+            border-collapse: separate;
+            border-spacing: 2mm 0;
+            padding: 0;
+            margin: 0 auto;
+        }
+        
+        .partner-logos-row {
             display: table-row;
         }
         
-        .signature-box {
+        .partner-logo-item {
             display: table-cell;
             text-align: center;
-            vertical-align: bottom;
-            padding: 0 10mm;
-            width: 33.33%;
-        }
-        
-        .signature-image {
-            height: 18mm;
+            vertical-align: middle;
             width: auto;
-            max-width: 50mm;
-            margin-bottom: 2mm;
+            height: 12mm;
+            padding: 0 1mm;
         }
         
-        .signature-line {
-            width: 50mm;
-            height: 0;
-            border-bottom: 1px solid #333;
-            margin: 0 auto 2mm auto;
-        }
-        
-        .signature-name {
-            font-size: 9pt;
-            font-weight: bold;
-            color: #1a1a2e;
-        }
-        
-        .signature-title {
-            font-size: 8pt;
-            color: #555;
-            margin-top: 1mm;
+        .partner-logo-image {
+            max-width: 20mm;
+            max-height: 12mm;
+            width: auto;
+            height: auto;
+            vertical-align: middle;
         }
         
         /* Seal */
@@ -384,49 +387,37 @@
                 </div>
             </div>
             
-            <!-- Signatures -->
-            <div class="signatures">
-                <div class="signatures-row">
-                    <!-- Signature 1 - Chairperson -->
-                    <div class="signature-box">
+            <!-- Partner Logos -->
+            <div class="partner-logos">
+                <div class="partner-logos-title">Our Partners</div>
+                <div class="partner-logos-grid">
+                    <div class="partner-logos-row">
                         @php
-                            $signature1Path = public_path('images/İmza1.png');
-                            $signature1Data = file_exists($signature1Path) ? base64_encode(file_get_contents($signature1Path)) : '';
+                            $partnerLogos = [
+                                ['path' => 'images/aacsb.png', 'alt' => 'AACSB', 'mime' => 'image/png'],
+                                ['path' => 'images/amba.png', 'alt' => 'AMBA', 'mime' => 'image/png'],
+                                ['path' => 'images/asic-logo-white.png', 'alt' => 'ASIC', 'mime' => 'image/png'],
+                                ['path' => 'images/ECBE.jpg', 'alt' => 'ECBE', 'mime' => 'image/jpeg'],
+                                ['path' => 'images/enqa.png', 'alt' => 'ENQA', 'mime' => 'image/png'],
+                                ['path' => 'images/IACBE_logo_notag_2color.png', 'alt' => 'IACBE', 'mime' => 'image/png'],
+                                ['path' => 'images/qahe.png', 'alt' => 'QAHE', 'mime' => 'image/png'],
+                                ['path' => 'images/QS_World_University_Rankings_Logo.jpg', 'alt' => 'QS World University Rankings', 'mime' => 'image/jpeg'],
+                                ['path' => 'images/THEWUR.png', 'alt' => 'THE World University Rankings', 'mime' => 'image/png'],
+                                ['path' => 'images/unesco.png', 'alt' => 'UNESCO', 'mime' => 'image/png'],
+                                ['path' => 'images/WCI.png', 'alt' => 'World Certification Institute', 'mime' => 'image/png'],
+                            ];
                         @endphp
-                        @if($signature1Data)
-                            <img src="data:image/png;base64,{{ $signature1Data }}" alt="Signature" class="signature-image">
-                        @endif
-                        <div class="signature-line"></div>
-                        <div class="signature-name">Dr. Ahmad ALIYEV</div>
-                        <div class="signature-title">Chairperson of the Board of Trustees</div>
-                    </div>
-                    
-                    <!-- Signature 2 - President -->
-                    <div class="signature-box">
-                        @php
-                            $signature2Path = public_path('images/Imza2.png');
-                            $signature2Data = file_exists($signature2Path) ? base64_encode(file_get_contents($signature2Path)) : '';
-                        @endphp
-                        @if($signature2Data)
-                            <img src="data:image/png;base64,{{ $signature2Data }}" alt="Signature" class="signature-image">
-                        @endif
-                        <div class="signature-line"></div>
-                        <div class="signature-name">Prof. Dr. Tural AYSAL</div>
-                        <div class="signature-title">President</div>
-                    </div>
-                    
-                    <!-- Signature 3 - Director -->
-                    <div class="signature-box">
-                        @php
-                            $signature3Path = public_path('images/imza3.png');
-                            $signature3Data = file_exists($signature3Path) ? base64_encode(file_get_contents($signature3Path)) : '';
-                        @endphp
-                        @if($signature3Data)
-                            <img src="data:image/png;base64,{{ $signature3Data }}" alt="Signature" class="signature-image">
-                        @endif
-                        <div class="signature-line"></div>
-                        <div class="signature-name">Prof. Dr. Eldar MAMMADOV</div>
-                        <div class="signature-title">Director of the Graduate School</div>
+                        @foreach($partnerLogos as $logo)
+                            @php
+                                $logoPath = public_path($logo['path']);
+                                $logoData = file_exists($logoPath) ? base64_encode(file_get_contents($logoPath)) : '';
+                            @endphp
+                            @if($logoData)
+                                <div class="partner-logo-item">
+                                    <img src="data:{{ $logo['mime'] }};base64,{{ $logoData }}" alt="{{ $logo['alt'] }}" class="partner-logo-image">
+                                </div>
+                            @endif
+                        @endforeach
                     </div>
                 </div>
             </div>

@@ -51,7 +51,7 @@ class StudentApplicationRequest extends ApiFormRequest
             'profile_photo' => ['nullable', 'file', 'mimes:jpg,jpeg,png', 'max:2048'],
             'diploma' => ['nullable', 'file', 'mimes:jpg,jpeg,png,pdf', 'max:2048'],
             'transcript' => ['required', 'file', 'mimes:jpg,jpeg,png,pdf', 'max:2048'],
-            
+            'teachingLanguage' => ['required', 'string', 'max:50'],
             // Optional metadata
             'locale' => ['nullable', 'string', 'max:5'],
         ];

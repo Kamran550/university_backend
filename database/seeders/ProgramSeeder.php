@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 use App\Models\Program;
+use App\Models\ProgramTranslation;
+use App\Models\ProgramStudyLanguage;
 use App\Models\Faculty;
 use App\Models\Degree;
 use Illuminate\Database\Seeder;
@@ -11,175 +13,171 @@ class ProgramSeeder extends Seeder
 {
     public function run(): void
     {
-        // Program list by faculty
-        $programs = [
+        // Standard annual fee is €4,000 for all programs
+        $standardPrice = 4000;
 
-            'Engineering' => [
-                'Bachelor' => [
-                    ['name' => 'Mechanical Engineering', 'price' => 2500],
-                    ['name' => 'Electrical Engineering', 'price' => 2600],
-                    ['name' => 'Civil Engineering', 'price' => 2400],
-                ],
-                'Master' => [
-                    ['name' => 'Advanced Engineering', 'price' => 4200],
-                    ['name' => 'Robotics Engineering', 'price' => 4500],
-                ],
-                'PhD' => [
-                    ['name' => 'Engineering Research', 'price' => 6000],
-                    ['name' => 'Robotics Research', 'price' => 6500],
-                ]
+        // Bachelor's Programs
+        $bachelorsPrograms = [
+            'Faculty of Management Sciences' => [
+                ['en' => 'Aviation Management', 'tr' => 'Havacılık Yönetimi'],
+                ['en' => 'Business Administration', 'tr' => 'İşletme'],
+                ['en' => 'Political Science and Public Administration', 'tr' => 'Siyaset Bilimi ve Kamu Yönetimi'],
+                ['en' => 'International Relations', 'tr' => 'Uluslararası İlişkiler'],
+                ['en' => 'International Business and Entrepreneurship', 'tr' => 'Uluslararası İşletmecilik ve Girişimcilik'],
+                ['en' => 'International Trade and Logistics', 'tr' => 'Uluslararası Ticaret ve Lojistik'],
+                ['en' => 'Management Information Systems', 'tr' => 'Yönetim Bilişim Sistemleri'],
+                ['en' => 'Economics and Finance', 'tr' => 'Ekonomi ve Finans'],
             ],
-
-            'Computer Science & IT' => [
-                'Bachelor' => [
-                    ['name' => 'Computer Science', 'price' => 2200],
-                    ['name' => 'Software Engineering', 'price' => 2300],
-                    ['name' => 'Information Technology', 'price' => 2100],
-                ],
-                'Master' => [
-                    ['name' => 'Data Science', 'price' => 4500],
-                    ['name' => 'Artificial Intelligence', 'price' => 4700],
-                    ['name' => 'Cybersecurity', 'price' => 4400],
-                ],
-                'PhD' => [
-                    ['name' => 'Advanced AI Research', 'price' => 6500],
-                    ['name' => 'Quantum Computing', 'price' => 7000],
-                ]
+            'Faculty of Health Sciences' => [
+                ['en' => 'Exercise and Sports Sciences', 'tr' => 'Egzersiz ve Spor Bilimleri'],
+                ['en' => 'Exercise and Sports Sciences for People with Disabilities', 'tr' => 'Engellilerde Egzersiz ve Spor Bilimleri'],
+                ['en' => 'Health Management', 'tr' => 'Sağlık Yönetimi'],
+                ['en' => 'Cosmetology', 'tr' => 'Kozmetoloji'],
+                ['en' => 'Psychology', 'tr' => 'Psikoloji'],
             ],
-
-            'Business & Economics' => [
-                'Bachelor' => [
-                    ['name' => 'Business Administration', 'price' => 2000],
-                    ['name' => 'Economics', 'price' => 2100],
-                    ['name' => 'Finance', 'price' => 2200],
-                    ['name' => 'Marketing', 'price' => 2000],
-                ],
-                'Master' => [
-                    ['name' => 'MBA', 'price' => 4500],
-                    ['name' => 'Master of Finance', 'price' => 4300],
-                    ['name' => 'Master of Marketing', 'price' => 4200],
-                ],
-                'PhD' => [
-                    ['name' => 'Business Research', 'price' => 5500],
-                    ['name' => 'Economic Theory', 'price' => 5800],
-                ]
+            'Faculty of Engineering' => [
+                ['en' => 'Computer Engineering', 'tr' => 'Bilgisayar Mühendisliği'],
+                ['en' => 'Software Engineering', 'tr' => 'Yazılım Mühendisliği'],
+                ['en' => 'Cyber Security Engineering', 'tr' => 'Siber Güvenlik Mühendisliği'],
+                ['en' => 'Artificial Intelligence Engineering', 'tr' => 'Yapay Zeka Mühendisliği'],
+                ['en' => 'Aviation Systems and Technologies Engineering', 'tr' => 'Havacılık Sistemleri ve Teknolojileri Mühendisliği'],
+                ['en' => 'Industrial Engineering', 'tr' => 'Endüstri Mühendisliği'],
+                ['en' => 'Management Engineering', 'tr' => 'İşletme Mühendisliği'],
             ],
-
-            'Law' => [
-                'Bachelor' => [
-                    ['name' => 'International Law', 'price' => 2300],
-                    ['name' => 'Criminal Law', 'price' => 2400],
-                ],
-                'Master' => [
-                    ['name' => 'Master of Laws (LLM)', 'price' => 4200],
-                ],
-                'PhD' => [
-                    ['name' => 'Legal Research', 'price' => 6000],
-                ]
+            'Faculty of Law' => [
+                ['en' => 'Law', 'tr' => 'Hukuk'],
             ],
-
-            'Medicine & Health Sciences' => [
-                'Bachelor' => [
-                    ['name' => 'Nursing', 'price' => 2500],
-                    ['name' => 'Public Health', 'price' => 3000],
-                ],
-                'Master' => [
-                    ['name' => 'Medical Research', 'price' => 4800],
-                ],
-                'PhD' => [
-                    ['name' => 'Clinical Medicine', 'price' => 6500],
-                    ['name' => 'Pharmaceutical Research', 'price' => 6800],
-                ]
-            ],
-
-            'Architecture & Civil Engineering' => [
-                'Bachelor' => [
-                    ['name' => 'Architecture', 'price' => 2400],
-                    ['name' => 'Urban Planning', 'price' => 2200],
-                ],
-                'Master' => [
-                    ['name' => 'Advanced Architecture', 'price' => 4300],
-                ],
-                'PhD' => [
-                    ['name' => 'Civil Engineering Research', 'price' => 6000],
-                ]
-            ],
-
-            'Education' => [
-                'Bachelor' => [
-                    ['name' => 'Education Studies', 'price' => 2000],
-                ],
-                'Master' => [
-                    ['name' => 'Educational Leadership', 'price' => 4200],
-                ],
-                'PhD' => [
-                    ['name' => 'Research Methods in Education', 'price' => 5500],
-                ]
-            ],
-
-            'Social Sciences' => [
-                'Bachelor' => [
-                    ['name' => 'Psychology', 'price' => 2100],
-                    ['name' => 'Sociology', 'price' => 2000],
-                ],
-                'Master' => [
-                    ['name' => 'Clinical Psychology', 'price' => 4300],
-                ],
-                'PhD' => [
-                    ['name' => 'Social Sciences Research', 'price' => 5600],
-                ]
-            ],
-
-            'Humanities' => [
-                'Bachelor' => [
-                    ['name' => 'History', 'price' => 2000],
-                    ['name' => 'Literature', 'price' => 2000],
-                ],
-                'Master' => [
-                    ['name' => 'Media Studies', 'price' => 4200],
-                ],
-                'PhD' => [
-                    ['name' => 'Humanities Research', 'price' => 5500],
-                ]
-            ],
-
-            'Natural Sciences' => [
-                'Bachelor' => [
-                    ['name' => 'Mathematics', 'price' => 2000],
-                    ['name' => 'Physics', 'price' => 2100],
-                    ['name' => 'Chemistry', 'price' => 2100],
-                    ['name' => 'Biology', 'price' => 2100],
-                ],
-                'Master' => [
-                    ['name' => 'Applied Mathematics', 'price' => 4300],
-                    ['name' => 'Theoretical Physics', 'price' => 4400],
-                    ['name' => 'Organic Chemistry', 'price' => 4200],
-                ],
-                'PhD' => [
-                    ['name' => 'Natural Science Research', 'price' => 6000],
-                ]
-            ]
-
         ];
 
-        // Create programs dynamically
-        foreach ($programs as $facultyName => $degreePrograms) {
+        // Master's Programs
+        $mastersPrograms = [
+            'Faculty of Health Sciences' => [
+                ['en' => 'Physical Activity Health and Sports', 'tr' => 'Fiziksel Aktivite Sağlık ve Spor'],
+                ['en' => 'Health Management', 'tr' => 'Sağlık Yönetimi'],
+                ['en' => 'Clinical Psychology', 'tr' => 'Klinik Psikoloji'],
+            ],
+            'Faculty of Engineering' => [
+                ['en' => 'Aviation Systems and Technologies', 'tr' => 'Havacılık Sistemleri ve Teknolojileri'],
+                ['en' => 'Engineering Management', 'tr' => 'Mühendislik Yönetimi'],
+                ['en' => 'Quality and Compliance Assessment Engineering', 'tr' => 'Kalite ve Uygunluk Değerlendirme Mühendisliği'],
+                ['en' => 'Cybersecurity Engineering', 'tr' => 'Siber Güvenlik Mühendisliği'],
+                ['en' => 'Software Engineering', 'tr' => 'Yazılım Mühendisliği'],
+                ['en' => 'Renewable Energy Engineering', 'tr' => 'Yenilenebilir Enerji Mühendisliği'],
+                ['en' => 'Data Science Engineering', 'tr' => 'Veri Bilimi Mühendisliği'],
+                ['en' => 'Computer Engineering', 'tr' => 'Bilgisayar Mühendisliği'],
+                ['en' => 'Artificial Intelligence Engineering', 'tr' => 'Yapay Zekâ Mühendisliği'],
+            ],
+            'Faculty of Management Sciences' => [
+                ['en' => 'Business Administration (MBA)', 'tr' => 'İşletme (MBA)'],
+                ['en' => 'Management Information Systems', 'tr' => 'Yönetim Bilişim Sistemleri'],
+            ],
+            'Faculty of Law' => [
+                ['en' => 'Law', 'tr' => 'Hukuk'],
+            ],
+        ];
 
+        // PhD Programs
+        $phdPrograms = [
+            'Faculty of Engineering' => [
+                ['en' => 'Aviation Systems and Technologies', 'tr' => 'Havacılık Sistemleri ve Teknolojileri'],
+                ['en' => 'Cyber Security Engineering', 'tr' => 'Siber Güvenlik Mühendisliği'],
+                ['en' => 'Software Engineering', 'tr' => 'Yazılım Mühendisliği'],
+                ['en' => 'Management Information Systems', 'tr' => 'Yönetim Bilişim Sistemleri'],
+                ['en' => 'Management Engineering', 'tr' => 'İşletme Mühendisliği'],
+                ['en' => 'Computer Engineering', 'tr' => 'Bilgisayar Mühendisliği'],
+                ['en' => 'Artificial Intelligence Engineering', 'tr' => 'Yapay Zekâ Mühendisliği'],
+            ],
+            'Faculty of Management Sciences' => [
+                ['en' => 'Business Administration', 'tr' => 'İşletme'],
+                ['en' => 'Management and Organization', 'tr' => 'Yönetim ve Organizasyon'],
+            ],
+            'Faculty of Health Sciences' => [
+                ['en' => 'Sports Health Sciences', 'tr' => 'Spor Sağlık Bilimleri'],
+            ],
+            'Faculty of Law' => [
+                ['en' => 'Law', 'tr' => 'Hukuk'],
+            ],
+        ];
+
+        // Get degrees
+        $bachelorsDegree = Degree::where('name', "Bachelor's")->first();
+        $mastersDegree = Degree::where('name', "Master's")->first();
+        $phdDegree = Degree::where('name', 'PhD')->first();
+
+        // Create Bachelor's Programs
+        $this->createPrograms($bachelorsPrograms, $bachelorsDegree, $standardPrice);
+
+        // Create Master's Programs
+        $this->createPrograms($mastersPrograms, $mastersDegree, $standardPrice);
+
+        // Create PhD Programs
+        $this->createPrograms($phdPrograms, $phdDegree, $standardPrice);
+    }
+
+    private function createPrograms(array $programsByFaculty, Degree $degree, int $price): void
+    {
+        foreach ($programsByFaculty as $facultyName => $programs) {
             $faculty = Faculty::where('name', $facultyName)->first();
 
-            foreach ($degreePrograms as $degreeName => $programList) {
+            if (!$faculty) {
+                continue;
+            }
 
-                $degree = Degree::where('name', $degreeName)->first();
-
-                foreach ($programList as $program) {
-                    Program::firstOrCreate([
-                        'name' => $program['name'],
-                        'faculty_id' => $faculty->id,
+            foreach ($programs as $programData) {
+                // Create program with English name (stored in main table)
+                $program = Program::firstOrCreate(
+                    [
                         'degree_id' => $degree->id,
-                    ], [
-                        'price_per_year' => $program['price'],
-                    ]);
-                }
+                        'faculty_id' => $faculty->id,
+                        'name' => $programData['en'],
+                    ],
+                    [
+                        'price_per_year' => $price,
+                    ]
+                );
+
+                // Create English translation
+                ProgramTranslation::firstOrCreate(
+                    [
+                        'program_id' => $program->id,
+                        'language' => 'EN',
+                    ],
+                    [
+                        'name' => $programData['en'],
+                    ]
+                );
+
+                // Create Turkish translation
+                ProgramTranslation::firstOrCreate(
+                    [
+                        'program_id' => $program->id,
+                        'language' => 'TR',
+                    ],
+                    [
+                        'name' => $programData['tr'],
+                    ]
+                );
+
+                // Create study languages (both EN and TR are available for all programs)
+                ProgramStudyLanguage::firstOrCreate(
+                    [
+                        'program_id' => $program->id,
+                        'language' => 'EN',
+                    ],
+                    [
+                        'is_available' => true,
+                    ]
+                );
+
+                ProgramStudyLanguage::firstOrCreate(
+                    [
+                        'program_id' => $program->id,
+                        'language' => 'TR',
+                    ],
+                    [
+                        'is_available' => true,
+                    ]
+                );
             }
         }
     }
