@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,7 +10,7 @@
             margin: 12mm;
             size: A4;
         }
-        
+
         body {
             font-family: 'Times New Roman', 'Times', 'Georgia', serif;
             font-size: 7.5pt;
@@ -22,7 +23,7 @@
             position: relative;
             min-height: 100vh;
         }
-        
+
         /* Background Watermark */
         body::before {
             content: '';
@@ -32,7 +33,7 @@
             transform: translate(-50%, -50%);
             width: 600px;
             height: 600px;
-            background-image: url('{{ public_path("images/EIPU-logo-dark.png") }}');
+            background-image: url('{{ public_path('images/EIPU-logo-dark.png') }}');
             background-size: contain;
             background-repeat: no-repeat;
             background-position: center;
@@ -40,13 +41,13 @@
             z-index: -1;
             pointer-events: none;
         }
-        
+
         .header {
             border-bottom: 1.5px solid #000;
             padding: 5px 0;
             margin-bottom: 8px;
         }
-        
+
         .logo-container {
             display: flex;
             align-items: center;
@@ -54,13 +55,13 @@
             padding: 0;
             position: relative;
         }
-        
+
         .logo {
             max-width: 25mm;
             height: auto;
             flex-shrink: 0;
         }
-        
+
         .university-name-container {
             flex: 1;
             display: flex;
@@ -69,7 +70,7 @@
             justify-content: center;
             text-align: center;
         }
-        
+
         .header-right-info {
             display: flex;
             flex-direction: column;
@@ -79,7 +80,7 @@
             text-align: right;
             min-width: 80mm;
         }
-        
+
         .university-name {
             font-size: 14pt;
             font-weight: bold;
@@ -88,7 +89,7 @@
             margin: 0;
             padding: 0;
         }
-        
+
         .directorate-name {
             font-size: 9pt;
             font-weight: normal;
@@ -97,16 +98,16 @@
             margin: 2px 0 0 0;
             padding: 0;
         }
-        
+
         .subject-info {
             margin: 8px 0 4px 0;
             font-size: 7.5pt;
         }
-        
+
         .subject-info-row {
             margin: 2px 0;
         }
-        
+
         .document-title {
             font-size: 11pt;
             font-weight: bold;
@@ -115,22 +116,22 @@
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
-        
+
         .greeting {
             margin: 8px 0;
             font-size: 7.5pt;
         }
-        
+
         .content {
             margin: 6px 0;
             text-align: justify;
             line-height: 1.3;
         }
-        
+
         .content p {
             margin: 4px 0;
         }
-        
+
         .section-header {
             font-size: 8pt;
             font-weight: bold;
@@ -139,7 +140,7 @@
             /* background-color: #fff; */
             border-left: 3px solid #000;
         }
-        
+
         .info-grid {
             display: table;
             width: 100%;
@@ -147,11 +148,11 @@
             border-collapse: collapse;
             font-size: 7pt;
         }
-        
+
         .info-row {
             display: table-row;
         }
-        
+
         .info-label {
             display: table-cell;
             padding: 4px 6px;
@@ -160,34 +161,34 @@
             border: 1px solid #000;
             /* background-color: #fff; */
         }
-        
+
         .info-value {
             display: table-cell;
             padding: 4px 6px;
             border: 1px solid #000;
         }
-        
+
         .subsection-title {
             font-size: 7.5pt;
             font-weight: bold;
             margin: 8px 0 4px 0;
         }
-        
+
         .payment-table {
             width: 100%;
             border-collapse: collapse;
             margin: 8px 0;
             font-size: 6.5pt;
-            
+
         }
-        
+
         .payment-table th,
         .payment-table td {
             padding: 3px 5px;
             border: 1px solid #000;
             text-align: left;
         }
-        
+
         .payment-table th {
             background-color: #fff;
             color: #000;
@@ -195,14 +196,14 @@
             text-transform: uppercase;
             font-size: 6pt;
         }
-        
+
         .proficiency-table {
             width: 100%;
             border-collapse: collapse;
             margin: 10px 0;
             font-size: 6pt;
         }
-        
+
         .proficiency-table th,
         .proficiency-table td {
             padding: 4px 5px;
@@ -210,46 +211,46 @@
             text-align: left;
             vertical-align: top;
         }
-        
+
         .proficiency-table th {
             background-color: #fff;
             color: #000;
             font-weight: bold;
             font-size: 5.5pt;
         }
-        
+
         .proficiency-table td {
             font-size: 5.5pt;
             line-height: 1.2;
         }
-        
+
         .required-documents-list {
             margin: 8px 0;
             padding-left: 20px;
         }
-        
+
         .required-documents-list li {
             margin: 3px 0;
             font-size: 6.5pt;
             line-height: 1.3;
         }
-        
+
         .closing-section {
             margin-top: 15px;
             margin-bottom: 0px;
         }
-        
+
         .dates-grid {
             display: table;
             width: 100%;
             border-collapse: collapse;
             font-size: 7pt;
         }
-        
+
         .dates-row {
             display: table-row;
         }
-        
+
         .dates-label {
             display: table-cell;
             padding: 3px 6px;
@@ -257,44 +258,44 @@
             width: 50%;
             font-weight: 600;
         }
-        
+
         .dates-value {
             display: table-cell;
             padding: 3px 6px;
             border: 1px solid #000;
         }
-        
+
         .important-box {
             margin: 8px 0;
             padding: 6px;
             border: 1.5px solid #000;
             /* background-color: #fff; */
         }
-        
+
         .important-title {
             font-size: 8pt;
             font-weight: bold;
             margin-bottom: 5px;
         }
-        
+
         .important-box ol {
             margin: 5px 0;
             padding-left: 15px;
             font-size: 6pt;
         }
-        
+
         .important-box li {
             margin: 3px 0;
             line-height: 1.2;
         }
-        
+
         .end-line {
             text-align: center;
             font-weight: bold;
             margin: 10px 0;
             font-size: 7pt;
         }
-        
+
         .verification-footer {
             position: absolute;
             bottom: 0;
@@ -310,39 +311,39 @@
             gap: 15px;
             margin-bottom: 10px;
         }
-        
+
         .verification-box {
             background-color: #f0f0f0;
             border-radius: 8px;
             padding: 12px 15px;
             flex: 1;
         }
-        
+
         .verification-text-box {
             font-size: 10pt;
             line-height: 1.5;
             color: #000;
         }
-        
+
         .doc-number {
             font-weight: bold;
             font-family: 'Courier New', monospace;
             letter-spacing: 0.5px;
         }
-        
+
         .qr-code {
             width: 70px;
             height: 70px;
             flex-shrink: 0;
         }
-        
+
         .footer-divider {
             height: 1px;
             background-color: #666;
             margin: 10px 0;
         }
-        
-                        
+
+
         .website-row {
             display: flex;
             align-items: center;
@@ -351,7 +352,7 @@
             margin: 5px 0;
             font-size: 7pt;
         }
-        
+
         .social-row {
             display: flex;
             align-items: center;
@@ -359,13 +360,13 @@
             gap: 6px;
             margin-top: 5px;
         }
-        
+
         .social-handle {
             font-size: 7pt;
             color: #000;
             margin-left: 2px;
         }
-        
+
         .social-icon {
             width: 20px;
             height: 20px;
@@ -379,33 +380,34 @@
             font-weight: bold;
             line-height: 1;
         }
-        
+
         .social-icon.instagram {
             font-size: 12pt;
         }
-        
+
         .social-icon.twitter {
             font-size: 11pt;
         }
-        
+
         .date-line {
             font-weight: bold;
             font-size: 7pt;
             margin-bottom: 10px;
         }
-        
+
         @media print {
             body {
                 margin: 0;
                 padding: 0;
             }
-            
+
             .no-print {
                 display: none;
             }
         }
     </style>
 </head>
+
 <body>
     <!-- Header -->
     <div class="header">
@@ -415,7 +417,7 @@
                 $logoData = file_exists($logoPath) ? base64_encode(file_get_contents($logoPath)) : '';
                 $logoMime = 'image/jpeg';
             @endphp
-            @if($logoData)
+            @if ($logoData)
                 <img src="data:{{ $logoMime }};base64,{{ $logoData }}" alt="EIPU Logo" class="logo">
             @endif
             <div class="university-name-container">
@@ -430,11 +432,12 @@
                 <div>Date: {{ now()->format('d.m.Y') }}</div>
             </div>
         </div>
-        
+
         <!-- Subject and Application Code -->
         <div class="subject-info">
             <div class="subject-info-row">
-                Subject: {{ $student->application->program?->degree?->name ?? 'N/A' }} Degree - CONDITIONAL ACCEPTANCE LETTER
+                Subject: {{ $student->application->program?->degree?->name ?? 'N/A' }} Degree - CONDITIONAL ACCEPTANCE
+                LETTER
             </div>
             <div class="subject-info-row">
                 Application Code: EIPU{{ $student->application_id ?? $student->id }}
@@ -442,7 +445,7 @@
             <div class="subject-info-row">
                 Dear {{ strtoupper($student->first_name . ' ' . $student->last_name) }}
             </div>
-        
+
         </div>
     </div>
 
@@ -456,26 +459,31 @@
     <!-- Introduction Content -->
     <div class="content">
         <p>
-            We are pleased to inform you that the Admission Committee of European International Peace University has carefully reviewed your application for admission to
-            <strong>{{ $student->application->program?->name ?? 'Program' }}</strong> ({{ $student->application->program?->degree?->name ?? 'Degree' }}) for the 2025-2026 – Fall. It is our pleasure to inform you that you have been granted conditional acceptance to the program. We extend our warm congratulations on this achievement.
+            We are pleased to inform you that the Admission Committee of European International Peace University has
+            carefully reviewed your application for admission to
+            <strong>{{ $student->application->program?->name ?? 'Program' }}</strong>
+            ({{ $student->application->program?->degree?->name ?? 'Degree' }}) for the 2025-2026 – Fall. It is our
+            pleasure to inform you that you have been granted conditional acceptance to the program. We extend our warm
+            congratulations on this achievement.
         </p>
     </div>
 
     <!-- Applicant and Program Details -->
     <div class="section-header">Applicant and Program Details</div>
-    
+
     <div class="info-grid">
         <div class="info-row">
             <div class="info-label">Application Number</div>
-            <div class="info-value"><strong>{{ $student->application_id ?? $student->id }}</strong></div>
+            <div class="info-value">{{ $student->application_number ?? 'N/A' }}</div>
         </div>
         <div class="info-row">
             <div class="info-label">Full Name</div>
-            <div class="info-value"><strong>{{ strtoupper($student->first_name . ' ' . $student->last_name) }}</strong></div>
+            <div class="info-value">{{ strtoupper($student->first_name . ' ' . $student->last_name) }}</div>
         </div>
         <div class="info-row">
-            <div class="info-label">Date of Birth / Citizenship</div>
-            <div class="info-value">{{ $student->date_of_birth ? $student->date_of_birth->format('d/m/Y') : 'N/A' }} – {{ $student->nationality ?? 'N/A' }}</div>
+            <div class="info-label">Date of Birth</div>
+            <div class="info-value">{{ $student->date_of_birth ? $student->date_of_birth->format('d/m/Y') : 'N/A' }}
+                </div>
         </div>
         <div class="info-row">
             <div class="info-label">Program</div>
@@ -483,7 +491,8 @@
         </div>
         <div class="info-row">
             <div class="info-label">Degree and Duration</div>
-            <div class="info-value">{{ $student->application->program?->degree?->name ?? 'N/A' }} - 4 Academic Years</div>
+            <div class="info-value">{{ $student->application->program?->degree?->name ?? 'N/A' }} - {{ $student->application->program?->degree?->duration ?? 'N/A' }} Academic Years
+            </div>
         </div>
         <div class="info-row">
             <div class="info-label">Faculty</div>
@@ -491,13 +500,13 @@
         </div>
         <div class="info-row">
             <div class="info-label">Education Language</div>
-            <div class="info-value">{{ $student->native_languag ?? 'English' }}</div>
+            <div class="info-value">{{ $student->study_language === 'EN' ? 'English' : 'Turkish' }}</div>
         </div>
     </div>
 
     <!-- Tuition Fee -->
     <div class="section-header">Tuition Fee</div>
-    
+
     <div class="info-grid">
         <div class="info-row">
             <div class="info-label">Annual Program Tuition Fee</div>
@@ -522,9 +531,13 @@
     <div class="subsection-title">1.1. Deposit Payment</div>
     <div class="content">
         <p>
-            The official Acceptance Letter will be issued upon payment of a non-refundable deposit of 1300 USD, either by credit card via the EIPU Application
-            Platform or by bank transfer to the University's bank account. For all bank transfers; name, surname and application number must be provided. The
-            bank account details are provided below. To proceed to the next stage of your application, you are required to upload a copy of the bank receipt or payment confirmation to the EIPU Application Platform after completing the transfer.
+            The official Acceptance Letter will be issued upon payment of a non-refundable deposit of 1000 USD, either
+            by credit card via the EIPU Application
+            Platform or by bank transfer to the University's bank account. For all bank transfers; name, surname and
+            application number must be provided. The
+            bank account details are provided below. To proceed to the next stage of your application, you are required
+            to upload a copy of the bank receipt or payment confirmation to the EIPU Application Platform after
+            completing the transfer.
         </p>
     </div>
     <br>
@@ -577,7 +590,7 @@
 
     <!-- English Language Proficiency Requirements -->
     <div class="section-header">English Language Proficiency Requirements</div>
-    
+
     <table class="proficiency-table">
         <thead>
             <tr>
@@ -600,14 +613,16 @@
             </tr>
             <tr>
                 <td><strong>TOEFL iBT</strong><br>(including Home Edition)</td>
-                <td>At least 90 overall with minimum scores of 17 for writing, 17 for listening, 18 for reading, and 20 for speaking.</td>
+                <td>At least 90 overall with minimum scores of 17 for writing, 17 for listening, 18 for reading, and 20
+                    for speaking.</td>
                 <td>At least 90 overall with a minimum of 20 in each subskill.</td>
                 <td>At least 100 overall with a minimum of 20 in each subskill.</td>
                 <td>At least 109 overall with a minimum of 26 in speaking and 24 in all other subskills.</td>
                 <td>Two calendar years</td>
             </tr>
             <tr>
-                <td><strong>IELTS (Academic)</strong><br>test from a recognized IELTS test centre (including one skill retake).</td>
+                <td><strong>IELTS (Academic)</strong><br>test from a recognized IELTS test centre (including one skill
+                    retake).</td>
                 <td>At least 6.5 overall with a minimum of 5.5 in each subskill.</td>
                 <td>At least 6.5 overall with a minimum of 6.0 in each subskill.</td>
                 <td>At least 7.0 overall with at least 6.0 in each subskill.</td>
@@ -623,10 +638,13 @@
     <div class="subsection-title">English Proficiency and Preparatory Exam</div>
     <div class="content">
         <p>
-            Students who do not have an English proficiency certificate, or those who will study in Turkish, must take a proficiency exam. 
-            The tuition fees of students who register for their departments but fail the preparatory exam will be counted towards the preparatory 
-            class fee, and any remaining balance will be collected at the beginning of the academic year. For more information, please visit: 
-            <strong>https://eipu.edu.pl/preparatory-class</strong>
+            Students who do not have an English proficiency certificate, or those who will study in Turkish, must take a
+            proficiency exam.
+            The tuition fees of students who register for their departments but fail the preparatory exam will be
+            counted towards the preparatory
+            class fee, and any remaining balance will be collected at the beginning of the academic year. For more
+            information, please visit:
+            <strong>https://eipu.edu.pl</strong>
         </p>
     </div>
 
@@ -636,7 +654,8 @@
     <div class="subsection-title">Scholarship Information</div>
     <div class="content">
         <p>
-            The scholarship only covers the annual/program tuition fee and does not include accommodation, transportation, meals, books, 
+            The scholarship only covers the annual/program tuition fee and does not include accommodation,
+            transportation, meals, books,
             other educational needs, and healthcare expenses.
         </p>
     </div>
@@ -645,7 +664,7 @@
 
     <!-- Required Documents for Final Registration -->
     <div class="section-header">Required Documents for Final Registration</div>
-    
+
     <ol class="required-documents-list">
         <li>Notarized, English-Translated (Wet-Signed and Stamped) Master's Degree Diploma (if applicable)</li>
         <li>Notarized, English-Translated (Wet-Signed and Stamped) Master's Degree Transcript (if applicable)</li>
@@ -665,10 +684,12 @@
     <!-- Additional Information -->
     <div class="content">
         <p>
-            Please follow our website at <strong>www.eipu.edu.pl</strong> for updates on registrations, academic calendar, and other developments.
+            Please follow our website at <strong>www.eipu.edu.pl</strong> for updates on registrations, academic
+            calendar, and other developments.
         </p>
         <p>
-            For inquiries regarding application, payment, registration, etc., please contact us at: <strong>international@eipu.edu.pl</strong>
+            For inquiries regarding application, payment, registration, etc., please contact us at:
+            <strong>international@eipu.edu.pl</strong>
         </p>
     </div>
 
@@ -698,10 +719,10 @@
             their undergraduate program.
         </p>
     </div> --}}
-    
+
     <!-- Important Dates -->
     {{-- <div class="section-header">Important Dates</div> --}}
-    
+
     {{-- <div class="dates-grid">
         <div class="dates-row">
             <div class="dates-label">Course registration period</div>
@@ -728,7 +749,7 @@
             <div class="dates-value">31/10/2025</div>
         </div>
     </div> --}}
-    
+
     <!-- Important Information -->
     {{-- <div class="important-box">
         <div class="important-title">Important Informations</div>
@@ -753,12 +774,13 @@
         <div class="date-line">
             Date: {{ now()->format('d/m/Y') }}
         </div>
-        
+
         <!-- Verification Box with QR Code -->
-     {{-- <div class="verification-box-2">
+        {{-- <div class="verification-box-2">
         <div style="flex-shrink: 0;">
             @php
-                $qrCode = \SimpleSoftwareIO\QrCode\Facades\QrCode::format('svg')->size(70)->generate($student->getVerificationUrl());
+                $verificationCodeForUrl = $verificationCode ?? null;
+                $qrCode = \SimpleSoftwareIO\QrCode\Facades\QrCode::format('svg')->size(70)->generate($student->getVerificationUrl($verificationCodeForUrl));
                 $qrCodeBase64 = base64_encode($qrCode);
             @endphp
             <img src="data:image/svg+xml;base64,{{ $qrCodeBase64 }}" alt="QR Code" class="qr-code">
@@ -770,54 +792,59 @@
             </div>
         </div>
      </div> --}}
-     <table style="width: 100%; margin-bottom: 15px;">
-        <tr>
-            <!-- QR Code -->
-    
-            <!-- Text Box -->
-            <td style="padding-left: 10px;">
-                <div style="background: #f0f0f0; padding: 12px 15px; border-radius: 8px; font-size: 11px; line-height: 1.4;">
-                    This document was e-signed for 
-                    <strong>{{ strtoupper($student->first_name . ' ' . $student->last_name) }}</strong>
-                    on {{ now()->format('d/m/Y') }} with document number 
-                    <strong>{{ $verificationCode ?? strtoupper(\Illuminate\Support\Str::random(12)) }}</strong>.
-                    The validity of the document can be confirmed by scanning the QR code or by document number at 
-                    <strong>{{ $student->getVerificationUrl() }}</strong>.
-                </div>
-            </td>
-            <td style="width: 80px; vertical-align: top;">
-                @php
-                    $qrCode = \SimpleSoftwareIO\QrCode\Facades\QrCode::format('svg')->size(70)->generate($student->getVerificationUrl());
-                    $qrCodeBase64 = base64_encode($qrCode);
-                @endphp
-    
-                <img src="data:image/svg+xml;base64,{{ $qrCodeBase64 }}" 
-                     style="width: 70px; height: 70px;" />
-            </td>
+        <table style="width: 100%; margin-bottom: 15px;">
+            <tr>
+                <!-- QR Code -->
 
-        </tr>
-    </table>
-    
-        
+                <!-- Text Box -->
+                <td style="padding-left: 10px;">
+                    <div
+                        style="background: #f0f0f0; padding: 12px 15px; border-radius: 8px; font-size: 11px; line-height: 1.4;">
+                        This document was e-signed for
+                        <strong>{{ strtoupper($student->first_name . ' ' . $student->last_name) }}</strong>
+                        on {{ now()->format('d/m/Y') }} with document number
+                        <strong>{{ $verificationCode ?? strtoupper(\Illuminate\Support\Str::random(12)) }}</strong>.
+                         The validity of the document can be confirmed by scanning the QR code or by document number at
+                         <strong>{{ $student->getVerificationUrl() }}</strong>.
+                    </div>
+                </td>
+                <td style="width: 80px; vertical-align: top;">
+                    @php
+                        $verificationCodeForUrl = $verificationCode ?? null;
+                        $qrCode = \SimpleSoftwareIO\QrCode\Facades\QrCode::format('svg')
+                            ->size(70)
+                            ->generate($student->getVerificationUrl($verificationCodeForUrl));
+                        $qrCodeBase64 = base64_encode($qrCode);
+                    @endphp
+
+                    <img src="data:image/svg+xml;base64,{{ $qrCodeBase64 }}" style="width: 70px; height: 70px;" />
+                </td>
+
+            </tr>
+        </table>
+
+
         <!-- Divider Line -->
         <div class="footer-divider"></div>
-        
+
         <!-- Footer Bottom Section -->
         <table style="width: 100%; margin-top: 20px;">
             <tr>
                 <!-- LEFT SIDE -->
                 <td style="width: 60%; font-size: 11px; line-height: 1.1;">
-                    <p><strong>Tel:</strong>+994 50 497 52 52</p>
-                    <p><strong>Email:</strong> international@eipu.edu.pl</p>
-                    <p><strong>Address:</strong> Nizami, Qafqaz Center, Baku, Azerbaijan</p>
+                    <p><strong>Tel:</strong>+994 50 497 52 52 | +48 431 226 131</p>
+
+                    <p><strong>Email:</strong> info@eipu.edu.pl</p>
+                    <p><strong>Address:</strong> Ogrodowa 5800-876 Warsaw / Poland</p>
                     <p><strong>Website:</strong> www.eipu.edu.pl</p>
                 </td>
-        
+
                 <!-- RIGHT SIDE -->
             </tr>
         </table>
-        
+
     </div>
 
 </body>
+
 </html>

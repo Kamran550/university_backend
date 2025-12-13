@@ -29,12 +29,12 @@
 
                     <!-- Title -->
                     <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 text-center mb-4">
-                        Sənəd Təsdiqi
+                        Document Verification
                     </h2>
 
                     <!-- Instructions -->
                     <p class="text-base sm:text-lg text-gray-600 text-center mb-8 max-w-md mx-auto">
-                        Sənədini burada təsdiq edə bilərsən. Zəhmə olmasa aşağıdakı təsdiqlənmə kodunu daxil et.
+                        You can verify your document here. Please enter the verification code below.
                     </p>
 
                     <!-- Verification Form -->
@@ -42,13 +42,13 @@
                         <!-- Verification ID Input -->
                         <div>
                             <label for="verificationCode" class="block text-sm font-medium text-gray-700 mb-2">
-                                Təsdiqlənmə Kodunu Daxil Et
+                                Enter Verification Code
                             </label>
                             <input 
                                 type="text" 
                                 id="verificationCode"
                                 wire:model="verificationCode"
-                                placeholder="Təsdiqlənmə kodunu daxil et"
+                                placeholder="Enter verification code"
                                 class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 outline-none transition-all text-base"
                                 autocomplete="off"
                                 autofocus
@@ -61,8 +61,8 @@
                             wire:loading.attr="disabled"
                             class="w-full bg-purple-600 hover:bg-purple-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                         >
-                            <span wire:loading.remove wire:target="verify">Davam Et</span>
-                            <span wire:loading wire:target="verify">Təsdiq edilir...</span>
+                            <span wire:loading.remove wire:target="verify">Continue</span>
+                            <span wire:loading wire:target="verify">Verifying...</span>
                             <svg wire:loading.remove wire:target="verify" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
                             </svg>
@@ -87,7 +87,7 @@
                 <!-- Success Message -->
                 <div class="mb-6 p-4 rounded-lg bg-green-50 border border-green-200">
                     <p class="text-base text-green-800 text-center font-semibold">
-                        Təsdiqlənmə uğurlu oldu!
+                        Verification successful!
                     </p>
                 </div>
 

@@ -31,7 +31,7 @@ class ShowStudent extends Component
             Log::info('=== sendAcceptanceLetter metodu çağırıldı ===');
             Log::info('Student ID: ' . $this->student->id);
             Log::info('Student Email: ' . ($this->student->email ?? 'YOXDUR'));
-            
+
             if (!$this->student->email) {
                 Log::warning('Email ünvanı yoxdur!');
                 session()->flash('error', 'Tələbənin email ünvanı yoxdur.');
@@ -43,9 +43,9 @@ class ShowStudent extends Component
 
             // Check mail configuration
             $mailDriver = config('mail.default');
-            
+
             Mail::to($this->student->email)->send(new AcceptanceLetterMail($this->student));
-            
+
             if ($mailDriver === 'log') {
                 session()->flash('success', 'Mail log faylına yazıldı. SMTP konfiqurasiyası üçün .env faylında MAIL_MAILER=smtp təyin edin.');
             } else {
@@ -57,12 +57,12 @@ class ShowStudent extends Component
                 'email' => $this->student->email,
                 'trace' => $e->getTraceAsString()
             ]);
-            
+
             $errorMessage = 'Mail göndərilərkən xəta baş verdi: ' . $e->getMessage();
             if (str_contains($e->getMessage(), 'Connection') || str_contains($e->getMessage(), 'SMTP')) {
                 $errorMessage .= ' SMTP konfiqurasiyasını yoxlayın.';
             }
-            
+
             session()->flash('error', $errorMessage);
         }
     }
@@ -76,7 +76,7 @@ class ShowStudent extends Component
             }
 
             $statusEnum = ApplicationStatusEnum::tryFrom($status);
-            
+
             if (!$statusEnum) {
                 session()->flash('error', 'Yanlış status dəyəri.');
                 return;
@@ -98,7 +98,7 @@ class ShowStudent extends Component
                 'status' => $status,
                 'trace' => $e->getTraceAsString()
             ]);
-            
+
             session()->flash('error', 'Status yenilənərkən xəta baş verdi: ' . $e->getMessage());
         }
     }
@@ -109,7 +109,7 @@ class ShowStudent extends Component
             Log::info('=== sendFinalAcceptanceLetter metodu çağırıldı ===');
             Log::info('Student ID: ' . $this->student->id);
             Log::info('Student Email: ' . ($this->student->email ?? 'YOXDUR'));
-            
+
             if (!$this->student->email) {
                 Log::warning('Email ünvanı yoxdur!');
                 session()->flash('error', 'Tələbənin email ünvanı yoxdur.');
@@ -122,17 +122,38 @@ class ShowStudent extends Component
             }
 
             // Reload student with application relationship
-            $this->student->load('application');
+            $this->student->load('application.program.degree.translations', 'application.program.translations');
+
+            // Generate diploma text in EN and TR
+            $program = $this->student->application->program;
+            $degree = $program?->degree;
+
+            $programNameEn = $program?->getName('EN') ?: $program?->name;
+            $programNameTr = $program?->getName('TR') ?: $program?->name;
+            $degreeNameEn = $degree?->getName('EN') ?: $degree?->name;
+            $degreeNameTr = $degree?->getName('TR') ?: $degree?->name;
+
+            $diplomaText = [
+                'en' => "Having successfully completed all the requirements of the\n{$programNameEn} Program\nin the Institute of Graduate Education,\nhas been awarded the {$degreeNameEn} Degree.",
+                'tr' => "Lisansüstü Eğitim Enstitüsünde\n{$programNameTr} Programındaki\ntüm yükümlülükleri başarıyla tamamlayarak\n{$degreeNameTr} Derecesini almaya hak kazanmıştır.",
+            ];
+
+            // Save diploma text to student application
+            $this->student->update([
+                'diploma_text' => $diplomaText,
+            ]);
+
+            Log::info('Diploma text saved', ['diploma_text' => $diplomaText]);
 
             // Check if user already exists
             $user = User::where('email', $this->student->email)->first();
 
             $plainPassword = null;
-            
+
             if (!$user) {
                 // Generate random password
                 $plainPassword = Str::random(12);
-                
+
                 // Create new user
                 $user = DB::transaction(function () use ($plainPassword) {
                     Log::info('Password: ' . $plainPassword);
@@ -172,9 +193,9 @@ class ShowStudent extends Component
 
             // Check mail configuration
             $mailDriver = config('mail.default');
-            
+
             Mail::to($this->student->email)->send(new FinalAcceptanceLetterMail($this->student, $user, $plainPassword));
-            
+
             if ($mailDriver === 'log') {
                 session()->flash('success', 'Tam qəbul məktubu log faylına yazıldı. SMTP konfiqurasiyası üçün .env faylında MAIL_MAILER=smtp təyin edin.');
             } else {
@@ -186,12 +207,12 @@ class ShowStudent extends Component
                 'email' => $this->student->email,
                 'trace' => $e->getTraceAsString()
             ]);
-            
+
             $errorMessage = 'Tam qəbul məktubu göndərilərkən xəta baş verdi: ' . $e->getMessage();
             if (str_contains($e->getMessage(), 'Connection') || str_contains($e->getMessage(), 'SMTP')) {
                 $errorMessage .= ' SMTP konfiqurasiyasını yoxlayın.';
             }
-            
+
             session()->flash('error', $errorMessage);
         }
     }

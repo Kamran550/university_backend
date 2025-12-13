@@ -16,6 +16,7 @@ class DegreeSeeder extends Seeder
         $degrees = [
             [
                 'name' => "Bachelor's",
+                'description' => 'Undergraduate',
                 'duration' => 4,
                 'translations' => [
                     'EN' => "Bachelor's",
@@ -24,6 +25,7 @@ class DegreeSeeder extends Seeder
             ],
             [
                 'name' => "Master's",
+                'description' => "Master's Degree (Thesis)",
                 'duration' => 2,
                 'translations' => [
                     'EN' => "Master's",
@@ -32,6 +34,7 @@ class DegreeSeeder extends Seeder
             ],
             [
                 'name' => 'PhD',
+                'description' => 'Doctorate (PhD)',
                 'duration' => 4,
                 'translations' => [
                     'EN' => 'PhD',

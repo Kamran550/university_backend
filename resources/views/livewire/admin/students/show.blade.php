@@ -133,6 +133,7 @@
                                 {{ $application->program->faculty->name ?? ($application->faculty_name ?? 'N/A') }}
                             </p>
                         </div>
+
                     </div>
                     
                     <!-- Application Status -->

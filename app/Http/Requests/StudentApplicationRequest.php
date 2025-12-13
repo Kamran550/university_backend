@@ -27,7 +27,7 @@ class StudentApplicationRequest extends ApiFormRequest
             'program_id' => ['required', 'integer', 'exists:programs,id'],
             
             // Student personal information
-            'passport_number' => ['nullable', 'string', 'max:50'],
+            'passport_number' => ['required', 'string', 'max:50'],
             'first_name' => ['required', 'string', 'max:100'],
             'last_name' => ['required', 'string', 'max:100'],
             'father_name' => ['required', 'string', 'max:100'],

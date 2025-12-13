@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
+
 class StudentApplication extends Model
 {
     use HasFactory, SoftDeletes;
@@ -31,6 +32,9 @@ class StudentApplication extends Model
         'student_number',
         'passport_number',
         'study_language',
+        'application_number',
+        'diploma_number',
+        'diploma_text',
     ];
 
     protected $hidden = [
@@ -40,6 +44,7 @@ class StudentApplication extends Model
 
     protected $casts = [
         'date_of_birth' => 'date',
+        'diploma_text' => 'array',
     ];
 
     /**
@@ -57,9 +62,15 @@ class StudentApplication extends Model
     /**
      * Get verification URL for the acceptance letter.
      */
-    public function getVerificationUrl(): string
+    public function getVerificationUrl(?string $verificationCode = null): string
     {
         $domain = config('app.verify_domain', 'verify.eipu.edu.pl');
-        return "https://{$domain}";
+        $url = "https://{$domain}";
+
+        if ($verificationCode) {
+            $url .= "?verificationcode=" . urlencode($verificationCode);
+        }
+
+        return $url;
     }
 }
