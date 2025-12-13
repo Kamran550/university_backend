@@ -39,16 +39,16 @@ class ApplicationService
         }
 
         $filename = time() . '_' . uniqid() . '.' . $file->getClientOriginalExtension();
-        
+
         $disk = config('filesystems.default');
-        
+
         Log::info('File upload attempt', [
             'disk' => $disk,
             'directory' => $directory,
             'filename' => $filename,
             'original_name' => $file->getClientOriginalName(),
         ]);
-        
+
         try {
             $path = Storage::disk($disk)->putFileAs($directory, $file, $filename, 'public');
             Log::info('File uploaded successfully', ['path' => $path]);
@@ -63,31 +63,94 @@ class ApplicationService
     }
 
     /**
-     * Generate student number in format: 20251100XXXX (10 digits total)
-     * Examples: 2025110001, 2025110002, 2025110011
+     * Generate application number in format: 200109NNNN (10 digits total)
+     * Format: Fixed prefix (200109) + Sequence (4)
+     * Examples: 2001090001, 2001090002, 2001090099, 2001090100
+     * 
+     * @return string
+     */
+    protected function generateApplicationNumber(): string
+    {
+        $prefix = '200109'; // Fixed prefix for application numbers
+
+        // Get the last student application with application_number
+        $lastStudent = StudentApplication::orderBy('application_number', 'desc')
+            ->where('application_number', 'like', $prefix . '%')
+            ->whereNotNull('application_number')
+            ->first();
+
+        if ($lastStudent && $lastStudent->application_number) {
+            // Extract the sequence number from the last application number (last 4 digits)
+            $lastSequence = (int) substr($lastStudent->application_number, -4);
+            $newSequence = $lastSequence + 1;
+        } else {
+            // First application
+            $newSequence = 1;
+        }
+
+        // Format: 200109 + 4-digit sequence with leading zeros
+        return $prefix . str_pad($newSequence, 4, '0', STR_PAD_LEFT);
+    }
+
+    /**
+     * Generate student number in format: YYYYMMNNNN (10 digits total)
+     * Format: Year (4) + Month (2) + Sequence (4)
+     * Examples: 2025120001, 2025120002, 2025120099, 2025120100
      * 
      * @return string
      */
     protected function generateStudentNumber(): string
     {
-        $prefix = '20251100';
-        
-        // Get the last student application to find the highest student number
+        // Generate prefix: YYYYMM (current year and month)
+        $prefix = date('Y') . date('m'); // e.g., 202512
+
+        // Get the last student application with the same prefix (same year and month)
         $lastStudent = StudentApplication::orderBy('student_number', 'desc')
             ->where('student_number', 'like', $prefix . '%')
+            ->whereNotNull('student_number')
             ->first();
-        
+
         if ($lastStudent && $lastStudent->student_number) {
             // Extract the sequence number from the last student number (last 4 digits)
             $lastSequence = (int) substr($lastStudent->student_number, -4);
             $newSequence = $lastSequence + 1;
         } else {
-            // First student
+            // First student for this month
             $newSequence = 1;
         }
-        
-        // Format the new student number with leading zeros (4 digits)
+
+        // Format the new student number: YYYYMM + 4-digit sequence with leading zeros
         return $prefix . str_pad($newSequence, 4, '0', STR_PAD_LEFT);
+    }
+
+    /**
+     * Generate diploma number in format: 2025001NNN (10 digits total)
+     * Format: Fixed prefix (2025001) + Sequence (3)
+     * Examples: 2025001001, 2025001002, 2025001099, 2025001100
+     * 
+     * @return string
+     */
+    protected function generateDiplomaNumber(): string
+    {
+        $prefix = '2025001'; // Fixed prefix for diploma numbers
+
+        // Get the last student application with diploma_number
+        $lastStudent = StudentApplication::orderBy('diploma_number', 'desc')
+            ->where('diploma_number', 'like', $prefix . '%')
+            ->whereNotNull('diploma_number')
+            ->first();
+
+        if ($lastStudent && $lastStudent->diploma_number) {
+            // Extract the sequence number from the last diploma number (last 3 digits)
+            $lastSequence = (int) substr($lastStudent->diploma_number, -3);
+            $newSequence = $lastSequence + 1;
+        } else {
+            // First diploma
+            $newSequence = 1;
+        }
+
+        // Format: 2025001 + 3-digit sequence with leading zeros
+        return $prefix . str_pad($newSequence, 3, '0', STR_PAD_LEFT);
     }
 
     /**
@@ -101,7 +164,7 @@ class ApplicationService
         return DB::transaction(function () use ($data) {
             // Get degree and faculty names
             Log::info('Program ID: ' . $data['program_id']);
-            
+
             // Prepare application data
             $applicationData = [
                 'applicant_type' => ApplicationTypeEnum::STUDENT->value,
@@ -112,7 +175,7 @@ class ApplicationService
                 'user_agent' => request()->userAgent(),
                 'locale' => $data['locale'] ?? 'en',
             ];
-            
+
 
             Log::info('Application data: ' . json_encode($applicationData));
             // Create application
@@ -124,12 +187,16 @@ class ApplicationService
             $diplomaPath = $this->handleFileUpload($data['diploma'] ?? null, 'applications/student/diplomas');
             $transcriptPath = $this->handleFileUpload($data['transcript'] ?? null, 'applications/student/transcripts');
 
-            // Generate student number
+            // Generate numbers
+            $applicationNumber = $this->generateApplicationNumber();
             $studentNumber = $this->generateStudentNumber();
+            $diplomaNumber = $this->generateDiplomaNumber();
 
             // Prepare student application data
             $studentData = [
+                'application_number' => $applicationNumber,
                 'student_number' => $studentNumber,
+                'diploma_number' => $diplomaNumber,
                 'passport_number' => $data['passport_number'] ?? null,
                 'first_name' => $data['first_name'],
                 'last_name' => $data['last_name'],
@@ -148,6 +215,7 @@ class ApplicationService
                 'profile_photo_path' => $profilePhotoPath,
                 'diploma_path' => $diplomaPath,
                 'transcript_path' => $transcriptPath,
+                'study_language' => $data['teachingLanguage'],
             ];
 
             // Create student application
@@ -211,5 +279,21 @@ class ApplicationService
             return $application->load('agencyApplication');
         });
     }
-}
 
+    /**
+     * Generate and assign diploma number to a student application.
+     * This should be called when a student graduates.
+     *
+     * @param int $studentApplicationId
+     * @return string The generated diploma number
+     */
+    public function generateAndAssignDiplomaNumber(int $studentApplicationId): string
+    {
+        $diplomaNumber = $this->generateDiplomaNumber();
+
+        StudentApplication::where('id', $studentApplicationId)
+            ->update(['diploma_number' => $diplomaNumber]);
+
+        return $diplomaNumber;
+    }
+}

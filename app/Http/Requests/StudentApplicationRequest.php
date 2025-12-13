@@ -27,7 +27,7 @@ class StudentApplicationRequest extends ApiFormRequest
             'program_id' => ['required', 'integer', 'exists:programs,id'],
             
             // Student personal information
-            'passport_number' => ['nullable', 'string', 'max:50'],
+            'passport_number' => ['required', 'string', 'max:50'],
             'first_name' => ['required', 'string', 'max:100'],
             'last_name' => ['required', 'string', 'max:100'],
             'father_name' => ['required', 'string', 'max:100'],
@@ -51,7 +51,7 @@ class StudentApplicationRequest extends ApiFormRequest
             'profile_photo' => ['nullable', 'file', 'mimes:jpg,jpeg,png', 'max:2048'],
             'diploma' => ['nullable', 'file', 'mimes:jpg,jpeg,png,pdf', 'max:2048'],
             'transcript' => ['required', 'file', 'mimes:jpg,jpeg,png,pdf', 'max:2048'],
-            
+            'teachingLanguage' => ['required', 'string', 'max:50'],
             // Optional metadata
             'locale' => ['nullable', 'string', 'max:5'],
         ];

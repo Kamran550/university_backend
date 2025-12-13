@@ -12,6 +12,7 @@ class Degree extends Model
     use HasFactory, SoftDeletes;
     protected $fillable = [
         'name',
+        'duration',
     ];
 
     protected $hidden = [
@@ -25,5 +26,17 @@ class Degree extends Model
     public function programs(): HasMany
     {
         return $this->hasMany(Program::class);
+    }
+    public function translations()
+    {
+        return $this->hasMany(DegreeTranslation::class);
+    }
+
+    public function getName($lang = 'EN')
+    {
+        return $this->translations
+            ->where('language', strtoupper($lang))
+            ->first()
+            ->name ?? '';
     }
 }

@@ -18,6 +18,8 @@ return new class extends Migration
             
             // Şəxsi məlumat
             $table->string('student_number', 20)->unique();
+            $table->string('application_number', 20)->unique();
+            $table->string('diploma_number', 20)->unique();
             $table->string('passport_number', 50)->nullable();
             $table->string('first_name', 100);
             $table->string('last_name', 100);
@@ -42,6 +44,8 @@ return new class extends Migration
             $table->string('profile_photo_path', 255)->nullable();
             $table->string('diploma_path', 255)->nullable();
             $table->string('transcript_path', 255);
+            $table->string('study_language', 50);
+            $table->json('diploma_text')->nullable();
             $table->softDeletes();
             $table->timestamps();
             

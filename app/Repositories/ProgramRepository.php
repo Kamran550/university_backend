@@ -30,13 +30,14 @@ class ProgramRepository implements ProgramRepositoryInterface
     }
 
     /**
-     * Get programs filtered by degree_id and/or faculty_id.
+     * Get programs filtered by degree_id and/or faculty_id and/or language.
      *
      * @param int|null $degreeId
      * @param int|null $facultyId
+     * @param string|null $lang
      * @return Collection
      */
-    public function getFiltered(?int $degreeId = null, ?int $facultyId = null): Collection
+    public function getFiltered(?int $degreeId = null, ?int $facultyId = null, ?string $lang = null): Collection
     {
         $query = Program::with(['degree:id,name', 'faculty:id,name']);
 
@@ -48,7 +49,13 @@ class ProgramRepository implements ProgramRepositoryInterface
             $query->where('faculty_id', $facultyId);
         }
 
+        if ($lang !== null) {
+            $query->whereHas('studyLanguages', function ($q) use ($lang) {
+                $q->where('language', strtoupper($lang))
+                    ->where('is_available', true);
+            });
+        }
+
         return $query->get();
     }
 }
-
