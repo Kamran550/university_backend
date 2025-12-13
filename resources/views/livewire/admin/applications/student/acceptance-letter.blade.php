@@ -440,7 +440,7 @@
                 LETTER
             </div>
             <div class="subject-info-row">
-                Application Code: EIPU{{ $student->application_id ?? $student->id }}
+                Application Code: {{ $student->application_number ?? 'N/A' }}
             </div>
             <div class="subject-info-row">
                 Dear {{ strtoupper($student->first_name . ' ' . $student->last_name) }}
