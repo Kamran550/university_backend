@@ -13,6 +13,7 @@ class Degree extends Model
     protected $fillable = [
         'name',
         'duration',
+        'description',
     ];
 
     protected $hidden = [

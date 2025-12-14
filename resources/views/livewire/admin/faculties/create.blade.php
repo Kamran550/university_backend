@@ -2,27 +2,52 @@
     <!-- Form -->
     <form wire:submit="save">
         
-        <!-- Name Field -->
+        <!-- Name Fields (EN and TR) -->
         <div class="mb-6">
-            <label for="modal-name" class="block text-sm font-medium text-gray-700 mb-2">
-                Faculty Name <span class="text-red-500">*</span>
-            </label>
-            <input 
-                type="text" 
-                id="modal-name"
-                wire:model="name"
-                class="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-150 ease-in-out @error('name') border-red-500 @else border-gray-300 @enderror"
-                placeholder="For example: Information Technology, Economics, Law"
-                autofocus
-            >
-            @error('name')
-                <p class="mt-2 text-sm text-red-600 flex items-center">
-                    <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                    </svg>
-                    {{ $message }}
-                </p>
-            @enderror
+            <!-- English Name Field -->
+            <div class="mb-4">
+                <label for="modal-name-en" class="block text-sm font-medium text-gray-700 mb-2">
+                    Faculty Name (English) <span class="text-red-500">*</span>
+                </label>
+                <input 
+                    type="text" 
+                    id="modal-name-en"
+                    wire:model="name_en"
+                    class="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-150 ease-in-out @error('name_en') border-red-500 @else border-gray-300 @enderror"
+                    placeholder="For example: Information Technology, Economics, Law"
+                    autofocus
+                >
+                @error('name_en')
+                    <p class="mt-2 text-sm text-red-600 flex items-center">
+                        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                        {{ $message }}
+                    </p>
+                @enderror
+            </div>
+
+            <!-- Turkish Name Field -->
+            <div class="mb-4">
+                <label for="modal-name-tr" class="block text-sm font-medium text-gray-700 mb-2">
+                    Faculty Name (Turkish) <span class="text-red-500">*</span>
+                </label>
+                <input 
+                    type="text" 
+                    id="modal-name-tr"
+                    wire:model="name_tr"
+                    class="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-150 ease-in-out @error('name_tr') border-red-500 @else border-gray-300 @enderror"
+                    placeholder="Məsələn: İnformasiya Texnologiyaları, İqtisadiyyat, Hüquq"
+                >
+                @error('name_tr')
+                    <p class="mt-2 text-sm text-red-600 flex items-center">
+                        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                        {{ $message }}
+                    </p>
+                @enderror
+            </div>
         </div>
 
         <!-- Form Actions -->

@@ -36,7 +36,7 @@ class Index extends Component
     public function render()
     {
         return view('livewire.admin.programs.index', [
-            'programs' => Program::with(['degree', 'faculty'])->paginate(5),
+            'programs' => Program::with(['degree', 'faculty', 'studyLanguages'])->paginate(5),
         ]);
     }
 }

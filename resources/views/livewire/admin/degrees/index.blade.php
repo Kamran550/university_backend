@@ -30,6 +30,9 @@
                         <th scope="col" class="px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
                             Degree Name
                         </th>
+                        <th scope="col" class="px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
+                            Degree Abbreviation
+                        </th>
                         <th scope="col" class="px-6 py-4 text-center text-xs font-semibold text-gray-700 uppercase tracking-wider w-32">
                             Actions
                         </th>
@@ -58,6 +61,10 @@
                                         <div class="text-sm font-semibold text-gray-900">{{ $degree->name }}</div>
                                     </div>
                                 </div>
+                            </td>
+                            <!-- Degree Abbreviation -->
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="text-sm font-medium text-gray-900">{{ $degree->description }}</div>
                             </td>
                                             
                             <!-- Actions -->

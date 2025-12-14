@@ -2,27 +2,52 @@
     <!-- Form -->
     <form wire:submit="save">
         
-        <!-- Program Name Field -->
+        <!-- Program Name Fields (EN and TR) -->
         <div class="mb-6">
-            <label for="modal-name" class="block text-sm font-medium text-gray-700 mb-2">
-                Program Name <span class="text-red-500">*</span>
-            </label>
-            <input 
-                type="text" 
-                id="modal-name"
-                wire:model="name"
-                class="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-150 ease-in-out @error('name') border-red-500 @else border-gray-300 @enderror"
-                placeholder="For example: Computer Science, Economics, Law"
-                autofocus
-            >
-            @error('name')
-                <p class="mt-2 text-sm text-red-600 flex items-center">
-                    <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                    </svg>
-                    {{ $message }}
-                </p>
-            @enderror
+            <!-- English Name Field -->
+            <div class="mb-4">
+                <label for="modal-name-en" class="block text-sm font-medium text-gray-700 mb-2">
+                    Program Name (English) <span class="text-red-500">*</span>
+                </label>
+                <input 
+                    type="text" 
+                    id="modal-name-en"
+                    wire:model="name_en"
+                    class="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-150 ease-in-out @error('name_en') border-red-500 @else border-gray-300 @enderror"
+                    placeholder="For example: Computer Science, Economics, Law"
+                    autofocus
+                >
+                @error('name_en')
+                    <p class="mt-2 text-sm text-red-600 flex items-center">
+                        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                        {{ $message }}
+                    </p>
+                @enderror
+            </div>
+
+            <!-- Turkish Name Field -->
+            <div class="mb-4">
+                <label for="modal-name-tr" class="block text-sm font-medium text-gray-700 mb-2">
+                    Program Name (Turkish) <span class="text-red-500">*</span>
+                </label>
+                <input 
+                    type="text" 
+                    id="modal-name-tr"
+                    wire:model="name_tr"
+                    class="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-150 ease-in-out @error('name_tr') border-red-500 @else border-gray-300 @enderror"
+                    placeholder="Məsələn: Kompüter Elmləri, İqtisadiyyat, Hüquq"
+                >
+                @error('name_tr')
+                    <p class="mt-2 text-sm text-red-600 flex items-center">
+                        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                        {{ $message }}
+                    </p>
+                @enderror
+            </div>
         </div>
 
         <!-- Degree Field -->
@@ -100,6 +125,37 @@
                     {{ $message }}
                 </p>
             @enderror
+        </div>
+
+        <!-- Study Languages -->
+        <div class="mb-6">
+            <label class="block text-sm font-medium text-gray-700 mb-3">
+                Study Languages <span class="text-red-500">*</span>
+            </label>
+            <div class="space-y-3">
+                <!-- English Language -->
+                <label class="flex items-center">
+                    <input 
+                        type="checkbox" 
+                        wire:model="study_language_en"
+                        class="w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500"
+                    >
+                    <span class="ml-2 text-sm text-gray-700">English (EN)</span>
+                </label>
+                
+                <!-- Turkish Language -->
+                <label class="flex items-center">
+                    <input 
+                        type="checkbox" 
+                        wire:model="study_language_tr"
+                        class="w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500"
+                    >
+                    <span class="ml-2 text-sm text-gray-700">Turkish (TR)</span>
+                </label>
+            </div>
+            <p class="mt-2 text-xs text-gray-500">
+                Select the languages in which this program will be taught.
+            </p>
         </div>
 
         <!-- Form Actions -->
