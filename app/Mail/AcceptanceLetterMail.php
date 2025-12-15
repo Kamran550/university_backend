@@ -37,7 +37,7 @@ class AcceptanceLetterMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Şərtli Qəbul Məktubu - ' . $this->student->first_name . ' ' . $this->student->last_name,
+            subject: 'Conditional Acceptance Letter - ' . $this->student->first_name . ' ' . $this->student->last_name,
         );
     }
 

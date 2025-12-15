@@ -803,9 +803,9 @@
                         This document was e-signed for
                         <strong>{{ strtoupper($student->first_name . ' ' . $student->last_name) }}</strong>
                         on {{ now()->format('d/m/Y') }} with document number
-                        <strong>{{ $verificationCode ?? strtoupper(\Illuminate\Support\Str::random(12)) }}</strong>.
+                        <strong>{{ $verificationCode ?? strtoupper(\Illuminate\Support\Str::random(12)) }}</strong>
                          The validity of the document can be confirmed by scanning the QR code or by document number at
-                         <strong>{{ $student->getVerificationUrl() }}</strong>.
+                         <strong>{{ $student->getVerificationUrl() }}</strong>
                     </div>
                 </td>
                 <td style="width: 80px; vertical-align: top;">

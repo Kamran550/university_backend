@@ -15,7 +15,7 @@
         <p>Dear <strong>{{ $student->first_name }} {{ $student->last_name }}</strong>,</p>
 
         <p>
-            We are sending you the acceptance letter. The acceptance letter is attached to this email in PDF format.
+            We are sending you the conditional acceptance letter. The conditional acceptance letter is attached to this email in PDF format.
         </p>
 
         <p>

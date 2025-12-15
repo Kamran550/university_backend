@@ -49,7 +49,7 @@ class ShowStudent extends Component
             if ($mailDriver === 'log') {
                 session()->flash('success', 'Mail log faylına yazıldı. SMTP konfiqurasiyası üçün .env faylında MAIL_MAILER=smtp təyin edin.');
             } else {
-                session()->flash('success', 'Şərtli qəbul məktubu ' . $this->student->email . ' ünvanına göndərildi.');
+                session()->flash('success', 'Conditional Acceptance Letter sent to ' . $this->student->email . ' email address.');
             }
         } catch (\Exception $e) {
             Log::error('Mail göndərilərkən xəta: ' . $e->getMessage(), [
