@@ -483,7 +483,7 @@
         <div class="info-row">
             <div class="info-label">Date of Birth</div>
             <div class="info-value">{{ $student->date_of_birth ? $student->date_of_birth->format('d/m/Y') : 'N/A' }}
-                </div>
+            </div>
         </div>
         <div class="info-row">
             <div class="info-label">Program</div>
@@ -491,7 +491,8 @@
         </div>
         <div class="info-row">
             <div class="info-label">Degree and Duration</div>
-            <div class="info-value">{{ $student->application->program?->degree?->name ?? 'N/A' }} - {{ $student->application->program?->degree?->duration ?? 'N/A' }} Academic Years
+            <div class="info-value">{{ $student->application->program?->degree?->name ?? 'N/A' }} -
+                {{ $student->application->program?->degree?->duration ?? 'N/A' }} Academic Years
             </div>
         </div>
         <div class="info-row">
@@ -527,11 +528,10 @@
     </div>
     <!-- Section 1 -->
     {{-- <div class="section-header">1. Condition for Issuing the Acceptance Letter</div> --}}
-    <br>
     <div class="subsection-title">1.1. Deposit Payment</div>
     <div class="content">
         <p>
-            The official Acceptance Letter will be issued upon payment of a non-refundable deposit of 1000 USD, either
+            The official Acceptance Letter will be issued upon payment of a non-refundable deposit of 1000 EUR, either
             by credit card via the EIPU Application
             Platform or by bank transfer to the University's bank account. For all bank transfers; name, surname and
             application number must be provided. The
@@ -540,47 +540,34 @@
             completing the transfer.
         </p>
     </div>
-    <br>
     <!-- Payment Table -->
     <table class="payment-table">
         <thead>
             <tr>
-                <th>Payment Information</th>
-                <th>U.S. Dollar Account</th>
-                <th>Euro Account</th>
-                <th>Turkish Lira Account</th>
+                <th>PAYMENT INFORMATION</th>
+                <th>EURO ACCOUNT</th>
             </tr>
         </thead>
         <tbody>
-            {{-- <tr>
-                <td><strong>Bank Name</strong></td>
-                <td>Türkiye İş Bankası</td>
-                <td>Türkiye İş Bankası</td>
-                <td>Türkiye İş Bankası</td>
-            </tr> --}}
             <tr>
-                <td><strong>Account Name</strong></td>
-                <td>European International Peace University Ltd.</td>
-                <td>European International Peace University Ltd.</td>
-                <td>European International Peace University Ltd.</td>
+                <td><strong>BANK NAME</strong></td>
+                <td>BANK MILLENNIUM S.A.</td>
             </tr>
             <tr>
-                <td><strong>Account No</strong></td>
-                <td>6813-63633</td>
-                <td>6813-63647</td>
-                <td>6813-48527</td>
+                <td><strong>CITY / COUNTRY</strong></td>
+                <td>WARSZAWA - POLAND</td>
             </tr>
             <tr>
-                <td><strong>Swift Code</strong></td>
-                <td>ISBKTRIS</td>
-                <td>ISBKTRIS</td>
-                <td>ISBKTRIS</td>
+                <td><strong>ACCOUNT NAME</strong></td>
+                <td>EURO.INTE AND PEACE.UNIVE.SP.ZOO</td>
             </tr>
             <tr>
-                <td><strong>IBAN</strong></td>
-                <td>TR89 0006 4000 0026 8130 0636 33</td>
-                <td>TR02 0006 4000 0026 8130 0636 47</td>
-                <td>TR07 0006 4000 0016 8130 0485 27</td>
+                <td><strong>SWIFT CODE</strong></td>
+                <td>BIGBPLPW</td>
+            </tr>
+            <tr>
+                <td><strong>DEPOSIT AMOUNT</strong></td>
+                <td>1000 EUR</td>
             </tr>
         </tbody>
     </table>
@@ -804,8 +791,8 @@
                         <strong>{{ strtoupper($student->first_name . ' ' . $student->last_name) }}</strong>
                         on {{ now()->format('d/m/Y') }} with document number
                         <strong>{{ $verificationCode ?? strtoupper(\Illuminate\Support\Str::random(12)) }}</strong>
-                         The validity of the document can be confirmed by scanning the QR code or by document number at
-                         <strong>{{ $student->getVerificationUrl() }}</strong>
+                        The validity of the document can be confirmed by scanning the QR code or by document number at
+                        <strong>{{ $student->getVerificationUrl() }}</strong>
                     </div>
                 </td>
                 <td style="width: 80px; vertical-align: top;">
@@ -830,16 +817,14 @@
         <!-- Footer Bottom Section -->
         <table style="width: 100%; margin-top: 20px;">
             <tr>
-                <!-- LEFT SIDE -->
-                <td style="width: 60%; font-size: 11px; line-height: 1.1;">
-                    <p><strong>Tel:</strong>+994 50 497 52 52 | +48 431 226 131</p>
-
-                    <p><strong>Email:</strong> info@eipu.edu.pl</p>
-                    <p><strong>Address:</strong> Ogrodowa 5800-876 Warsaw / Poland</p>
-                    <p><strong>Website:</strong> www.eipu.edu.pl</p>
+                <td style="text-align: center; font-size: 11px; line-height: 1.1;">
+                    <p style="margin: 5px 0;">
+                        <strong>Tel:</strong> +48 431 226 131 |
+                        <strong>Email:</strong> international@eipu.edu.pl |
+                        <strong>Address:</strong> Ogrodowa 5800-876 Warsaw / Poland |
+                        <strong>Website:</strong> www.eipu.edu.pl
+                    </p>
                 </td>
-
-                <!-- RIGHT SIDE -->
             </tr>
         </table>
 
