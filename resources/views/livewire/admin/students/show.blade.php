@@ -216,7 +216,7 @@
                             <div>
                                 <label class="block text-sm font-medium text-gray-500 mb-1">Yearly Payment</label>
                                 <p class="text-lg font-semibold text-gray-900">
-                                    {{ number_format($application->program->price_per_year, 2) }} AZN
+                                    {{ number_format($application->program->price_per_year, 2) }} EUR
                                 </p>
                             </div>
                         @endif

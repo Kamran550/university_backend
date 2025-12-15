@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Storage;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
 use Livewire\WithFileUploads;
+use Illuminate\Support\Facades\Log;
 
 #[Layout('layouts.student')]
 class Profil extends Component
@@ -22,11 +23,11 @@ class Profil extends Component
     public $phone = '';
     public $profile_photo;
     public $profile_photo_preview = '';
-    
+
     public $current_password = '';
     public $new_password = '';
     public $new_password_confirmation = '';
-    
+
     public $error = '';
     public $success = '';
 
@@ -36,7 +37,7 @@ class Profil extends Component
         'email' => 'required|email|max:255',
         'username' => 'required|string|max:255',
         'phone' => 'nullable|string|max:255',
-        'profile_photo' => 'nullable|image|max:2048',
+        'profile_photo' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
         'current_password' => 'required_with:new_password',
         'new_password' => 'nullable|min:6|confirmed',
         'new_password_confirmation' => 'required_with:new_password',
@@ -49,6 +50,7 @@ class Profil extends Component
         'email.email' => 'Enter a valid email address.',
         'username.required' => 'Username is required.',
         'profile_photo.image' => 'Only image files are accepted.',
+        'profile_photo.mimes' => 'Only JPG, JPEG and PNG formats are allowed.',
         'profile_photo.max' => 'Image size must be less than 2MB.',
         'current_password.required_with' => 'To change password, current password is required.',
         'new_password.min' => 'New password must be at least 6 characters long.',
@@ -63,30 +65,54 @@ class Profil extends Component
         $this->email = $user->email;
         $this->username = $user->username;
         $this->phone = $user->phone;
-        $this->profile_photo_preview = $user->profile_photo ? Storage::url($user->profile_photo) : '';
+
+        if ($user->profile_photo) {
+            /** @var \Illuminate\Filesystem\FilesystemAdapter $disk */
+            $disk = Storage::disk('do_spaces');
+            $this->profile_photo_preview = $disk->url($user->profile_photo);
+        } else {
+            $this->profile_photo_preview = '';
+        }
     }
 
     public function updatedProfilePhoto()
     {
-        $this->validateOnly('profile_photo');
-        // JavaScript preview istifadə edirik, buna görə burada preview yaratmağa ehtiyac yoxdur
-        // Amma validation üçün saxlayırıq
+        Log::info('Profile photo updated', ['file' => $this->profile_photo]);
+
+        try {
+            $this->validateOnly('profile_photo');
+            Log::info('Validation passed');
+        } catch (\Exception $e) {
+            Log::error('Validation failed', ['error' => $e->getMessage()]);
+            $this->error = 'File validation failed: ' . $e->getMessage();
+        }
     }
 
     public function updateProfile()
     {
-        $this->validate([
-            'name' => 'required|string|max:255',
-            'surname' => 'required|string|max:255',
-            'email' => 'required|email|max:255|unique:users,email,' . Auth::id(),
-            'username' => 'required|string|max:255|unique:users,username,' . Auth::id(),
-            'phone' => 'nullable|string|max:255',
-            'profile_photo' => 'nullable|image|max:2048',
+        Log::info('updateProfile called', [
+            'has_photo' => !is_null($this->profile_photo),
+            'photo_type' => gettype($this->profile_photo)
         ]);
+
+        try {
+            $this->validate([
+                'name' => 'required|string|max:255',
+                'surname' => 'required|string|max:255',
+                'email' => 'required|email|max:255|unique:users,email,' . Auth::id(),
+                'username' => 'required|string|max:255|unique:users,username,' . Auth::id(),
+                'phone' => 'nullable|string|max:255',
+                'profile_photo' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+            ]);
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            Log::error('Validation error', ['errors' => $e->errors()]);
+            $this->error = implode(' ', array_map(fn($errors) => implode(' ', $errors), $e->errors()));
+            return;
+        }
 
         /** @var \App\Models\User $user */
         $user = Auth::user();
-        
+
         $updateData = [
             'name' => $this->name,
             'surname' => $this->surname,
@@ -97,15 +123,36 @@ class Profil extends Component
 
         // Handle profile photo upload
         if ($this->profile_photo) {
-            // Delete old photo if exists
-            if ($user->profile_photo && Storage::exists($user->profile_photo)) {
-                Storage::delete($user->profile_photo);
-            }
+            try {
+                Log::info('Processing profile photo', [
+                    'original_name' => $this->profile_photo->getClientOriginalName(),
+                    'size' => $this->profile_photo->getSize(),
+                    'mime' => $this->profile_photo->getMimeType()
+                ]);
 
-            // Store new photo (uses default disk - local or DO Spaces based on env)
-            $path = $this->profile_photo->store('profile-photos');
-            $updateData['profile_photo'] = $path;
-            $this->profile_photo_preview = Storage::url($path);
+                /** @var \Illuminate\Filesystem\FilesystemAdapter $disk */
+                $disk = Storage::disk('do_spaces');
+
+                // Delete old photo if exists
+                if ($user->profile_photo && $disk->exists($user->profile_photo)) {
+                    Log::info('Deleting old photo', ['path' => $user->profile_photo]);
+                    $disk->delete($user->profile_photo);
+                }
+
+                // Store new photo in DigitalOcean Spaces
+                $path = $this->profile_photo->store('users/profile-photos', 'do_spaces');
+                Log::info('Photo stored successfully', ['path' => $path]);
+
+                $updateData['profile_photo'] = $path;
+                $this->profile_photo_preview = $disk->url($path);
+            } catch (\Exception $e) {
+                Log::error('Failed to upload photo', [
+                    'error' => $e->getMessage(),
+                    'trace' => $e->getTraceAsString()
+                ]);
+                $this->error = 'Failed to upload photo: ' . $e->getMessage();
+                return;
+            }
         }
 
         // Update password if provided
@@ -130,15 +177,21 @@ class Profil extends Component
             $updateData['password'] = Hash::make($this->new_password);
         }
 
-        User::where('id', $user->id)->update($updateData);
+        try {
+            User::where('id', $user->id)->update($updateData);
+            Log::info('Profile updated successfully', ['user_id' => $user->id, 'data' => $updateData]);
 
-        // Clear fields
-        $this->profile_photo = null;
-        $this->current_password = '';
-        $this->new_password = '';
-        $this->new_password_confirmation = '';
-        $this->error = '';
-        $this->success = 'Profile updated successfully.';
+            // Clear fields
+            $this->profile_photo = null;
+            $this->current_password = '';
+            $this->new_password = '';
+            $this->new_password_confirmation = '';
+            $this->error = '';
+            $this->success = 'Profile updated successfully.';
+        } catch (\Exception $e) {
+            Log::error('Failed to update profile', ['error' => $e->getMessage()]);
+            $this->error = 'Failed to update profile: ' . $e->getMessage();
+        }
     }
 
     public function render()

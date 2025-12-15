@@ -99,7 +99,7 @@
                             <td class="px-6 py-4 whitespace-nowrap">
                                 <span
                                     class="text-sm font-medium text-gray-900">{{ number_format($program->price_per_year ?? 0, 2) }}
-                                    ₼</span>
+                                    EUR</span>
                             </td>
 
                             <!-- Study Languages -->

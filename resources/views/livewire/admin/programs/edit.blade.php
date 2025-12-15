@@ -107,7 +107,7 @@
         <!-- Price per Year Field -->
         <div class="mb-6">
             <label for="edit-modal-price" class="block text-sm font-medium text-gray-700 mb-2">
-                Yearly Price (₼) <span class="text-red-500">*</span>
+                Yearly Price (EUR) <span class="text-red-500">*</span>
             </label>
             <input 
                 type="number" 

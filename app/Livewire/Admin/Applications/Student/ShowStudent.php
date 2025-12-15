@@ -148,6 +148,7 @@ class ShowStudent extends Component
             // Check if user already exists
             $user = User::where('email', $this->student->email)->first();
 
+            Log::info('User: ',['user:',$user]);
             $plainPassword = null;
 
             if (!$user) {
@@ -193,6 +194,8 @@ class ShowStudent extends Component
 
             // Check mail configuration
             $mailDriver = config('mail.default');
+
+            Log::info('PASsssssword: ',['password:',$plainPassword]);
 
             Mail::to($this->student->email)->send(new FinalAcceptanceLetterMail($this->student, $user, $plainPassword));
 
