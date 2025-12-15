@@ -88,7 +88,7 @@ class AcceptanceLetterMail extends Mailable
                 'verificationCode' => $verificationCode,
             ])->setPaper('a4', 'portrait');
 
-            $fileName = 'Qebul_Mektubu_' . $this->student->first_name . '_' . $this->student->last_name . '_' . now()->format('Y-m-d') . '.pdf';
+            $fileName = 'Acceptence_Letter_' . $this->student->first_name . '_' . $this->student->last_name . '_' . now()->format('Y-m-d') . '.pdf';
             $filePath = 'applications/acceptance-letters/' . $fileName;
 
             // Save PDF to storage (uses default disk - local or DO Spaces based on env)
@@ -104,7 +104,7 @@ class AcceptanceLetterMail extends Mailable
                     ->withMime('application/pdf'),
             ];
         } catch (\Exception $e) {
-            Log::error('PDF generate edərkən xəta: ' . $e->getMessage(), [
+            Log::error('Error generating PDF: ' . $e->getMessage(), [
                 'student_id' => $this->student->id,
                 'trace' => $e->getTraceAsString()
             ]);
