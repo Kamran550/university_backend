@@ -78,6 +78,10 @@
         // PhD applicants provide master documents
         $diplomaLabel = "Master's Diploma";
         $transcriptLabel = "Master's Transcript";
+        $diplomaLabel = "Bachelor's Diploma";
+        $transcriptLabel = "Bachelor's Transcript";
+        $diplomaPath = $student->bachelor_diploma_path;
+        $transcriptPath = $student->bachelor_transcript_path;
         $diplomaPath = $student->master_diploma_path;
         $transcriptPath = $student->master_transcript_path;
     }
