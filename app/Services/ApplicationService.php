@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use App\Enums\DegreeTypeEnum;
 
 class ApplicationService
 {
@@ -163,8 +164,11 @@ class ApplicationService
     {
         return DB::transaction(function () use ($data) {
             // Get degree and faculty names
-            Log::info('Program ID: ' . $data['program_id']);
 
+            Log::info('dataaa application:', ['app:', $data]);
+            // Get program with degree information
+
+            $degreeType = $data['degree_type'];
             // Prepare application data
             $applicationData = [
                 'applicant_type' => ApplicationTypeEnum::STUDENT->value,
@@ -184,9 +188,35 @@ class ApplicationService
             // Handle file uploads
             $photoIdPath = $this->handleFileUpload($data['photo_id'] ?? null, 'applications/student/photo-ids');
             $profilePhotoPath = $this->handleFileUpload($data['profile_photo'] ?? null, 'applications/student/profile-photos');
-            $diplomaPath = $this->handleFileUpload($data['diploma'] ?? null, 'applications/student/diplomas');
-            $transcriptPath = $this->handleFileUpload($data['transcript'] ?? null, 'applications/student/transcripts');
 
+            // Determine which diploma and transcript fields to use based on degree level
+            $highSchoolDiplomaPath = null;
+            $highSchoolTranscriptPath = null;
+            $bachelorDiplomaPath = null;
+            $bachelorTranscriptPath = null;
+            $masterDiplomaPath = null;
+            $masterTranscriptPath = null;
+
+
+            switch ($degreeType) {
+                case DegreeTypeEnum::BACHELOR->value:
+                    // Bachelor applicants provide high school documents
+                    $highSchoolDiplomaPath = $this->handleFileUpload($data['high_school_diploma'] ?? null, 'applications/student/diplomas/high-school');
+                    $highSchoolTranscriptPath = $this->handleFileUpload($data['high_school_transcript'] ?? null, 'applications/student/transcripts/high-school');
+                    break;
+                case DegreeTypeEnum::MASTER->value:
+                    // Master applicants provide bachelor documents
+                    $bachelorDiplomaPath = $this->handleFileUpload($data['bachelor_diploma'] ?? null, 'applications/student/diplomas/bachelor');
+                    $bachelorTranscriptPath = $this->handleFileUpload($data['bachelor_transcript'] ?? null, 'applications/student/transcripts/bachelor');
+                    break;
+                case DegreeTypeEnum::phD->value:
+                    // PhD applicants provide bachelor and master documents
+                    $bachelorDiplomaPath = $this->handleFileUpload($data['bachelor_diploma'] ?? null, 'applications/student/diplomas/bachelor');
+                    $bachelorTranscriptPath = $this->handleFileUpload($data['bachelor_transcript'] ?? null, 'applications/student/transcripts/bachelor');
+                    $masterDiplomaPath = $this->handleFileUpload($data['master_diploma'] ?? null, 'applications/student/diplomas/master');
+                    $masterTranscriptPath = $this->handleFileUpload($data['master_transcript'] ?? null, 'applications/student/transcripts/master');
+                    break;
+            }
             // Generate numbers
             $applicationNumber = $this->generateApplicationNumber();
             $studentNumber = $this->generateStudentNumber();
@@ -213,8 +243,12 @@ class ApplicationService
                 'address_line' => $data['address_line'],
                 'photo_id_path' => $photoIdPath,
                 'profile_photo_path' => $profilePhotoPath,
-                'diploma_path' => $diplomaPath,
-                'transcript_path' => $transcriptPath,
+                'high_school_diploma_path' => $highSchoolDiplomaPath,
+                'high_school_transcript_path' => $highSchoolTranscriptPath,
+                'bachelor_diploma_path' => $bachelorDiplomaPath,
+                'bachelor_transcript_path' => $bachelorTranscriptPath,
+                'master_diploma_path' => $masterDiplomaPath,
+                'master_transcript_path' => $masterTranscriptPath,
                 'study_language' => $data['teachingLanguage'],
             ];
 

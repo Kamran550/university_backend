@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('phone')->nullable();
             $table->string('profile_photo')->nullable();
             $table->foreignId('role_id')->constrained('roles');
+            $table->string('remember_token')->nullable();
             $table->timestamps();
         });
     }

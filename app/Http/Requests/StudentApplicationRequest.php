@@ -4,7 +4,8 @@ namespace App\Http\Requests;
 
 use App\Enums\GenderEnum;
 use Illuminate\Validation\Rule;
-
+use App\Enums\DegreeTypeEnum;
+use Illuminate\Support\Facades\Log;
 class StudentApplicationRequest extends ApiFormRequest
 {
     /**
@@ -14,6 +15,7 @@ class StudentApplicationRequest extends ApiFormRequest
     {
         return true;
     }
+
 
     /**
      * Get the validation rules that apply to the request.
@@ -25,7 +27,7 @@ class StudentApplicationRequest extends ApiFormRequest
         return [
             // Application fields
             'program_id' => ['required', 'integer', 'exists:programs,id'],
-            
+            'degree_id' => ['required', 'integer', 'exists:degrees,id'],
             // Student personal information
             'passport_number' => ['required', 'string', 'max:50'],
             'first_name' => ['required', 'string', 'max:100'],
@@ -47,13 +49,19 @@ class StudentApplicationRequest extends ApiFormRequest
             'address_line' => ['required', 'string'],
             
             // Documents (files)
-            'photo_id' => ['nullable', 'file', 'mimes:jpg,jpeg,png,pdf', 'max:2048'],
-            'profile_photo' => ['nullable', 'file', 'mimes:jpg,jpeg,png', 'max:2048'],
-            'diploma' => ['nullable', 'file', 'mimes:jpg,jpeg,png,pdf', 'max:2048'],
-            'transcript' => ['required', 'file', 'mimes:jpg,jpeg,png,pdf', 'max:2048'],
+            'photo_id' => ['nullable', 'file', 'mimes:jpg,jpeg,png,pdf', 'max:5120'],
+            'profile_photo' => ['nullable', 'file', 'mimes:jpg,jpeg,png', 'max:5120'],
+            'high_school_diploma' => ['nullable', 'file', 'mimes:jpg,jpeg,png,pdf', 'max:5120'],
+            'high_school_transcript' => ['nullable', 'file', 'mimes:jpg,jpeg,png,pdf', 'max:5120'],
+            'bachelor_diploma' => ['nullable', 'file', 'max:5120'],
+            'bachelor_transcript' => ['nullable', 'file', 'mimes:jpg,jpeg,png,pdf', 'max:5120'],
+            'master_diploma' => ['nullable', 'file', 'mimes:jpg,jpeg,png,pdf', 'max:5120'],
+            'master_transcript' => ['nullable', 'file', 'mimes:jpg,jpeg,png,pdf', 'max:5120'],
             'teachingLanguage' => ['required', 'string', 'max:50'],
             // Optional metadata
             'locale' => ['nullable', 'string', 'max:5'],
+            'degree_type' => ['required', Rule::in(DegreeTypeEnum::values())],
+            
         ];
     }
 }
