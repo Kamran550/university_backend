@@ -57,34 +57,6 @@
 
     // Determine which diploma and transcript to show based on degree level
     $degreeName = $application?->program?->degree?->name ?? '';
-    $diplomaLabel = 'Diploma';
-    $transcriptLabel = 'Transcript';
-    $diplomaPath = null;
-    $transcriptPath = null;
-
-    if ($degreeName === "Bachelor's") {
-        // Bachelor applicants provide high school documents
-        $diplomaLabel = 'High School Diploma';
-        $transcriptLabel = 'High School Transcript';
-        $diplomaPath = $student->high_school_diploma_path;
-        $transcriptPath = $student->high_school_transcript_path;
-    } elseif ($degreeName === "Master's") {
-        // Master applicants provide bachelor documents
-        $diplomaLabel = "Bachelor's Diploma";
-        $transcriptLabel = "Bachelor's Transcript";
-        $diplomaPath = $student->bachelor_diploma_path;
-        $transcriptPath = $student->bachelor_transcript_path;
-    } elseif ($degreeName === 'PhD') {
-        // PhD applicants provide master documents
-        $diplomaLabel = "Master's Diploma";
-        $transcriptLabel = "Master's Transcript";
-        $diplomaLabel = "Bachelor's Diploma";
-        $transcriptLabel = "Bachelor's Transcript";
-        $diplomaPath = $student->bachelor_diploma_path;
-        $transcriptPath = $student->bachelor_transcript_path;
-        $diplomaPath = $student->master_diploma_path;
-        $transcriptPath = $student->master_transcript_path;
-    }
 
     $documents = [
         [
@@ -95,15 +67,48 @@
             'label' => 'Profile Picture',
             'path' => $student->profile_photo_path,
         ],
-        [
-            'label' => $diplomaLabel,
-            'path' => $diplomaPath,
-        ],
-        [
-            'label' => $transcriptLabel,
-            'path' => $transcriptPath,
-        ],
     ];
+
+    // Add degree-specific documents
+    if ($degreeName === "Bachelor's") {
+        // Bachelor applicants provide high school documents
+        $documents[] = [
+            'label' => 'High School Diploma',
+            'path' => $student->high_school_diploma_path,
+        ];
+        $documents[] = [
+            'label' => 'High School Transcript',
+            'path' => $student->high_school_transcript_path,
+        ];
+    } elseif ($degreeName === "Master's") {
+        // Master applicants provide bachelor documents
+        $documents[] = [
+            'label' => "Bachelor's Diploma",
+            'path' => $student->bachelor_diploma_path,
+        ];
+        $documents[] = [
+            'label' => "Bachelor's Transcript",
+            'path' => $student->bachelor_transcript_path,
+        ];
+    } elseif ($degreeName === 'PhD') {
+        // PhD applicants provide BOTH bachelor and master documents
+        $documents[] = [
+            'label' => "Bachelor's Diploma",
+            'path' => $student->bachelor_diploma_path,
+        ];
+        $documents[] = [
+            'label' => "Bachelor's Transcript",
+            'path' => $student->bachelor_transcript_path,
+        ];
+        $documents[] = [
+            'label' => "Master's Diploma",
+            'path' => $student->master_diploma_path,
+        ];
+        $documents[] = [
+            'label' => "Master's Transcript",
+            'path' => $student->master_transcript_path,
+        ];
+    }
 
     $previewType = static function (?string $path): string {
         if (!$path) {
