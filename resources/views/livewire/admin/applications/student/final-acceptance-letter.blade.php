@@ -414,10 +414,10 @@
     <!-- Signature Section -->
     <div class="signature-section">
         <div class="signature-name">
-            Kanan KARIMOV
+            Prof. Dr. Serdar Koral
         </div>
         <div class="signature-title">
-            General Secretary
+            Rector
         </div>
     </div>
 

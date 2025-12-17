@@ -455,7 +455,7 @@
 
                 <!-- Location & Date -->
                 <div class="location-date">
-                    <div class="location">Warsaw, Poland</div>
+                    <div class="location">Rector: Prof. Dr. Serdar Koral</div>
                     <div class="date">{{ $graduationDate ?? now()->format('F d, Y') }}</div>
                 </div>
             </div>
