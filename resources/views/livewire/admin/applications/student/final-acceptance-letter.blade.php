@@ -13,8 +13,8 @@
 
         body {
             font-family: 'Times New Roman', 'Times', 'Georgia', serif;
-            font-size: 7.5pt;
-            line-height: 1.3;
+            font-size: 10pt;
+            line-height: 1.4;
             color: #000;
             margin: 0;
             padding: 0;
@@ -94,13 +94,13 @@
             flex-direction: column;
             align-items: flex-end;
             justify-content: center;
-            font-size: 7.5pt;
+            font-size: 9pt;
             text-align: right;
             min-width: 80mm;
         }
 
         .document-info {
-            font-size: 7pt;
+            font-size: 9pt;
             margin: 8px 0 4px 0;
             text-align: left;
         }
@@ -139,7 +139,7 @@
             width: 100%;
             margin: 0;
             border-collapse: collapse;
-            font-size: 7pt;
+            font-size: 9pt;
         }
 
         .info-row {
@@ -148,14 +148,14 @@
 
         .info-label {
             display: table-cell;
-            padding: 4px 6px;
+            padding: 5px 8px;
             font-weight: bold;
             width: 40%;
         }
 
         .info-value {
             display: table-cell;
-            padding: 4px 6px;
+            padding: 5px 8px;
         }
 
         .photo-container {
@@ -177,8 +177,8 @@
         .footer {
             margin-top: 20px;
             padding-top: 15px;
-            font-size: 7pt;
-            line-height: 1.3;
+            font-size: 9pt;
+            line-height: 1.4;
         }
 
         .footer-note {
@@ -193,12 +193,12 @@
 
         .signature-name {
             font-weight: bold;
-            font-size: 8pt;
+            font-size: 10pt;
             margin-top: 30px;
         }
 
         .signature-title {
-            font-size: 7pt;
+            font-size: 9pt;
             margin-top: 3px;
         }
 
@@ -213,7 +213,7 @@
 
         .date-line {
             font-weight: bold;
-            font-size: 7pt;
+            font-size: 9pt;
             margin-bottom: 10px;
         }
 
@@ -270,7 +270,7 @@
         <div class="document-title" style="flex: 1; margin: 0;">
             STUDENT CERTIFICATE
         </div>
-        <div style="font-size: 7.5pt; font-weight: normal;">
+        <div style="font-size: 9pt; font-weight: normal;">
             {{ now()->format('d/m/Y') }}
         </div>
     </div>
@@ -374,7 +374,7 @@
             @else
                 <div class="photo-container">
                     <div
-                        style="width: 100%; height: 100%; background-color: #f0f0f0; display: flex; align-items: center; justify-content: center; color: #999; font-size: 8pt;">
+                        style="width: 100%; height: 100%; background-color: #f0f0f0; display: flex; align-items: center; justify-content: center; color: #999; font-size: 10pt;">
                         No Photo
                     </div>
                 </div>
@@ -414,7 +414,7 @@
     <!-- Signature Section -->
     <div class="signature-section">
         <div class="signature-name">
-            Prof. Dr. Serdar Koral
+            Prof. Dr. SERDAR KORAL
         </div>
         <div class="signature-title">
             Rector
@@ -429,7 +429,7 @@
         </div>
 
         <!-- Verification Box with QR Code -->
-        <table style="width: 100%; margin-bottom: 15px;">
+        <table style="width: 100%; margin-bottom: 10px;">
             <tr>
                 <!-- QR Code -->
 
@@ -464,20 +464,20 @@
         <div class="footer-divider"></div>
 
         <!-- Footer Bottom Section -->
-        <table style="width: 100%; margin-top: 20px;">
+        <table style="width: 100%; margin-top: 10px;">
             <tr>
                 <!-- LEFT SIDE -->
-                <td style="width: 100%; font-size: 7pt; line-height: 1.3;">
+                <td style="width: 100%; font-size: 6pt; line-height: 1.1;">
                     <p style="margin: 2px 0; font-weight: bold; text-align: center;">
                         Fully Accredited Multinational Higher Education Institution and Global Service Provider
                     </p>
-                    <p style="margin: 4px 0; text-align: center;">
+                    <p style="margin: 2px 0; text-align: center;">
                         ISTASYON MAH. 2325 SK. NO: 18 / 1 ETIMESGUT ANKARA / Türkiye [ EIPU ]
                     </p>
-                    <p style="margin: 4px 0; text-align: center;">
+                    <p style="margin: 2px 0; text-align: center;">
                         Ogrodowa 5800-876 Warsaw / Poland [ EIPU ]
                     </p>
-                    <p style="margin: 4px 0; text-align: center;">
+                    <p style="margin: 2px 0; text-align: center;">
                         32-36 Bd d'Avranches, 1160 Bonnevoie-Nord-Verlorenkost / Luxembourg [ EIPU ]
                     </p>
                     <p style="margin: 4px 0; text-align: center;">
