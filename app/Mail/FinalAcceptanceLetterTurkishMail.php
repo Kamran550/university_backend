@@ -17,7 +17,7 @@ use Illuminate\Support\Str;
 use App\Models\DocumentVerification;
 use App\Enums\DocumentTypeEnum;
 
-class FinalAcceptanceLetterMail extends Mailable
+class FinalAcceptanceLetterTurkishMail extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -41,7 +41,7 @@ class FinalAcceptanceLetterMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Student Certificate - ' . $this->student->first_name . ' ' . $this->student->last_name,
+            subject: 'Öğrenci Belgesi - ' . $this->student->first_name . ' ' . $this->student->last_name,
         );
     }
 
@@ -51,7 +51,7 @@ class FinalAcceptanceLetterMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'emails.final-acceptance-letter',
+            view: 'emails.final-acceptance-turkish',
             with: [
                 'student' => $this->student,
                 'user' => $this->user,
@@ -89,14 +89,20 @@ class FinalAcceptanceLetterMail extends Mailable
             }
 
             // Generate PDF from the final acceptance letter blade template
-            $pdf = Pdf::loadView('livewire.admin.applications.student.final-acceptance-letter', [
+            $pdf = Pdf::loadView('livewire.admin.applications.student.final-acceptance-letter-turkish', [
                 'student' => $this->student,
                 'user' => $this->user,
                 'verificationCode' => $verificationCode,
+            ])->setOptions([
+                'isRemoteEnabled' => false,
+                'isHtml5ParserEnabled' => true,
+                'isFontSubsettingEnabled' => true,
+                'defaultFont' => 'DejaVu Serif'
             ])->setPaper('a4', 'portrait');
 
-            $fileName = 'Student_Certificate_' . $this->student->first_name . '_' . $this->student->last_name . '_' . now()->format('Y-m-d') . '.pdf';
+            $fileName = 'Ogrenci_Belgesi_' . $this->student->first_name . '_' . $this->student->last_name . '_' . now()->format('Y-m-d') . '.pdf';
             $filePath = 'applications/certificates/' . $fileName;
+            Log::info('filePath: ', ['pdf pathhhh:',$pdf->output()]);
 
             // Save PDF to storage (uses default disk - local or DO Spaces based on env)
             Storage::put($filePath, $pdf->output());
@@ -104,7 +110,7 @@ class FinalAcceptanceLetterMail extends Mailable
             if ($this->student->application && isset($documentVerification)) {
                 $documentVerification->update([
                     'file_path' => $filePath,
-                ]);
+                ]); 
             }
 
             // Update Application model with the PDF path
@@ -113,7 +119,7 @@ class FinalAcceptanceLetterMail extends Mailable
                     ->withMime('application/pdf'),
             ];
         } catch (\Exception $e) {
-            Log::error('Final acceptance letter PDF generate edərkən xəta: ' . $e->getMessage(), [
+            Log::error('Türkçe öğrenci belgesi PDF generate edərkən xəta: ' . $e->getMessage(), [
                 'student_id' => $this->student->id,
                 'user_id' => $this->user->id,
                 'trace' => $e->getTraceAsString()

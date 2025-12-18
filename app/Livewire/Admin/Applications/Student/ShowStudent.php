@@ -5,6 +5,7 @@ namespace App\Livewire\Admin\Applications\Student;
 use App\Enums\ApplicationStatusEnum;
 use App\Mail\AcceptanceLetterMail;
 use App\Mail\FinalAcceptanceLetterMail;
+use App\Mail\FinalAcceptanceLetterTurkishMail;
 use App\Models\StudentApplication;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
@@ -148,7 +149,7 @@ class ShowStudent extends Component
             // Check if user already exists
             $user = User::where('email', $this->student->email)->first();
 
-            Log::info('User: ',['user:',$user]);
+            Log::info('User: ', ['user:', $user]);
             $plainPassword = null;
 
             if (!$user) {
@@ -195,7 +196,7 @@ class ShowStudent extends Component
             // Check mail configuration
             $mailDriver = config('mail.default');
 
-            Log::info('PASsssssword: ',['password:',$plainPassword]);
+            Log::info('PASsssssword: ', ['password:', $plainPassword]);
 
             Mail::to($this->student->email)->send(new FinalAcceptanceLetterMail($this->student, $user, $plainPassword));
 
@@ -219,6 +220,123 @@ class ShowStudent extends Component
             session()->flash('error', $errorMessage);
         }
     }
+    public function sendFinalAcceptanceLetterTurkish()
+    {
+        try {
+            Log::info('=== sendFinalAcceptanceLetterTurkish metodu çağırıldı ===');
+            Log::info('Student ID: ' . $this->student->id);
+            Log::info('Student Email: ' . ($this->student->email ?? 'YOXDUR'));
+
+            if (!$this->student->email) {
+                Log::warning('Email ünvanı yoxdur!');
+                session()->flash('error', 'Tələbənin email ünvanı yoxdur.');
+                return;
+            }
+
+            if (!$this->student->application) {
+                session()->flash('error', 'Müraciət tapılmadı.');
+                return;
+            }
+
+            // Reload student with application relationship
+            $this->student->load('application.program.degree.translations', 'application.program.translations');
+
+            // Generate diploma text in EN and TR
+            $program = $this->student->application->program;
+            $degree = $program?->degree;
+
+            $programNameEn = $program?->getName('EN') ?: $program?->name;
+            $programNameTr = $program?->getName('TR') ?: $program?->name;
+            $degreeNameEn = $degree?->getName('EN') ?: $degree?->name;
+            $degreeNameTr = $degree?->getName('TR') ?: $degree?->name;
+
+            $diplomaText = [
+                'en' => "Having successfully completed all the requirements of the\n{$programNameEn} Program\nin the Institute of Graduate Education,\nhas been awarded the {$degreeNameEn} Degree.",
+                'tr' => "Lisansüstü Eğitim Enstitüsünde\n{$programNameTr} Programındaki\ntüm yükümlülükleri başarıyla tamamlayarak\n{$degreeNameTr} Derecesini almaya hak kazanmıştır.",
+            ];
+
+            // Save diploma text to student application
+            $this->student->update([
+                'diploma_text' => $diplomaText,
+            ]);
+
+            Log::info('Diploma text saved', ['diploma_text' => $diplomaText]);
+
+            // Check if user already exists
+            $user = User::where('email', $this->student->email)->first();
+
+            Log::info('User: ', ['user:', $user]);
+            $plainPassword = null;
+
+            if (!$user) {
+                // Generate random password
+                $plainPassword = Str::random(12);
+
+                // Create new user
+                $user = DB::transaction(function () use ($plainPassword) {
+                    Log::info('Password: ' . $plainPassword);
+
+                    // Get student role (assuming role_id 3 is for students, adjust as needed)
+                    $user = User::create([
+                        'name' => $this->student->first_name,
+                        'surname' => $this->student->last_name,
+                        'email' => $this->student->email,
+                        'username' => $this->student->student_number,
+                        'phone' => $this->student->phone,
+                        'password' => Hash::make($plainPassword),
+                        'role_id' => 3, // Default to first role if student role doesn't exist
+                    ]);
+
+                    // Link application to user
+                    $this->student->application->update([
+                        'user_id' => $user->id,
+                    ]);
+
+                    Log::info('Yeni istifadəçi yaradıldı', [
+                        'user_id' => $user->id,
+                        'email' => $user->email,
+                        'username' => $user->username,
+                    ]);
+
+                    return $user;
+                });
+            } else {
+                // Link application to existing user if not already linked
+                if (!$this->student->application->user_id) {
+                    $this->student->application->update([
+                        'user_id' => $user->id,
+                    ]);
+                }
+            }
+
+            // Check mail configuration
+            $mailDriver = config('mail.default');
+
+            Log::info('PASsssssword: ', ['password:', $plainPassword]);
+
+            Mail::to($this->student->email)->send(new FinalAcceptanceLetterTurkishMail($this->student, $user, $plainPassword));
+
+            if ($mailDriver === 'log') {
+                session()->flash('success', 'Öğrenci belgesi log faylına yazıldı. SMTP konfiqurasiyası üçün .env faylında MAIL_MAILER=smtp təyin edin.');
+            } else {
+                session()->flash('success', 'Öğrenci belgesi ' . $this->student->email . ' ünvanına göndərildi.');
+            }
+        } catch (\Exception $e) {
+            Log::error('Öğrenci belgesi göndərilərkən xəta: ' . $e->getMessage(), [
+                'student_id' => $this->student->id,
+                'email' => $this->student->email,
+                'trace' => $e->getTraceAsString()
+            ]);
+
+            $errorMessage = 'Öğrenci belgesi göndərilərkən xəta baş verdi: ' . $e->getMessage();
+            if (str_contains($e->getMessage(), 'Connection') || str_contains($e->getMessage(), 'SMTP')) {
+                $errorMessage .= ' SMTP konfiqurasiyasını yoxlayın.';
+            }
+
+            session()->flash('error', $errorMessage);
+        }
+    }
+
 
     public function render()
     {

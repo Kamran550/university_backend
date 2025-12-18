@@ -16,6 +16,21 @@ class StudentApplicationRequest extends ApiFormRequest
         return true;
     }
 
+    protected function prepareForValidation(): void
+    {
+        if ($this->hasFile('high_school_transcript')) {
+            $file = $this->file('high_school_transcript');
+
+            Log::info('High school transcript uploaded', [
+                'original_name' => $file->getClientOriginalName(),
+                'mime_type'     => $file->getClientMimeType(),
+                'size_bytes'    => $file->getSize(),
+                'size_mb'       => round($file->getSize() / 1024 / 1024, 2),
+            ]);
+        }
+    }
+
+    
 
     /**
      * Get the validation rules that apply to the request.

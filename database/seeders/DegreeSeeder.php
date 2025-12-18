@@ -19,8 +19,14 @@ class DegreeSeeder extends Seeder
                 'description' => 'Undergraduate',
                 'duration' => 4,
                 'translations' => [
-                    'EN' => "Bachelor's",
-                    'TR' => 'Lisans',
+                    'EN' => [
+                        'name' => "Bachelor's",
+                        'description' => 'Undergraduate',
+                    ],
+                    'TR' => [
+                        'name' => 'Lisans',
+                        'description' => 'Lisans',
+                    ],
                 ],
             ],
             [
@@ -28,8 +34,14 @@ class DegreeSeeder extends Seeder
                 'description' => "Master's Degree (Thesis)",
                 'duration' => 2,
                 'translations' => [
-                    'EN' => "Master's",
-                    'TR' => 'Yüksek Lisans',
+                    'EN' => [
+                        'name' => "Master's",
+                        'description' => "Master's Degree (Thesis)",
+                    ],
+                    'TR' => [
+                        'name' => 'Yüksek Lisans',
+                        'description' => 'Lisansüstü',
+                    ],
                 ],
             ],
             [
@@ -37,8 +49,14 @@ class DegreeSeeder extends Seeder
                 'description' => 'Doctorate (PhD)',
                 'duration' => 4,
                 'translations' => [
-                    'EN' => 'PhD',
-                    'TR' => 'Doktora',
+                    'EN' => [
+                        'name' => 'PhD',
+                        'description' => 'Doctorate (PhD)',
+                    ],
+                    'TR' => [
+                        'name' => 'Doktora',
+                        'description' => 'Lisansüstü',
+                    ],
                 ],
             ],
         ];
@@ -53,14 +71,15 @@ class DegreeSeeder extends Seeder
             );
 
             // Create translations
-            foreach ($translations as $lang => $name) {
+            foreach ($translations as $lang => $translationData) {
                 DegreeTranslation::firstOrCreate(
                     [
                         'degree_id' => $degree->id,
                         'language' => $lang,
                     ],
                     [
-                        'name' => $name,
+                        'name' => $translationData['name'],
+                        'description' => $translationData['description'],
                     ]
                 );
             }

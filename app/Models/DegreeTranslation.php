@@ -16,6 +16,7 @@ class DegreeTranslation extends Model
         'degree_id',
         'language',
         'name',
+        'description',
     ];
 
 

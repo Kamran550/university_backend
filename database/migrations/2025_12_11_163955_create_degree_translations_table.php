@@ -14,8 +14,10 @@ return new class extends Migration
         Schema::create('degree_translations', function (Blueprint $table) {
             $table->id();
             $table->foreignId('degree_id')->constrained('degrees')->onDelete('cascade');
+            
             $table->string('language');
             $table->string('name');
+            $table->string('description');
             $table->timestamps();
             $table->softDeletes();
         });

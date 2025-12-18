@@ -40,4 +40,11 @@ class Degree extends Model
             ->first()
             ->name ?? '';
     }
+    public function getDescription($lang = 'EN')
+    {
+        return $this->translations
+            ->where('language', strtoupper($lang))
+            ->first()
+            ->description ?? '';
+    }
 }
