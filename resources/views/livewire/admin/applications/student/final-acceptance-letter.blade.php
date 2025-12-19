@@ -410,8 +410,8 @@
             * It is expected that the person will reach the graduation stage in the
             @php
                 $duration = $student->application->program?->degree?->duration ?? 4;
-                $startYear = now()->format('Y');
-                $endYear = now()->addYears($duration)->format('Y');
+                $startYear = now()->addYears($duration)->format('Y');
+                $endYear = now()->addYears($duration + 1)->format('Y');
             @endphp
             {{ $startYear }}-{{ $endYear }} academic year.
         </div>
