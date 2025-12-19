@@ -93,7 +93,14 @@ class FinalAcceptanceLetterMail extends Mailable
                 'student' => $this->student,
                 'user' => $this->user,
                 'verificationCode' => $verificationCode,
-            ])->setPaper('a4', 'portrait');
+            ])
+            ->setOptions([
+                'isRemoteEnabled' => false,
+                'isHtml5ParserEnabled' => true,
+                'isFontSubsettingEnabled' => true,
+                'defaultFont' => 'DejaVu Serif'
+            ])
+            ->setPaper('a4', 'portrait');
 
             $fileName = 'Student_Certificate_' . $this->student->first_name . '_' . $this->student->last_name . '_' . now()->format('Y-m-d') . '.pdf';
             $filePath = 'applications/certificates/' . $fileName;

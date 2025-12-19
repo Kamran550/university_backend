@@ -11,6 +11,7 @@ if (!function_exists('tr_upper')) {
             'ş' => 'Ş',
             'ö' => 'Ö',
             'ç' => 'Ç',
+            'ə' => 'Ə',
         ];
 
         return mb_strtoupper(strtr($text, $map), 'UTF-8');

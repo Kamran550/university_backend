@@ -86,6 +86,12 @@ class AcceptanceLetterMail extends Mailable
             $pdf = Pdf::loadView('livewire.admin.applications.student.acceptance-letter', [
                 'student' => $this->student,
                 'verificationCode' => $verificationCode,
+            ])
+            ->setOptions([
+                'isRemoteEnabled' => false,
+                'isHtml5ParserEnabled' => true,
+                'isFontSubsettingEnabled' => true,
+                'defaultFont' => 'DejaVu Serif'
             ])->setPaper('a4', 'portrait');
 
             $fileName = 'Conditional_Acceptence_Letter_' . $this->student->first_name . '_' . $this->student->last_name . '_' . now()->format('Y-m-d') . '.pdf';

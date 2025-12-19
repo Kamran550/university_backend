@@ -12,7 +12,7 @@
         }
 
         body {
-            font-family: 'Times New Roman', 'Times', 'Georgia', serif;
+            font-family: 'DejaVu Serif', 'Times New Roman', serif;
             font-size: 10pt;
             line-height: 1.4;
             color: #000;
@@ -33,7 +33,7 @@
             transform: translate(-50%, -50%);
             width: 600px;
             height: 600px;
-            background-image: url('{{ public_path('images/EIPU-logo-dark.png') }}');
+            background-image: url('{{ public_path('images/bsmu-logo-tam.png') }}');
             background-size: contain;
             background-repeat: no-repeat;
             background-position: center;
@@ -45,6 +45,7 @@
         .header {
             border-bottom: 1.5px solid #000;
             padding: 5px 0;
+            margin-top: -5px;
             margin-bottom: 8px;
         }
 
@@ -80,7 +81,7 @@
         }
 
         .university-name {
-            font-size: 14pt;
+            font-size: 12pt;
             font-weight: bold;
             color: #000;
             text-align: center;
@@ -89,7 +90,7 @@
         }
 
         .directorate-name {
-            font-size: 9pt;
+            font-size: 7pt;
             font-weight: normal;
             color: #000;
             text-align: center;
@@ -102,19 +103,19 @@
             flex-direction: column;
             align-items: flex-end;
             justify-content: center;
-            font-size: 9pt;
+            font-size: 7pt;
             text-align: right;
             min-width: 80mm;
         }
 
         .document-info {
-            font-size: 9pt;
+            font-size: 7pt;
             margin: 8px 0 4px 0;
             text-align: left;
         }
 
         .document-title {
-            font-size: 11pt;
+            font-size: 9pt;
             font-weight: bold;
             text-align: center;
             margin: 10px 0;
@@ -147,7 +148,7 @@
             width: 100%;
             margin: 0;
             border-collapse: collapse;
-            font-size: 9pt;
+            font-size: 7pt;
         }
 
         .info-row {
@@ -183,10 +184,10 @@
         }
 
         .footer {
-            margin-top: 20px;
-            padding-top: 15px;
-            font-size: 9pt;
-            line-height: 1.4;
+            margin-top: 10px;
+            padding-top: 10px;
+            font-size: 7pt;
+            line-height: 1.1;
         }
 
         .footer-note {
@@ -195,19 +196,18 @@
         }
 
         .signature-section {
-            margin-top: 20px;
+            margin-top: 8px;
             text-align: right;
         }
 
         .signature-name {
             font-weight: bold;
-            font-size: 10pt;
-            margin-top: 30px;
+            font-size: 7pt;
+            margin-top: 10px;
         }
 
         .signature-title {
-            font-size: 9pt;
-            margin-top: 3px;
+            font-size: 7pt;
             padding-right: 50px;
         }
 
@@ -216,14 +216,14 @@
             bottom: 0;
             left: 0;
             right: 0;
-            margin-top: 20px;
+            margin-top: 10px;
             padding: 0;
         }
 
         .date-line {
             font-weight: bold;
-            font-size: 9pt;
-            margin-bottom: 10px;
+            font-size: 7pt;
+            margin-bottom: 7px;
         }
 
         .footer-divider {
@@ -298,40 +298,40 @@
                 </div>
                 <div class="info-row">
                     <div class="info-label">Name</div>
-                    <div class="info-value">{{ strtoupper($student->first_name) }}</div>
+                    <div class="info-value">{{ tr_upper($student->first_name) }}</div>
                 </div>
                 <div class="info-row">
                     <div class="info-label">Surname</div>
-                    <div class="info-value">{{ strtoupper($student->last_name) }}</div>
+                    <div class="info-value">{{ tr_upper($student->last_name) }}</div>
                 </div>
                 <div class="info-row">
                     <div class="info-label">Place of Birth & Date</div>
                     <div class="info-value">
-                        {{ strtoupper($student->place_of_birth ?? ($student->nationality ?? 'N/A')) }} -
+                        {{ tr_upper($student->place_of_birth ?? ($student->nationality ?? 'N/A')) }} -
                         {{ $student->date_of_birth ? $student->date_of_birth->format('d/m/Y') : 'N/A' }}</div>
                 </div>
                 <div class="info-row">
                     <div class="info-label">Father's Name</div>
-                    <div class="info-value">{{ strtoupper($student->father_name ?? 'N/A') }}</div>
+                    <div class="info-value">{{ tr_upper($student->father_name ?? 'N/A') }}</div>
                 </div>
                 <div class="info-row">
                     <div class="info-label">Nationality</div>
-                    <div class="info-value">{{ strtoupper($student->nationality ?? 'N/A') }}</div>
+                    <div class="info-value">{{ tr_upper($student->nationality ?? 'N/A') }}</div>
                 </div>
                 <div class="info-row">
                     <div class="info-label">Education Level</div>
                     <div class="info-value">
-                        {{ strtoupper($student->application->program?->degree?->description ?? ($student->application->program?->degree?->name ?? 'N/A')) }}
+                        {{ tr_upper($student->application->program?->degree?->description ?? ($student->application->program?->degree?->name ?? 'N/A')) }}
                     </div>
                 </div>
                 <div class="info-row">
                     <div class="info-label">Institue / Faculty</div>
                     <div class="info-value">
-                        {{ strtoupper($student->application->program?->faculty?->name ?? 'GRADUATE SCHOOL') }}</div>
+                        {{ tr_upper($student->application->program?->faculty?->name ?? 'GRADUATE SCHOOL') }}</div>
                 </div>
                 <div class="info-row">
                     <div class="info-label">Department</div>
-                    <div class="info-value">{{ strtoupper($student->application->program?->name ?? 'N/A') }}</div>
+                    <div class="info-value">{{ tr_upper($student->application->program?->name ?? 'N/A') }}</div>
                 </div>
                 <div class="info-row">
                     <div class="info-label">Education Language</div>
@@ -423,7 +423,7 @@
     <!-- Signature Section -->
     <div class="signature-section">
         <div class="signature-name">
-            Prof. Dr. SERDAR KORAL
+            Prof. Dr. Serdar KORAL
         </div>
         <div class="signature-title">
             Rector
@@ -447,7 +447,7 @@
                     <div
                         style="background: #f0f0f0; padding: 12px 15px; border-radius: 8px; font-size: 11px; line-height: 1.4;">
                         This document was e-signed for
-                        <strong>{{ strtoupper($student->first_name . ' ' . $student->last_name) }}</strong> on
+                        <strong>{{ tr_upper($student->first_name . ' ' . $student->last_name) }}</strong> on
                         {{ now()->format('d/m/Y') }} with document number
                         <strong>{{ $verificationCode ?? strtoupper(Str::random(12)) }}</strong>
                         The validity of the document can be confirmed by scanning the QR code or by document number at

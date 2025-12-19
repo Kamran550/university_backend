@@ -6,14 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Conditional Acceptance Letter - {{ $student->first_name }} {{ $student->last_name }}</title>
     <style>
+
         @page {
             margin: 12mm;
             size: A4;
         }
 
         body {
-            font-family: 'Times New Roman', 'Times', 'Georgia', serif;
-            font-size: 7.5pt;
+            /* font-family: 'Times New Roman', 'Times', 'Georgia', serif; */
+            font-family: 'DejaVu Serif', 'Times New Roman', serif;
+
+            font-size: 7.2pt;
             line-height: 1.3;
             color: #000;
             margin: 0;
@@ -49,12 +52,21 @@
         }
 
         .logo-container {
+            text-align: center;
+            padding: 0;
+            position: relative;
+            margin-bottom: 3px;
+            margin-top: 0;
+        }
+
+
+        /* .logo-container {
             display: flex;
             align-items: center;
             justify-content: space-between;
             padding: 0;
             position: relative;
-        }
+        } */
 
         .logo {
             max-width: 25mm;
@@ -123,7 +135,7 @@
         }
 
         .content {
-            margin: 6px 0;
+            /* margin: 6px 0; */
             text-align: justify;
             line-height: 1.3;
         }
@@ -236,7 +248,7 @@
         }
 
         .closing-section {
-            margin-top: 15px;
+            margin-top: 10px;
             margin-bottom: 0px;
         }
 
@@ -301,7 +313,7 @@
             bottom: 0;
             left: 0;
             right: 0;
-            margin-top: 20px;
+            margin-top: 15px;
             padding: 0;
         }
 
@@ -443,10 +455,10 @@
                 Application Code: {{ $student->application_number ?? 'N/A' }}
             </div>
             <div class="subject-info-row">
-                Dear {{ strtoupper($student->first_name . ' ' . $student->last_name) }}
+                Dear {{ tr_upper($student->first_name . ' ' . $student->last_name) }}
             </div>
 
-        </div>
+        </div>  
     </div>
 
     <!-- Document Title -->
@@ -478,7 +490,7 @@
         </div>
         <div class="info-row">
             <div class="info-label">Full Name</div>
-            <div class="info-value">{{ strtoupper($student->first_name . ' ' . $student->last_name) }}</div>
+            <div class="info-value">{{ tr_upper($student->first_name . ' ' . $student->last_name) }}</div>
         </div>
         <div class="info-row">
             <div class="info-label">Date of Birth</div>
@@ -540,6 +552,7 @@
             completing the transfer.
         </p>
     </div>
+    <br>
     <!-- Payment Table -->
     <table class="payment-table">
         <thead>
@@ -571,9 +584,6 @@
             </tr>
         </tbody>
     </table>
-
-    <br>
-    <br>
 
     <!-- English Language Proficiency Requirements -->
     <div class="section-header">English Language Proficiency Requirements</div>
@@ -619,7 +629,6 @@
         </tbody>
     </table>
 
-    <br>
 
     <!-- English Proficiency and Preparatory Exam -->
     <div class="subsection-title">English Proficiency and Preparatory Exam</div>
@@ -634,20 +643,6 @@
             <strong>https://eipu.edu.pl</strong>
         </p>
     </div>
-
-    <br>
-
-    <!-- Scholarship Information -->
-    <div class="subsection-title">Scholarship Information</div>
-    <div class="content">
-        <p>
-            The scholarship only covers the annual/program tuition fee and does not include accommodation,
-            transportation, meals, books,
-            other educational needs, and healthcare expenses.
-        </p>
-    </div>
-
-    <br>
 
     <!-- Required Documents for Final Registration -->
     <div class="section-header">Required Documents for Final Registration</div>
@@ -666,7 +661,6 @@
         <li>Final Acceptance Letter</li>
     </ol>
 
-    <br>
 
     <!-- Additional Information -->
     <div class="content">
@@ -679,9 +673,6 @@
             <strong>international@eipu.edu.pl</strong>
         </p>
     </div>
-
-    <br>
-    <br>
 
     <!-- Closing -->
     <div class="closing-section">
@@ -788,7 +779,7 @@
                     <div
                         style="background: #f0f0f0; padding: 12px 15px; border-radius: 8px; font-size: 11px; line-height: 1.4;">
                         This document was e-signed for
-                        <strong>{{ strtoupper($student->first_name . ' ' . $student->last_name) }}</strong>
+                        <strong>{{ tr_upper($student->first_name . ' ' . $student->last_name) }}</strong>
                         on {{ now()->format('d/m/Y') }} with document number
                         <strong>{{ $verificationCode ?? strtoupper(\Illuminate\Support\Str::random(12)) }}</strong>
                         The validity of the document can be confirmed by scanning the QR code or by document number at

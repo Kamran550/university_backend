@@ -11,6 +11,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
+        // Load custom helpers
+        require_once app_path('Helpers/TextHelper.php');
+
         $this->app->bind(
             \App\Repositories\Interfaces\FacultyRepositoryInterface::class,
             \App\Repositories\FacultyRepository::class
