@@ -343,7 +343,7 @@
                 </div>
                 <div class="info-row">
                     <div class="info-label">Sınıf</div>
-                    <div class="info-value">Yeni Başlayan (1. Sınıf)</div>
+                    <div class="info-value">DERS AŞAMASI (1. SINIF)</div>
                 </div>
                 <div class="info-row">
                     <div class="info-label">Kayıt Tarihi</div>
