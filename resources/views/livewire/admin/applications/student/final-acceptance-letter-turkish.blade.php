@@ -324,13 +324,13 @@
                 <div class="info-row">
                     <div class="info-label">Enstitü / Fakülte</div>
                     <div class="info-value">
-                        {{ strtoupper($student->application->program?->faculty?->getName('TR') ?: $student->application->program?->faculty?->name ?? 'GRADUATE SCHOOL') }}
+                        {{ tr_upper($student->application->program?->faculty?->getName('TR') ?: $student->application->program?->faculty?->name ?? 'GRADUATE SCHOOL' ) }}
                     </div>
                 </div>
                 <div class="info-row">
                     <div class="info-label">Bölüm</div>
                     <div class="info-value">
-                        {{ strtoupper($student->application->program?->getName('TR') ?: $student->application->program?->name ?? 'N/A') }}
+                        {{ tr_upper($student->application->program?->getName('TR') ?: $student->application->program?->name ?? 'N/A' ) }}
                     </div>
                 </div>
                 <div class="info-row">
