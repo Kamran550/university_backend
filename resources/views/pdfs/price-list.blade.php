@@ -256,7 +256,6 @@
                                 <th class="center" style="width: 15%;">
                                     {{ $translations['spring_semester'] }}<br>{{ $translations['scholarship_10'] }}
                                 </th>
-                                <th class="center" style="width: 15%;">{{ $translations['scholarship_50'] }}</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -266,8 +265,6 @@
                                     <td class="price">€ {{ number_format($program['price_per_year'], 0, ',', '.') }}
                                     </td>
                                     <td class="price">€ {{ number_format($program['fall_semester'], 0, ',', '.') }}
-                                    </td>
-                                    <td class="price">€ {{ number_format($program['spring_semester'], 0, ',', '.') }}
                                     </td>
                                     <td class="price">€ {{ number_format($program['spring_semester'], 0, ',', '.') }}
                                     </td>

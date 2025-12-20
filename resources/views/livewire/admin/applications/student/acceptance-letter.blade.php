@@ -810,7 +810,7 @@
             <tr>
                 <td style="text-align: center; font-size: 11px; line-height: 1.1;">
                     <p style="margin: 5px 0;">
-                        <strong>Tel:</strong> +48 431 226 131 |
+                        <strong>Tel:</strong> +48 579 369 968 |
                         <strong>Email:</strong> international@eipu.edu.pl |
                         <strong>Address:</strong> Ogrodowa 5800-876 Warsaw / Poland |
                         <strong>Website:</strong> www.eipu.edu.pl
