@@ -171,7 +171,6 @@
         @endif
 
         <div class="contact-info">
-            <strong>Adres:</strong> Ogrodowa 58, 00-876 Varşova, Polonya<br>
             <strong>E-posta:</strong> international@eipu.edu.pl<br>
             <strong>Telefon:</strong> +48 579 369 968<br>
             <strong>Tarih:</strong> {{ now()->format('d/m/Y') }}
@@ -212,7 +211,13 @@
         <p>
             Bu mektup, daha önce <strong>{{ $student->current_university ?: 'N/A' }}</strong>'nde kayıtlı olan
             <strong>{{ tr_upper(text: $student->first_name) }} {{ tr_upper(text: $student->last_name) }}</strong>'in,
-            2025–2026 akademik yılı için Avrupa Uluslararası Barış Üniversitesi bünyesinde
+            @php
+                $applicationDate = $student->application->submitted_at ?? ($student->application->created_at ?? now());
+                $startYear = $applicationDate->format('Y');
+                $endYear = $startYear + 1;
+            @endphp
+            {{ $startYear }}–{{ $endYear }} akademik yılı için Avrupa Uluslararası Barış Üniversitesi
+            bünyesinde
             {{ tr_upper($student->application->program?->degree?->getName('TR') ?? ($student->application->program?->degree?->name ?? 'N/A')) }}
             {{ tr_upper($student->application->program?->getName('TR') ?? ($student->application->program?->name ?? 'N/A')) }}
             programına
