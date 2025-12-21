@@ -11,6 +11,6 @@ interface ApplicationRepositoryInterface
     public function create(array $data): Application;
     
     public function createStudentApplication(int $applicationId, array $data): StudentApplication;
-    
+
     public function createAgencyApplication(int $applicationId, array $data): AgencyApplication;
 }

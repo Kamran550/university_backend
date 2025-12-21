@@ -455,7 +455,7 @@
                 Application Code: {{ $student->application_number ?? 'N/A' }}
             </div>
             <div class="subject-info-row">
-                Dear {{ tr_upper($student->first_name . ' ' . $student->last_name) }}
+                Dear {{ tr_upper(text: $student->first_name . ' ' . $student->last_name) }}
             </div>
 
         </div>  

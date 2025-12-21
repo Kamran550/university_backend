@@ -36,7 +36,7 @@
                                 Contact
                             </th>
                             <th scope="col" class="hidden lg:table-cell px-4 sm:px-6 py-3 sm:py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
-                                Program
+                                Application Type
                             </th>
                             <th scope="col" class="px-4 sm:px-6 py-3 sm:py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
                                 Status
@@ -80,9 +80,9 @@
                                     <div class="text-xs text-gray-500">{{ $app->phone }}</div>
                                 </td>
                                 
-                                <!-- Program (Hidden on tablet) -->
+                                <!-- Application Type (Hidden on tablet) -->
                                 <td class="hidden lg:table-cell px-4 sm:px-6 py-3 sm:py-4">
-                                    <div class="text-sm text-gray-900">{{ $app->application?->program?->name ?? 'N/A' }}</div>
+                                    <div class="text-sm text-gray-900">{{ $app->application?->applicant_type ? ucfirst($app->application->applicant_type) : 'N/A' }}</div>
                                 </td>
                                 
                                 <!-- Status -->

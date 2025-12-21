@@ -252,9 +252,9 @@
                                 <th style="width: 40%;">{{ $translations['program_name'] }}</th>
                                 <th class="center" style="width: 15%;">{{ $translations['standard_annual_fee'] }}</th>
                                 <th class="center" style="width: 15%;">
-                                    {{ $translations['fall_semester'] }}<br>{{ $translations['scholarship_10'] }}</th>
+                                    {{ $translations['fall_semester'] }}<br>{{ $translations['scholarship_50'] }}</th>
                                 <th class="center" style="width: 15%;">
-                                    {{ $translations['spring_semester'] }}<br>{{ $translations['scholarship_10'] }}
+                                    {{ $translations['spring_semester'] }}<br>{{ $translations['scholarship_50'] }}
                                 </th>
                             </tr>
                         </thead>

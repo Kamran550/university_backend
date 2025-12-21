@@ -8,6 +8,7 @@ use App\Http\Requests\StudentApplicationRequest;
 use App\Services\ApplicationService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Log;
+use App\Http\Requests\TransferApplicationRequest;
 
 class ApplicationController extends Controller
 {
@@ -37,6 +38,32 @@ class ApplicationController extends Controller
             return $this->errorResponse(
                 'APPLICATION_ERROR',
                 'Failed to submit student application: ' . $e->getMessage(),
+                500
+            );
+        }
+    }
+
+
+    /**
+     * Store a transfer application.
+     *
+     * @param TransferApplicationRequest $request
+     * @return JsonResponse
+     */
+    public function storeTransfer(TransferApplicationRequest $request): JsonResponse
+    {
+
+        try {
+            $application = $this->applicationService->storeTransferApplication($request->validated());
+
+            return $this->successResponse(
+                'Transfer application submitted successfully',
+                $application->load('program', 'studentApplication')
+            );
+        } catch (\Exception $e) {
+            return $this->errorResponse(
+                'APPLICATION_ERROR',
+                'Failed to submit transfer application: ' . $e->getMessage(),
                 500
             );
         }

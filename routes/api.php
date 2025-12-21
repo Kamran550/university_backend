@@ -20,5 +20,6 @@ Route::prefix('v1')->group(function () {
     // Application routes
     Route::post('/applications/student', [ApplicationController::class, 'storeStudent']);
     Route::post('/applications/agency', [ApplicationController::class, 'storeAgency']);
+    Route::post('/applications/transfer', [ApplicationController::class, 'storeTransfer']);
 });
 
