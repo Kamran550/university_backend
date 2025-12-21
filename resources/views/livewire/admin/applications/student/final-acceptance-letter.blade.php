@@ -343,7 +343,7 @@
                 </div>
                 <div class="info-row">
                     <div class="info-label">Class</div>
-                    <div class="info-value">Freshman (1st Grade)</div>
+                    <div class="info-value">Freshman ({{ $student->current_course }} ?? 1st Grade)</div>
                 </div>
                 <div class="info-row">
                     <div class="info-label">Date of Registration</div>

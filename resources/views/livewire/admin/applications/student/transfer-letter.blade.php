@@ -190,7 +190,7 @@
 
     <!-- Reference Information -->
     <div class="reference-line">
-        <strong>Referans No:</strong> {{ $student->application_number ?? 'N/A' }}
+        <strong>Öğrenci No:</strong> {{ $student->application_number ?? 'N/A' }}
     </div>
     <div class="reference-line">
         <strong>Pasaport No:</strong> {{ $student->passport_number ?? 'N/A' }}
@@ -235,6 +235,7 @@
         <div class="signature-line" style="margin-top: 15px;">
             Öğrenci İşleri
         </div>
+        <br>
         <div class="signature-line">
             AVRUPA ULUSLARARASI BARIŞ ÜNİVERSİTESİ
         </div>
