@@ -344,7 +344,7 @@
                 </div>
                 <div class="info-row">
                     <div class="info-label">Sınıf</div>
-                    <div class="info-value">DERS AŞAMASI ({{ $student->current_course }} ?? 1. SINIF)</div>
+                    <div class="info-value">DERS AŞAMASI ({{ $student->current_course ?? 1 }} SINIF)</div>
                 </div>
                 <div class="info-row">
                     <div class="info-label">Kayıt Tarihi</div>
