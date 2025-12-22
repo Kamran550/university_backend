@@ -51,7 +51,7 @@ Route::name('admin.')->group(function () {
         Route::get('/', TeachersIndex::class)->name('index');
     });
 
-    Route::prefix('applications')->name('applications.')->group(function () {
+    Route::prefix(prefix: 'applications')->name('applications.')->group(function () {
         Route::prefix('student')->name('student.')->group(function () {
             Route::get('/', StudentApplicationsIndex::class)->name('index');
             Route::get('/{student}', ShowStudent::class)->name('show')->where('student', '[0-9]+');

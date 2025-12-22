@@ -16,11 +16,14 @@ class Index extends Component
     #[Url(as: 'page')]
     public int $page = 1;
 
-    public $queryString = ['page'];
-
     protected function getPageName()
     {
         return 'page';
+    }
+
+    public function updatingPage()
+    {
+        $this->resetPage();
     }
 
     public function paginationView()
@@ -30,8 +33,11 @@ class Index extends Component
 
     public function render()
     {
+        $applications = StudentApplication::with('application.program')->paginate(10);
+        $applications->setPath(route('admin.applications.student.index'));
+
         return view('livewire.admin.applications.student.index', [
-            'applications' => StudentApplication::with('application.program')->paginate(10),
+            'applications' => $applications,
         ]);
     }
 }
