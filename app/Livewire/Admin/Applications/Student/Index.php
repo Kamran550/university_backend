@@ -16,17 +16,17 @@ class Index extends Component
     #[Url(as: 'page')]
     public int $page = 1;
 
-    public $queryString = ['page'];
+    // public $queryString = ['page'];
 
-    protected function getPageName()
-    {
-        return 'page';
-    }
+    // protected function getPageName()
+    // {
+    //     return 'page';
+    // }
 
-    public function updatingPage()
-    {
-        $this->resetPage();
-    }
+    // public function updatingPage()
+    // {
+    //     $this->resetPage();
+    // }
 
     public function paginationView()
     {
