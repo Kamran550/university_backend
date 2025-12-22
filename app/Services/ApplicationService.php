@@ -154,6 +154,14 @@ class ApplicationService
         return $prefix . str_pad($newSequence, 3, '0', STR_PAD_LEFT);
     }
 
+
+    protected function calculateGraduationYear(int $duration, int $currentCourse = 0)
+    {
+        $currentYear = (int) date('Y');
+
+        return $currentYear + $duration - $currentCourse;
+    }
+
     /**
      * Store a student application.
      *
@@ -169,6 +177,8 @@ class ApplicationService
             // Get program with degree information
 
             $degreeType = $data['degree_type'];
+            $duration = Degree::findOrFail($data['degree_id'])->duration;
+            $graduationYear = $this->calculateGraduationYear($duration);
             // Prepare application data
             $applicationData = [
                 'applicant_type' => ApplicationTypeEnum::STUDENT->value,
@@ -222,6 +232,8 @@ class ApplicationService
             $studentNumber = $this->generateStudentNumber();
             $diplomaNumber = $this->generateDiplomaNumber();
 
+            
+
             // Prepare student application data
             $studentData = [
                 'application_number' => $applicationNumber,
@@ -250,6 +262,7 @@ class ApplicationService
                 'master_diploma_path' => $masterDiplomaPath,
                 'master_transcript_path' => $masterTranscriptPath,
                 'study_language' => $data['teachingLanguage'],
+                'graduation_year' => $graduationYear,
             ];
 
             // Create student application
@@ -277,6 +290,8 @@ class ApplicationService
              // Get program with degree information
  
              $degreeType = $data['degree_type'];
+             $duration = Degree::findOrFail($data['degree_id'])->duration;
+
              // Prepare application data
              $applicationData = [
                  'applicant_type' => ApplicationTypeEnum::TRANSFER->value,
@@ -329,6 +344,8 @@ class ApplicationService
              $applicationNumber = $this->generateApplicationNumber();
              $studentNumber = $this->generateStudentNumber();
              $diplomaNumber = $this->generateDiplomaNumber();
+             $graduationYear = $this->calculateGraduationYear($duration, $data['current_course']);
+
  
              // Prepare student application data
              $studentData = [
@@ -360,6 +377,7 @@ class ApplicationService
                  'study_language' => $data['teachingLanguage'],
                  'current_university' => $data['current_university'],
                  'current_course' => $data['current_course'],
+                 'graduation_year' => $graduationYear,
              ];
  
              // Create student application

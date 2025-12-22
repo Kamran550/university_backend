@@ -410,8 +410,8 @@
             * İlgilisinin
             @php
                 $duration = $student->application->program?->degree?->duration ?? 4;
-                $startYear = now()->addYears($duration)->format('Y');
-                $endYear = now()->addYears($duration + 1)->format('Y');
+                $startYear = $student->graduation_year;
+                $endYear = $student->graduation_year + 1;
             @endphp
             {{ $startYear }}-{{ $endYear }} akademik yılında mezuniyet aşamasına gelmesi beklenmektedir
         </div>

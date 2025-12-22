@@ -343,7 +343,7 @@
                 </div>
                 <div class="info-row">
                     <div class="info-label">Class</div>
-                    <div class="info-value">Freshman ({{ $student->current_course  ?? '1st' }}   Grade)</div>
+                    <div class="info-value">Freshman ({{ $student->current_course ?? '1st' }} Grade)</div>
                 </div>
                 <div class="info-row">
                     <div class="info-label">Date of Registration</div>
@@ -409,9 +409,8 @@
         <div class="footer-note">
             * It is expected that the person will reach the graduation stage in the
             @php
-                $duration = $student->application->program?->degree?->duration ?? 4;
-                $startYear = now()->addYears($duration)->format('Y');
-                $endYear = now()->addYears($duration + 1)->format('Y');
+                $startYear = $student->graduation_year;
+                $endYear = $student->graduation_year + 1;
             @endphp
             {{ $startYear }}-{{ $endYear }} academic year.
         </div>

@@ -680,71 +680,6 @@
         <p><strong>International Admissions Office</strong></p>
     </div>
 
-    <!-- Section 2  2 ci sehifenin baslangici -->
-    {{-- <div class="section-header">2. Conditions of Registration Upon Arrival at EIPU</div>
-    <div class="content">
-        <p>
-            You can download your official Acceptance Letter from the EIPU Application platform after completing the procedures listed there. Please carefully
-            review the conditions and instructions below before registering to ensure a smooth registration process. We eagerly anticipate the completion of your admission process and look forward to welcoming you as a student in the upcoming Fall Semester of the 2025-2026 Academic Year.
-        </p>
-    </div> --}}
-
-    {{-- <div class="subsection-title">2.1. English Language Requirement</div>
-    <div class="content">
-        <p>
-            Students who are unable to provide valid proof of English proficiency (TOEFL iBT – 78, IELTS – 6.0, or PTE – 55) will be required to take the English
-            Proficiency Test upon arrival at the University. Those who pass the assessment conducted by the English Preparatory School will be allowed to proceed to
-            their undergraduate program.
-        </p>
-    </div> --}}
-
-    <!-- Important Dates -->
-    {{-- <div class="section-header">Important Dates</div> --}}
-
-    {{-- <div class="dates-grid">
-        <div class="dates-row">
-            <div class="dates-label">Course registration period</div>
-            <div class="dates-value">15/09/2025 – 19/09/2025</div>
-        </div>
-        <div class="dates-row">
-            <div class="dates-label">First day for arrivals</div>
-            <div class="dates-value">01/09/2025</div>
-        </div>
-        <div class="dates-row">
-            <div class="dates-label">Classes commence</div>
-            <div class="dates-value">22/09/2025</div>
-        </div>
-        <div class="dates-row">
-            <div class="dates-label">Last day for arrivals</div>
-            <div class="dates-value">31/10/2025</div>
-        </div>
-        <div class="dates-row">
-            <div class="dates-label">English proficiency test period</div>
-            <div class="dates-value">22/09/2025 – 30/09/2025</div>
-        </div>
-        <div class="dates-row">
-            <div class="dates-label">Late registration date</div>
-            <div class="dates-value">31/10/2025</div>
-        </div>
-    </div> --}}
-
-    <!-- Important Information -->
-    {{-- <div class="important-box">
-        <div class="important-title">Important Informations</div>
-        <ol>
-            <li>Please note that the Airport Immigration Office will not permit entry into North Cyprus with a Conditional Acceptance Letter.</li>
-            <li>It is the responsibility of each student to ensure that all required documents for enrollment are complete and submitted. Failure to provide the necessary documents may result in delays in class registration or an inability to register.</li>
-            <li>All documents submitted to our University from your high school, college, or university are assumed to be original and issued by institutions accredited by the Ministry of Education in the country of graduation.</li>
-            <li>If your language proficiency is insufficient to begin the graduate program (Turkish and/or English), you must complete at least one year of language courses. The annual tuition fee for the language course is not included in the program fee, and the tuition fee for the language course (prep school) will be added for each program.</li>
-            <li>The deposit payment is non-refundable and will be credited toward the total fees for the first semester.</li>
-            <li>Starting from 20 September 2025, students who register will be charged a late registration fee of EUR 15 per day.</li>
-        </ol>
-    </div> --}}
-
-    <!-- End Line -->
-    {{-- <div class="end-line">
-        ***THIS IS THE LAST LINE. NO INFORMATION WAS PRINTED AFTER THIS LINE. ***
-    </div> --}}
 
     <!-- Footer Section -->
     <div class="verification-footer">
@@ -753,23 +688,6 @@
             Date: {{ now()->format('d/m/Y') }}
         </div>
 
-        <!-- Verification Box with QR Code -->
-        {{-- <div class="verification-box-2">
-        <div style="flex-shrink: 0;">
-            @php
-                $verificationCodeForUrl = $verificationCode ?? null;
-                $qrCode = \SimpleSoftwareIO\QrCode\Facades\QrCode::format('svg')->size(70)->generate($student->getVerificationUrl($verificationCodeForUrl));
-                $qrCodeBase64 = base64_encode($qrCode);
-            @endphp
-            <img src="data:image/svg+xml;base64,{{ $qrCodeBase64 }}" alt="QR Code" class="qr-code">
-        </div>
-
-        <div class="verification-box">
-            <div class="verification-text-box ">
-                This document was e-signed for <strong>{{ strtoupper($student->first_name . ' ' . $student->last_name) }}</strong> on {{ now()->format('d/m/Y') }} with document number <strong class="doc-number">{{ $student->application->verification_code ?? 'N/A' }}</strong>. The validity of the document can be confirmed by scanning the QR code or by document number at <strong>{{ $student->getVerificationUrl() }}</strong>
-            </div>
-        </div>
-     </div> --}}
         <table style="width: 100%; margin-bottom: 15px;">
             <tr>
                 <!-- QR Code -->

@@ -42,6 +42,7 @@ class StudentApplication extends Model
         'diploma_text',
         'current_university',
         'current_course',
+        'graduation_year',
     ];
 
     protected $hidden = [
