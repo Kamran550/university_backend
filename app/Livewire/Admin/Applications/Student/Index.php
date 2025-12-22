@@ -16,6 +16,9 @@ class Index extends Component
     #[Url(as: 'page')]
     public int $page = 1;
 
+    public $queryString = ['page'];  // ← BU SƏTİRİ ƏLAVƏ EDİN
+
+
     protected function getPageName()
     {
         return 'page';
