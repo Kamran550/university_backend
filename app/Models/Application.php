@@ -24,6 +24,7 @@ class Application extends Model
         'ip_address',
         'user_agent',
         'locale',
+        'document_status',
         
     ];
 

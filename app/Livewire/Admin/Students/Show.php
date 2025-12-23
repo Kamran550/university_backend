@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
+use App\Enums\DocumentStatusEnum;
 
 #[Layout('layouts.admin')]
 class Show extends Component
@@ -19,16 +20,16 @@ class Show extends Component
     public function mount(User $student): void
     {
         $this->student = $student;
-        
+
         // Get student's latest application with all related data
         $this->application = Application::with([
             'program.degree',
             'program.faculty',
             'studentApplication'
         ])
-        ->where('user_id', $student->id)
-        ->latest()
-        ->first();
+            ->where('user_id', $student->id)
+            ->latest()
+            ->first();
     }
 
     public function sendDiploma(): void
@@ -37,7 +38,7 @@ class Show extends Component
             Log::info('=== sendDiploma metodu çağırıldı ===');
             Log::info('Student ID: ' . $this->student->id);
             Log::info('Student Email: ' . ($this->student->email ?? 'YOXDUR'));
-            
+
             if (!$this->student->email) {
                 Log::warning('Email ünvanı yoxdur!');
                 session()->flash('error', 'Tələbənin email ünvanı yoxdur.');
@@ -71,14 +72,18 @@ class Show extends Component
 
             // Check mail configuration
             $mailDriver = config('mail.default');
-            
+
             Mail::to($this->student->email)->send(new DiplomaMail(
                 $this->student,
                 $freshApplication,
                 $studentApplication,
                 now()->format('F d, Y')
             ));
-            
+            $this->application->update([
+                'document_status' => DocumentStatusEnum::DIPLOMA_LETTER->value,
+            ]);
+            $this->application->load('studentApplication', 'documentVerifications');
+
             if ($mailDriver === 'log') {
                 session()->flash('success', 'Diploma log faylına yazıldı. SMTP konfiqurasiyası üçün .env faylında MAIL_MAILER=smtp təyin edin.');
             } else {
@@ -93,12 +98,12 @@ class Show extends Component
                 'line' => $e->getLine(),
                 'trace' => $e->getTraceAsString()
             ]);
-            
+
             $errorMessage = 'Diploma göndərilərkən xəta baş verdi: ' . $e->getMessage();
             if (str_contains($e->getMessage(), 'Connection') || str_contains($e->getMessage(), 'SMTP')) {
                 $errorMessage .= ' SMTP konfiqurasiyasını yoxlayın.';
             }
-            
+
             session()->flash('error', $errorMessage);
         }
     }
@@ -108,4 +113,3 @@ class Show extends Component
         return view('livewire.admin.students.show');
     }
 }
-

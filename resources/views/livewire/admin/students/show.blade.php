@@ -1,3 +1,11 @@
+@php
+    use App\Enums\DocumentStatusEnum;
+    use Illuminate\Support\Str;
+
+    $formatDocumentStatus = static fn(?string $status) => $status
+        ? str($status)->replace('_', ' ')->title()->value()
+        : '—';
+@endphp
 <div class="p-4 sm:p-6 lg:p-8">
     <div class="max-w-7xl mx-auto">
 
@@ -98,7 +106,8 @@
                         </div>
                         <div>
                             <label class="block text-sm font-medium text-gray-500 mb-1">Passport/ID Number</label>
-                            <p class="text-lg font-semibold text-gray-900">{{ $application->studentApplication->passport_number ?? 'N/A' }}</p>
+                            <p class="text-lg font-semibold text-gray-900">
+                                {{ $application->studentApplication->passport_number ?? 'N/A' }}</p>
                         </div>
 
 
@@ -195,6 +204,29 @@
                                 </span>
                             </div>
                         </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-500 mb-1">Document Status</label>
+                            <div class="mt-1">
+                                @php
+                                    $docStatus = $application->document_status ?? null;
+                                    $docStatusLabel = $formatDocumentStatus($docStatus);
+                                @endphp
+                                <span
+                                    class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-gray-100 text-gray-800">
+                                    {{ $docStatusLabel }}
+                                </span>
+                            </div>
+                        </div>
+
+                        @if ($application->studentApplication && $application->studentApplication->application_number)
+                            <div>
+                                <label class="block text-sm font-medium text-gray-500 mb-1">Application Number</label>
+                                <p class="text-lg font-semibold text-gray-900">
+                                    {{ $application->studentApplication->application_number }}
+                                </p>
+                            </div>
+                        @endif
 
                         <div>
                             <label class="block text-sm font-medium text-gray-500 mb-1">Application Date</label>
