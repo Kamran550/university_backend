@@ -189,7 +189,7 @@
 
     <!-- Reference Information -->
     <div class="reference-line">
-        <strong>Öğrenci No:</strong> {{ $student->application_number ?? 'N/A' }}
+        <strong>Öğrenci No:</strong> {{ $student->student_number ?? 'N/A' }}
     </div>
     <div class="reference-line">
         <strong>Pasaport No:</strong> {{ $student->passport_number ?? 'N/A' }}
