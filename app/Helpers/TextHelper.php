@@ -37,7 +37,7 @@ if (!function_exists('course_to_word')) {
             1 => 'birinci',
             2 => 'ikinci',
             3 => 'üçüncü',
-            4 => 'dörtüncü',
+            4 => 'dördüncü',
             5 => 'beşinci',
             6 => 'altıncı',
         ];
