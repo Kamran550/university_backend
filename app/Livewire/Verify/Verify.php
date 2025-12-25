@@ -35,7 +35,7 @@ class Verify extends Component
         $this->reset(['message', 'messageType', 'application']);
 
         if (empty($this->verificationCode)) {
-            $this->message = 'Zəhmət olmasa təsdiqlənmə kodunu daxil edin.';
+            $this->message = 'Please enter the verification code.';
             $this->messageType = 'error';
             return;
         }
@@ -47,14 +47,14 @@ class Verify extends Component
         $application = DocumentVerification::where('verification_code', $verificationCode)->first();
 
         if (!$application) {
-            $this->message = 'Yanlış təsdiqlənmə kodu. Zəhmət olmasa yenidən yoxlayın.';
+            $this->message = 'Invalid verification code. Please try again.';
             $this->messageType = 'error';
             return;
         }
 
         $this->application = $application;
         
-        $this->message = 'Təsdiqlənmə uğurlu oldu!';
+        $this->message = 'Verification successful!';
         $this->messageType = 'success';
     }
 

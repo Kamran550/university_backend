@@ -10,6 +10,9 @@ use Illuminate\Support\Facades\Mail;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
 use App\Enums\DocumentStatusEnum;
+use App\Models\Payments;
+use App\Enums\PaymentStatusEnum;
+
 
 #[Layout('layouts.admin')]
 class Show extends Component
@@ -110,6 +113,13 @@ class Show extends Component
 
     public function render()
     {
-        return view('livewire.admin.students.show');
+        $paidPayments = Payments::where('user_id', $this->student->id)
+            ->where('status', PaymentStatusEnum::PAID->value)
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        return view('livewire.admin.students.show', [
+            'paidPayments' => $paidPayments
+        ]);
     }
 }

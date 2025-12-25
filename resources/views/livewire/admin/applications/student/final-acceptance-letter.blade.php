@@ -33,7 +33,7 @@
             transform: translate(-50%, -50%);
             width: 600px;
             height: 600px;
-            background-image: url('{{ public_path('images/bsmu-logo-tam.png') }}');
+            background-image: url('{{ public_path(path: 'images/EIPU-simvol.png') }}');
             background-size: contain;
             background-repeat: no-repeat;
             background-position: center;

@@ -17,6 +17,7 @@ class DocumentVerification extends Model
         'verification_code',
         'file_path',
         'verified_at',
+        'payment_id',
     ];
 
     protected $casts = [
