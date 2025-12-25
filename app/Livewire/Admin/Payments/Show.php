@@ -27,7 +27,6 @@ class Show extends Component
     public function downloadReceipt()
     {
         try {
-            ini_set('memory_limit', '512M');
             $this->isDownloading = true;
 
             // Check if document verification record already exists
