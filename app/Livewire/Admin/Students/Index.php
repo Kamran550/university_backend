@@ -32,10 +32,6 @@ class Index extends Component
         $this->resetPage();
     }
 
-    public function updatingPage()
-    {
-        $this->resetPage();
-    }
 
     public function paginationView()
     {
