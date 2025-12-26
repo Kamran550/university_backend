@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Role;
 use App\Enums\PaymentTypeEnum;
 use App\Enums\PaymentStatusEnum;
+use App\Enums\PaymentMethodEnum;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
 use Illuminate\Support\Facades\Log;
@@ -22,6 +23,7 @@ class Create extends Component
     public string $semester = 'Fall';
     public string $amount = '';
     public string $status = 'paid';
+    public string $payment_method = 'cash';
 
     public function updatedStudentSearch()
     {
@@ -55,6 +57,7 @@ class Create extends Component
             'semester' => ['required', 'in:Fall,Spring'],
             'amount' => ['required', 'numeric', 'min:0'],
             'status' => ['required', 'in:' . implode(',', PaymentStatusEnum::values())],
+            'payment_method' => ['required', 'in:' . implode(',', PaymentMethodEnum::values())],
         ];
     }
 
@@ -73,7 +76,33 @@ class Create extends Component
             'amount.min' => 'Amount must be greater than or equal to 0.',
             'status.required' => 'Status is required.',
             'status.in' => 'Invalid status selected.',
+            'payment_method.required' => 'Payment method is required.',
+            'payment_method.in' => 'Invalid payment method selected.',
         ];
+    }
+
+    protected function generateInvoicedNumber(): string
+    {
+        // Generate prefix: YYYYMM (current year and month)
+        $prefix = '202619'; // e.g., 202512
+
+        // Get the last payment with the same prefix (same year and month)
+        $lastPayment = Payments::orderBy('invoiced_number', 'desc')
+            ->where('invoiced_number', 'like', $prefix . '%')
+            ->whereNotNull('invoiced_number')
+            ->first();
+
+        if ($lastPayment && $lastPayment->invoiced_number) {
+            // Extract the sequence number from the last invoiced number (last 4 digits)
+            $lastSequence = (int) substr($lastPayment->invoiced_number, -4);
+            $newSequence = $lastSequence + 1;
+        } else {
+            // First payment for this month
+            $newSequence = 1;
+        }
+
+        // Format the new invoiced number: YYYYMM + 4-digit sequence with leading zeros
+        return $prefix . str_pad($newSequence, 4, '0', STR_PAD_LEFT);
     }
 
     public function save()
@@ -88,6 +117,8 @@ class Create extends Component
                 'semester' => $this->semester,
                 'amount' => $this->amount,
                 'status' => $this->status,
+                'payment_method' => $this->payment_method,
+                'invoiced_number' => $this->generateInvoicedNumber(),
             ]);
 
             Log::info('Payment created', [
@@ -144,6 +175,7 @@ class Create extends Component
             'students' => $students,
             'paymentTypes' => PaymentTypeEnum::cases(),
             'statuses' => PaymentStatusEnum::cases(),
+            'paymentMethods' => PaymentMethodEnum::cases(),
         ]);
     }
 }

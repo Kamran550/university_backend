@@ -46,10 +46,10 @@
                                         'rejected' => 'bg-red-100 text-red-800',
                                     ];
                                     $statusLabels = [
-                                        'pending' => 'Gözləyir',
-                                        'under_review' => 'Nəzərdən keçirilir',
-                                        'approved' => 'Təsdiqləndi',
-                                        'rejected' => 'Rədd edildi',
+                                        'pending' => 'Pending',
+                                        'under_review' => 'Under Review',
+                                        'approved' => 'Approved',
+                                        'rejected' => 'Rejected',
                                     ];
                                     $status = $application->status->value ?? 'pending';
                                     $color = $statusColors[$status] ?? 'bg-gray-100 text-gray-800';

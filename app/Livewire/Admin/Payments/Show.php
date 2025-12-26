@@ -65,16 +65,19 @@ class Show extends Component
             $academicYear = $this->payment->academic_year;
             $academicYearRange = $academicYear . '-' . ($academicYear + 1);
 
-            // Get application number if exists
-            $applicationNumber = $this->payment->user->applications()->first()?->studentApplication?->application_number ?? 'N/A';
-
+            // Get invoiced number (use payment's invoiced_number)
+            $invoicedNumber = $this->payment->invoiced_number ?? 'N/A';
+            $studentNumber = $this->payment->user->applications()->first()?->studentApplication?->application_number ?? 'N/A';
+            $passportNumber = $this->payment->user->applications()->first()?->studentApplication?->passport_number ?? 'N/A';
             // Generate PDF
             $pdf = Pdf::loadView('pdfs.payment-receipt', [
                 'payment' => $this->payment,
                 'user' => $this->payment->user,
                 'academicYearRange' => $academicYearRange,
                 'verificationCode' => $verificationCode,
-                'applicationNumber' => $applicationNumber,
+                'invoicedNumber' => $invoicedNumber,
+                'studentNumber' => $studentNumber,
+                'passportNumber' => $passportNumber,
             ])
                 ->setOptions([
                     'isRemoteEnabled' => false,

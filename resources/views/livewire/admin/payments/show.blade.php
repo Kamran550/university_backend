@@ -74,6 +74,22 @@
                     <div class="text-lg font-semibold text-gray-900">#{{ $payment->id }}</div>
                 </div>
 
+                <div>
+                    <label class="block text-sm font-medium text-gray-500 mb-1">Invoiced Number</label>
+                    <div class="text-lg font-semibold text-gray-900">{{ $payment->invoiced_number }}</div>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-500 mb-1">Payment Method</label>
+                    <div class="text-lg font-semibold text-gray-900">
+                        @if ($payment->payment_method->value === 'cash')
+                            By Cash
+                        @else
+                            Online via Credit Card
+                        @endif
+                    </div>
+                </div>
+
+
                 <!-- Payment Type -->
                 <div>
                     <label class="block text-sm font-medium text-gray-500 mb-1">Payment Type</label>

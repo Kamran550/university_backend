@@ -176,8 +176,8 @@
             </div>
         </div>
 
-        <!-- Amount and Status -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+        <!-- Amount, Status and Payment Method -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
             <!-- Amount -->
             <div>
                 <label for="amount" class="block text-sm font-medium text-gray-700 mb-2">
@@ -214,6 +214,28 @@
                     @endforeach
                 </select>
                 @error('status')
+                    <p class="mt-2 text-sm text-red-600 flex items-center">
+                        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        {{ $message }}
+                    </p>
+                @enderror
+            </div>
+
+            <!-- Payment Method -->
+            <div>
+                <label for="payment_method" class="block text-sm font-medium text-gray-700 mb-2">
+                    Payment Method <span class="text-red-500">*</span>
+                </label>
+                <select id="payment_method" wire:model="payment_method"
+                    class="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-150 ease-in-out @error('payment_method') border-red-500 @else border-gray-300 @enderror">
+                    @foreach ($paymentMethods as $method)
+                        <option value="{{ $method->value }}">{{ ucfirst($method->value) }}</option>
+                    @endforeach
+                </select>
+                @error('payment_method')
                     <p class="mt-2 text-sm text-red-600 flex items-center">
                         <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"

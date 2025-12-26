@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Enums\PaymentTypeEnum;
 use App\Enums\PaymentStatusEnum;
+use App\Enums\PaymentMethodEnum;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
@@ -21,6 +22,8 @@ class Payments extends Model
         'semester',
         'amount',
         'status',
+        'payment_method',
+        'invoiced_number',
     ];
 
     /**
@@ -33,6 +36,7 @@ class Payments extends Model
         return [
             'payment_type' => PaymentTypeEnum::class,
             'status' => PaymentStatusEnum::class,
+            'payment_method' => PaymentMethodEnum::class,
             'amount' => 'decimal:2',
         ];
     }

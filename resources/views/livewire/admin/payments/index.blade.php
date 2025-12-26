@@ -159,7 +159,7 @@
                             <!-- Amount -->
                             <td class="px-6 py-4 whitespace-nowrap">
                                 <div class="text-sm font-semibold text-gray-900">
-                                    ${{ number_format($payment->amount, 2) }}
+                                    € {{ number_format($payment->amount, 2) }}
                                 </div>
                             </td>
 
