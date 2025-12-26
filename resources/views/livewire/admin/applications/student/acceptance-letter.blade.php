@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Conditional Acceptance Letter - {{ $student->first_name }} {{ $student->last_name }}</title>
     <style>
-
         @page {
             margin: 12mm;
             size: A4;
@@ -458,7 +457,7 @@
                 Dear {{ tr_upper(text: $student->first_name . ' ' . $student->last_name) }}
             </div>
 
-        </div>  
+        </div>
     </div>
 
     <!-- Document Title -->
@@ -573,6 +572,10 @@
             <tr>
                 <td><strong>ACCOUNT NAME</strong></td>
                 <td>EURO.INTE AND PEACE.UNIVE.SP.ZOO</td>
+            </tr>
+            <tr>
+                <td><strong>IBAN</strong></td>
+                <td>PL44116022022390000134915690</td>
             </tr>
             <tr>
                 <td><strong>SWIFT CODE</strong></td>

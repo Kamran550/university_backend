@@ -143,7 +143,7 @@
         .signature-title {
             font-size: 7.5pt;
             color: #6b7280;
-            padding-right: 108px;
+            padding-right: 50px;
         }
 
         .payment-table {
@@ -253,7 +253,7 @@
     </div>
 
     <!-- Receipt Information -->
-    <div class="section-header">Invoiced Person: {{ $invoicedNumber }}</div>
+    <div class="section-header">INVOICE NUMBER: {{ $invoicedNumber }}</div>
     <div class="info-grid">
         <div class="info-row">
             <div class="info-label">Name Surname</div>
@@ -331,18 +331,23 @@
                 <td>EURO.INTE AND PEACE.UNIVE.SP.ZOO</td>
             </tr>
             <tr>
+                <td><strong>IBAN</strong></td>
+                <td>PL44116022022390000134915690</td>
+            </tr>
+            <tr>
                 <td><strong>SWIFT CODE</strong></td>
                 <td>BIGBPLPW</td>
             </tr>
         </tbody>
     </table>
 
+    <br>
     <div class="signature-section">
         <div class="signature-name">
             Prof. Dr. Serdar KORAL
         </div>
         <div class="signature-title">
-            Rektör
+            Rektor
         </div>
     </div>
 
