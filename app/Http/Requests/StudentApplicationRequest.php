@@ -56,7 +56,7 @@ class StudentApplicationRequest extends ApiFormRequest
             
             // Contact information
             'phone' => ['required', 'string', 'max:20'],
-            'email' => ['required', 'email', 'max:255'],
+            'email' => ['required', 'email', 'max:255', Rule::unique('student_applications', 'email')],
             
             // Address
             'country' => ['required', 'string', 'max:100'],
