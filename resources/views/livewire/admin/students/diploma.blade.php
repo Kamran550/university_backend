@@ -141,6 +141,15 @@
             text-transform: uppercase;
         }
 
+        .countries-text {
+            text-align: center;
+            font-size: 8pt;
+            color: #1a365d;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-top: 1mm;
+        }
+
         /* Main Content */
         .main-content {
             position: relative;
@@ -281,6 +290,20 @@
             font-style: italic;
         }
 
+        .location-row {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8mm;
+            flex-wrap: wrap;
+        }
+
+        .location-item {
+            font-size: 9pt;
+            color: #333;
+            font-style: italic;
+        }
+
         .date {
             font-size: 9pt;
             color: #333;
@@ -403,6 +426,7 @@
                     <div class="university-info">
                         <div class="university-name">European International Peace University</div>
                         <div class="university-subtitle">Business European Education Alliance</div>
+                        <div class="countries-text">POLAND | LUXEMBOURG | TÜRKİYE</div>
                     </div>
                 </div>
             </div>
@@ -455,7 +479,10 @@
 
                 <!-- Location & Date -->
                 <div class="location-date">
-                    <div class="location">Rector: Prof. Dr. Serdar Koral</div>
+                    <div class="location-row">
+                        <div class="location-item">Rector: Prof. Dr. Serdar Koral</div>
+                        <div class="location-item">Secretary General: Martin Dravoski</div>
+                    </div>
                     <div class="date">{{ $graduationDate ?? now()->format('F d, Y') }}</div>
                 </div>
             </div>
