@@ -465,12 +465,14 @@
                                         {{ $studentApplication->diploma_text['en'] ?? '' }}
                                     </div>
                                     <div class="e-signature">✓ e-signed / e-imzalıdır</div>
+                                    <div class="location-item">Secretary General / Genel Sekreter: Martin Dravoski</div>
                                 </td>
                                 <td>
                                     <div class="diploma-text-content">
                                         {{ $studentApplication->diploma_text['tr'] ?? '' }}
                                     </div>
                                     <div class="e-signature">✓ e-signed / e-imzalıdır</div>
+                                    <div class="location-item">Rektor / Rectör: Prof. Dr. Serdar Koral</div>
                                 </td>
                             </tr>
                         </table>
@@ -479,10 +481,10 @@
 
                 <!-- Location & Date -->
                 <div class="location-date">
-                    <div class="location-row">
+                    {{-- <div class="location-row">
                         <div class="location-item">Rector: Prof. Dr. Serdar Koral</div>
                         <div class="location-item">Secretary General: Martin Dravoski</div>
-                    </div>
+                    </div> --}}
                     <div class="date">{{ $graduationDate ?? now()->format('F d, Y') }}</div>
                 </div>
             </div>
