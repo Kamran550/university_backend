@@ -302,7 +302,10 @@
             font-size: 9pt;
             color: #333;
             font-style: italic;
+            text-align: center;
+
         }
+
 
         .date {
             font-size: 9pt;
