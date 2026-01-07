@@ -29,6 +29,7 @@ class User extends Authenticatable
         'phone',
         'profile_photo',
         'role_id',
+        'graduation_date',
     ];
 
     /**
@@ -59,6 +60,7 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'graduation_date' => 'date',
         ];
     }
 }

@@ -19,10 +19,12 @@ class Show extends Component
 {
     public User $student;
     public ?Application $application = null;
+    public ?string $graduationDate = null;
 
     public function mount(User $student): void
     {
         $this->student = $student;
+        $this->graduationDate = $student->graduation_date?->format('Y-m-d');
 
         // Get student's latest application with all related data
         $this->application = Application::with([
@@ -33,6 +35,29 @@ class Show extends Component
             ->where('user_id', $student->id)
             ->latest()
             ->first();
+    }
+
+    public function updateGraduationDate(): void
+    {
+        $this->validate([
+            'graduationDate' => 'required|date',
+        ]);
+
+        try {
+            $this->student->update([
+                'graduation_date' => $this->graduationDate
+            ]);
+
+            session()->flash('success', 'Məzuniyyət tarixi uğurla yeniləndi.');
+            
+            Log::info('Graduation date updated', [
+                'student_id' => $this->student->id,
+                'graduation_date' => $this->graduationDate
+            ]);
+        } catch (\Exception $e) {
+            Log::error('Graduation date update error: ' . $e->getMessage());
+            session()->flash('error', 'Məzuniyyət tarixi yenilənərkən xəta baş verdi.');
+        }
     }
 
     public function sendDiploma(): void
@@ -73,6 +98,12 @@ class Show extends Component
 
             $studentApplication = $freshApplication->studentApplication;
 
+            // Check if graduation date is set
+            if (!$this->graduationDate) {
+                session()->flash('error', 'Zəhmət olmasa əvvəlcə məzuniyyət tarixini təyin edin.');
+                return;
+            }
+
             // Check mail configuration
             $mailDriver = config('mail.default');
 
@@ -80,7 +111,7 @@ class Show extends Component
                 $this->student,
                 $freshApplication,
                 $studentApplication,
-                now()->format('F d, Y')
+                \Carbon\Carbon::parse($this->graduationDate)->format('F d, Y')
             ));
             $this->application->update([
                 'document_status' => DocumentStatusEnum::DIPLOMA_LETTER->value,

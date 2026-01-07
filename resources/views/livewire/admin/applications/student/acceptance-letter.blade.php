@@ -473,7 +473,7 @@
             We are pleased to inform you that the Admission Committee of European International Peace University has
             carefully reviewed your application for admission to
             <strong>{{ $student->application->program?->name ?? 'Program' }}</strong>
-            ({{ $student->application->program?->degree?->name ?? 'Degree' }}) for the 2025-2026 – Fall. It is our
+            ({{ $student->application->program?->degree?->name ?? 'Degree' }}) for the {{ now()->format('Y') }}-{{ now()->addYear()->format('Y') }} – Fall. It is our
             pleasure to inform you that you have been granted conditional acceptance to the program. We extend our warm
             congratulations on this achievement.
         </p>

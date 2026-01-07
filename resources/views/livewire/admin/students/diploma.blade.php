@@ -303,7 +303,6 @@
             color: #333;
             font-style: italic;
             text-align: center;
-
         }
 
 
