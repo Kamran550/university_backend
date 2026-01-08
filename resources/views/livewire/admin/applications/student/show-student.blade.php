@@ -68,13 +68,13 @@
         'Faculty' => $application?->program?->faculty?->name ?? '—',
         'Student Number' => $student->student_number ?? '—',
         'Document Status' => $formatDocumentStatus($application?->document_status),
-
         'Study Language' => $studyLanguage,
         'Application Number' => $student->application_number ?? '—',
         'Diploma Number' => $student->diploma_number ?? '—',
         'Status' => $formatStatus($application?->status?->value ?? $application?->status),
         'Submitted At' => $application?->submitted_at?->format('d.m.Y H:i') ?? '—',
         'Reviewed At' => $application?->reviewed_at?->format('d.m.Y H:i') ?? '—',
+        'Scholarship Status' => $student->scholarship_status ?? '—',
     ];
 
     // Determine which diploma and transcript to show based on degree level
