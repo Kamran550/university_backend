@@ -130,49 +130,50 @@
             <!-- Graduation Date Card -->
             <div class="bg-white rounded-xl shadow-lg border border-gray-200 p-6 sm:p-8 mb-6">
                 <h2 class="text-xl sm:text-2xl font-bold text-gray-900 mb-6">Graduation Date</h2>
-                
+
                 <form wire:submit.prevent="updateGraduationDate" class="space-y-4">
                     <div class="flex flex-col sm:flex-row gap-4 items-end">
                         <div class="flex-1">
                             <label for="graduationDate" class="block text-sm font-medium text-gray-700 mb-2">
                                 Məzuniyyət Tarixi
                             </label>
-                            <input 
-                                type="date" 
-                                id="graduationDate"
-                                wire:model="graduationDate"
+                            <input type="date" id="graduationDate" wire:model="graduationDate"
                                 class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-150 ease-in-out"
-                                required
-                            >
+                                required>
                             @error('graduationDate')
                                 <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                             @enderror
                         </div>
-                        
-                        <button 
-                            type="submit"
-                            wire:loading.attr="disabled"
-                            wire:target="updateGraduationDate"
-                            class="inline-flex items-center justify-center px-6 py-2.5 text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 rounded-lg shadow-md hover:shadow-lg transition duration-150 ease-in-out disabled:opacity-50 disabled:cursor-not-allowed"
-                        >
-                            <svg wire:loading.remove wire:target="updateGraduationDate" class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+
+                        <button type="submit" wire:loading.attr="disabled" wire:target="updateGraduationDate"
+                            class="inline-flex items-center justify-center px-6 py-2.5 text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 rounded-lg shadow-md hover:shadow-lg transition duration-150 ease-in-out disabled:opacity-50 disabled:cursor-not-allowed">
+                            <svg wire:loading.remove wire:target="updateGraduationDate" class="w-5 h-5 mr-2"
+                                fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M5 13l4 4L19 7" />
                             </svg>
-                            <svg wire:loading wire:target="updateGraduationDate" class="animate-spin w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24">
-                                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                            <svg wire:loading wire:target="updateGraduationDate" class="animate-spin w-5 h-5 mr-2"
+                                fill="none" viewBox="0 0 24 24">
+                                <circle class="opacity-25" cx="12" cy="12" r="10"
+                                    stroke="currentColor" stroke-width="4"></circle>
+                                <path class="opacity-75" fill="currentColor"
+                                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z">
+                                </path>
                             </svg>
                             <span wire:loading.remove wire:target="updateGraduationDate">Təyin Et</span>
                             <span wire:loading wire:target="updateGraduationDate">Yenilənir...</span>
                         </button>
                     </div>
-                    
-                    @if($graduationDate)
+
+                    @if ($graduationDate)
                         <div class="flex items-center text-sm text-gray-600">
-                            <svg class="w-5 h-5 mr-2 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                            <svg class="w-5 h-5 mr-2 text-green-500" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                             </svg>
-                            Hal-hazırda təyin edilmiş tarix: <strong class="ml-1">{{ \Carbon\Carbon::parse($graduationDate)->format('d.m.Y') }}</strong>
+                            Hal-hazırda təyin edilmiş tarix: <strong
+                                class="ml-1">{{ \Carbon\Carbon::parse($graduationDate)->format('d.m.Y') }}</strong>
                         </div>
                     @endif
                 </form>

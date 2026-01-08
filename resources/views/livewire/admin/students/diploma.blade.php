@@ -427,7 +427,7 @@
                     @endif
                     <div class="university-info">
                         <div class="university-name">European International Peace University</div>
-                        <div class="university-subtitle">Business European Education Alliance</div>
+                        <div class="university-subtitle">Business Eurasia Education Alliance</div>
                         <div class="countries-text">POLAND | LUXEMBOURG | TÜRKİYE</div>
                     </div>
                 </div>

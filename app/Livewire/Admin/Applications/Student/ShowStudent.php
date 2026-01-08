@@ -6,6 +6,8 @@ use App\Enums\ApplicationStatusEnum;
 use App\Mail\AcceptanceLetterMail;
 use App\Mail\FinalAcceptanceLetterMail;
 use App\Mail\FinalAcceptanceLetterTurkishMail;
+use App\Mail\FinalScholarshipAcceptanceLetterMail;
+use App\Mail\ScholarshipAcceptanceLetterMail;
 use App\Mail\TransferLetterMail;
 use App\Models\StudentApplication;
 use App\Models\User;
@@ -69,6 +71,54 @@ class ShowStudent extends Component
             ]);
 
             $errorMessage = 'Mail göndərilərkən xəta baş verdi: ' . $e->getMessage();
+            if (str_contains($e->getMessage(), 'Connection') || str_contains($e->getMessage(), 'SMTP')) {
+                $errorMessage .= ' SMTP konfiqurasiyasını yoxlayın.';
+            }
+
+            session()->flash('error', $errorMessage);
+        }
+    }
+
+    public function sendScholarshipAcceptanceLetter()
+    {
+        try {
+            Log::info('=== sendScholarshipAcceptanceLetter metodu çağırıldı ===');
+            Log::info('Student ID: ' . $this->student->id);
+            Log::info('Student Email: ' . ($this->student->email ?? 'YOXDUR'));
+
+            if (!$this->student->email) {
+                Log::warning('Email ünvanı yoxdur!');
+                session()->flash('error', 'Tələbənin email ünvanı yoxdur.');
+                return;
+            }
+
+            // Reload student with application relationship
+            $this->student->load('application');
+
+            // Check mail configuration
+            $mailDriver = config('mail.default');
+
+            Mail::to($this->student->email)->send(new ScholarshipAcceptanceLetterMail($this->student));
+
+            $this->student->application->update([
+                'document_status' => DocumentStatusEnum::ACCAPTANCE_LETTER->value,
+            ]);
+
+            $this->student->load('application');
+
+            if ($mailDriver === 'log') {
+                session()->flash('success', '100% Scholarship Conditional Acceptance Letter log faylına yazıldı. SMTP konfiqurasiyası üçün .env faylında MAIL_MAILER=smtp təyin edin.');
+            } else {
+                session()->flash('success', '100% Scholarship Conditional Acceptance Letter sent to ' . $this->student->email . ' email address.');
+            }
+        } catch (\Exception $e) {
+            Log::error('100% Scholarship letter göndərilərkən xəta: ' . $e->getMessage(), [
+                'student_id' => $this->student->id,
+                'email' => $this->student->email,
+                'trace' => $e->getTraceAsString()
+            ]);
+
+            $errorMessage = '100% Scholarship letter göndərilərkən xəta baş verdi: ' . $e->getMessage();
             if (str_contains($e->getMessage(), 'Connection') || str_contains($e->getMessage(), 'SMTP')) {
                 $errorMessage .= ' SMTP konfiqurasiyasını yoxlayın.';
             }
@@ -403,6 +453,7 @@ class ShowStudent extends Component
             session()->flash('error', $errorMessage);
         }
     }
+
 
 
     public function render()

@@ -528,15 +528,15 @@
         </div>
         <div class="info-row">
             <div class="info-label">Tuition Fee with Discount</div>
-            <div class="info-value"><strong>1000 EUR</strong></div>
+            <div class="info-value"><strong>185 EUR</strong></div>
         </div>
         <div class="info-row">
             <div class="info-label">Scholarship</div>
-            <div class="info-value"><strong>75%</strong></div>
+            <div class="info-value"><strong>100%</strong></div>
         </div>
         <div class="info-row">
             <div class="info-label">Amount of Deposit Payment</div>
-            <div class="info-value"><strong>1000 EUR</strong></div>
+            <div class="info-value"><strong>185 EUR</strong></div>
         </div>
     </div>
     <!-- Section 1 -->
@@ -544,7 +544,7 @@
     <div class="subsection-title">1.1. Deposit Payment</div>
     <div class="content">
         <p>
-            The official Acceptance Letter will be issued upon payment of a non-refundable deposit of 1000 EUR, either
+            The official Acceptance Letter will be issued upon payment of a non-refundable deposit of 185 EUR, either
             by credit card via the EIPU Application
             Platform or by bank transfer to the University's bank account. For all bank transfers; name, surname and
             application number must be provided. The
@@ -585,7 +585,7 @@
             </tr>
             <tr>
                 <td><strong>DEPOSIT AMOUNT</strong></td>
-                <td>1000 EUR</td>
+                <td>185 EUR</td>
             </tr>
         </tbody>
     </table>

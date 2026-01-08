@@ -325,13 +325,13 @@
                 <div class="info-row">
                     <div class="info-label">Enstitü / Fakülte</div>
                     <div class="info-value">
-                        {{ tr_upper($student->application->program?->faculty?->getName('TR') ?: $student->application->program?->faculty?->name ?? 'GRADUATE SCHOOL' ) }}
+                        {{ tr_upper($student->application->program?->faculty?->getName('TR') ?: $student->application->program?->faculty?->name ?? 'GRADUATE SCHOOL') }}
                     </div>
                 </div>
                 <div class="info-row">
                     <div class="info-label">Bölüm</div>
                     <div class="info-value">
-                        {{ tr_upper($student->application->program?->getName('TR') ?: $student->application->program?->name ?? 'N/A' ) }}
+                        {{ tr_upper($student->application->program?->getName('TR') ?: $student->application->program?->name ?? 'N/A') }}
                     </div>
                 </div>
                 <div class="info-row">
@@ -341,6 +341,10 @@
                 <div class="info-row">
                     <div class="info-label">Eğitim Tipi</div>
                     <div class="info-value">Örğün</div>
+                </div>
+                <div class="info-row">
+                    <div class="info-label">Burs</div>
+                    <div class="info-value">{{ $student->scholarship_status . " Burslu" ?? '75% Burslu' }}</div>
                 </div>
                 <div class="info-row">
                     <div class="info-label">Sınıf</div>
@@ -402,8 +406,11 @@
             {{ $student->application->program?->degree?->duration ?? 4 }} yıldır.
         </div>
         <div class="footer-note">
-            * {{$student->application->program?->degree?->getName('TR') ?: $student->application->program?->degree?->description ?? ($student->application->program?->degree?->name ?? 'N/A') }} Eğitim-Öğretim Yönergesinin ilgili maddeleri uyarınca programa kayıtlı kişilerin öğrencilik haklarından
-            yararlanabilmelerini teminen dersler için gözetilen devam, katılım ve sınav koşullarını bir bütün olarak eksiksiz
+            *
+            {{ $student->application->program?->degree?->getName('TR') ?: $student->application->program?->degree?->description ?? ($student->application->program?->degree?->name ?? 'N/A') }}
+            Eğitim-Öğretim Yönergesinin ilgili maddeleri uyarınca programa kayıtlı kişilerin öğrencilik haklarından
+            yararlanabilmelerini teminen dersler için gözetilen devam, katılım ve sınav koşullarını bir bütün olarak
+            eksiksiz
             şekilde yerine getirmeleri gerekmektedir. Aksi takdirde ilgilisinin programla ilişiği kesilir.
         </div>
         <div class="footer-note">
@@ -445,14 +452,15 @@
                 <!-- Text Box -->
                 <td style="padding-left: 10px; margin-top: 8x;">
                     <div
-                    style="background: #f0f0f0; padding: 12px 15px; border-radius: 8px; font-size: 11px; line-height: 1.2;">
-                    Bu belge,
-                    {{ now()->format('d/m/Y') }} tarihinde
-                    <strong>{{ strtoupper($student->first_name . ' ' . $student->last_name) }}</strong> adına
-                    <strong>{{ $verificationCode ?? tr_upper(Str::random(12)) }}</strong>
-                    belge numarasıyla elektronik olarak imzalanmıştır. Belgenin geçerliliği, QR kodunu tarayarak veya belge numarasını kullanarak
-                    <strong>{{ $student->getVerificationUrl() }}</strong> adresinden doğrulanabilir.
-                </div>
+                        style="background: #f0f0f0; padding: 12px 15px; border-radius: 8px; font-size: 11px; line-height: 1.2;">
+                        Bu belge,
+                        {{ now()->format('d/m/Y') }} tarihinde
+                        <strong>{{ strtoupper($student->first_name . ' ' . $student->last_name) }}</strong> adına
+                        <strong>{{ $verificationCode ?? tr_upper(Str::random(12)) }}</strong>
+                        belge numarasıyla elektronik olarak imzalanmıştır. Belgenin geçerliliği, QR kodunu tarayarak
+                        veya belge numarasını kullanarak
+                        <strong>{{ $student->getVerificationUrl() }}</strong> adresinden doğrulanabilir.
+                    </div>
 
                 </td>
                 <td style="width: 80px; vertical-align: top;">

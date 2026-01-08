@@ -17,7 +17,7 @@ use Illuminate\Support\Str;
 use App\Enums\DocumentTypeEnum;
 use App\Enums\ScholarshipStatusEnum;
 
-class AcceptanceLetterMail extends Mailable
+class ScholarshipAcceptanceLetterMail extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -37,7 +37,7 @@ class AcceptanceLetterMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Conditional Acceptance Letter - ' . $this->student->first_name . ' ' . $this->student->last_name,
+            subject: '100% Scholarship - Conditional Acceptance Letter - ' . $this->student->first_name . ' ' . $this->student->last_name,
         );
     }
 
@@ -47,7 +47,7 @@ class AcceptanceLetterMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'emails.acceptance-letter',
+            view: 'emails.scholarship-acceptance-letter',
             with: [
                 'student' => $this->student,
             ],
@@ -82,11 +82,11 @@ class AcceptanceLetterMail extends Mailable
                 $this->student->application->load('documentVerifications');
             }
 
-            $this->student->scholarship_status = ScholarshipStatusEnum::PERCENT_75->value;
+            $this->student->scholarship_status = ScholarshipStatusEnum::PERCENT_100->value;
             $this->student->save();
 
-            // Generate PDF from the acceptance letter blade template
-            $pdf = Pdf::loadView('livewire.admin.applications.student.acceptance-letter', [
+            // Generate PDF from the scholarship acceptance letter blade template
+            $pdf = Pdf::loadView('livewire.admin.applications.student.scholarship-acceptance-letter', [
                 'student' => $this->student,
                 'verificationCode' => $verificationCode,
             ])
@@ -97,8 +97,8 @@ class AcceptanceLetterMail extends Mailable
                     'defaultFont' => 'DejaVu Serif'
                 ])->setPaper('a4', 'portrait');
 
-            $fileName = 'Conditional_Acceptence_Letter_' . $this->student->first_name . '_' . $this->student->last_name . '_' . now()->format('Y-m-d') . '.pdf';
-            $filePath = 'applications/acceptance-letters/' . $fileName;
+            $fileName = '100_Scholarship_CAL_' . $this->student->student_number . '_' . $this->student->first_name . '_' . $this->student->last_name . '.pdf';
+            $filePath = 'applications/scholarship-acceptance-letters/' . $fileName;
 
             // Save PDF to storage (uses default disk - local or DO Spaces based on env)
             Storage::put($filePath, $pdf->output());
@@ -108,12 +108,13 @@ class AcceptanceLetterMail extends Mailable
                 ]);
             }
 
+
             return [
                 Attachment::fromData(fn() => $pdf->output(), $fileName)
                     ->withMime('application/pdf'),
             ];
         } catch (\Exception $e) {
-            Log::error('Error generating PDF: ' . $e->getMessage(), [
+            Log::error('Error generating 100% Scholarship PDF: ' . $e->getMessage(), [
                 'student_id' => $this->student->id,
                 'trace' => $e->getTraceAsString()
             ]);

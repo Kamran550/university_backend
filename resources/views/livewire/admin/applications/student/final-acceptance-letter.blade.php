@@ -342,6 +342,10 @@
                     <div class="info-value">On-site Education</div>
                 </div>
                 <div class="info-row">
+                    <div class="info-label">Scholarship</div>
+                    <div class="info-value">{{ $student->scholarship_status . " Scholarship" ?? '75% Scholarship' }}</div>
+                </div>
+                <div class="info-row">
                     <div class="info-label">Class</div>
                     <div class="info-value">Freshman ({{ $student->current_course ?? '1st' }} Grade)</div>
                 </div>
