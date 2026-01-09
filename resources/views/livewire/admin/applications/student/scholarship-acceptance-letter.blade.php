@@ -447,8 +447,8 @@
         <!-- Subject and Application Code -->
         <div class="subject-info">
             <div class="subject-info-row">
-                Subject: {{ $student->application->program?->degree?->name ?? 'N/A' }} Degree - CONDITIONAL ACCEPTANCE
-                LETTER
+                Subject: {{ $student->application->program?->degree?->name ?? 'N/A' }} Degree - CONDITIONAL SCHOLARSHIP
+                ACCEPTANCE LETTER
             </div>
             <div class="subject-info-row">
                 Application Code: {{ $student->application_number ?? 'N/A' }}
@@ -462,7 +462,7 @@
 
     <!-- Document Title -->
     <div class="document-title">
-        CONDITIONAL ACCEPTANCE LETTER
+        CONDITIONAL SCHOLARSHIP ACCEPTANCE LETTER
     </div>
 
     <!-- Greeting -->
@@ -539,9 +539,16 @@
             <div class="info-value"><strong>185 EUR</strong></div>
         </div>
     </div>
-    <!-- Section 1 -->
-    {{-- <div class="section-header">1. Condition for Issuing the Acceptance Letter</div> --}}
-    <div class="subsection-title">1.1. Deposit Payment</div>
+    <div class="subsection-title">1.1. Conditions of Scholarship</div>
+    <div class="content">
+        <p>
+            This 100% scholarship covers the full tuition fees for 4 years, during which the student will not be
+            required to pay any tuition fees. The student is required to pay only an initial admission fee of 185 EUR.
+            Please note that this scholarship is not based on academic performance and cannot be revoked during the
+            4-year period. The scholarship has been granted in accordance with the university’s policies </p>
+    </div>
+
+    <div class="subsection-title">1.2. Deposit Payment</div>
     <div class="content">
         <p>
             The official Acceptance Letter will be issued upon payment of a non-refundable deposit of 185 EUR, either
@@ -553,7 +560,6 @@
             completing the transfer.
         </p>
     </div>
-    <br>
     <!-- Payment Table -->
     <table class="payment-table">
         <thead>

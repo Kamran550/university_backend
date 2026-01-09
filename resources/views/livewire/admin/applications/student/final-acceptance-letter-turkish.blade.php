@@ -343,7 +343,7 @@
                     <div class="info-value">Örğün</div>
                 </div>
                 <div class="info-row">
-                    <div class="info-label">Burs</div>
+                    <div class="info-label">Bursluluk Statüsü</div>
                     <div class="info-value">{{ $student->scholarship_status . " Burslu" ?? '75% Burslu' }}</div>
                 </div>
                 <div class="info-row">
