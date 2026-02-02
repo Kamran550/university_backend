@@ -486,18 +486,6 @@
             <tr>
                 <!-- LEFT SIDE -->
                 <td style="width: 100%; font-size: 6pt; line-height: 1.1;">
-                    <p style="margin: 2px 0; font-weight: bold; text-align: center;">
-                        Fully Accredited Multinational Higher Education Institution and Global Service Provider
-                    </p>
-                    <p style="margin: 2px 0; text-align: center;">
-                        ISTASYON MAH. 2325 SK. NO: 18 / 1 ETIMESGUT ANKARA / Türkiye [ EIPU ]
-                    </p>
-                    <p style="margin: 2px 0; text-align: center;">
-                        Ogrodowa 5800-876 Warsaw / Poland [ EIPU ]
-                    </p>
-                    <p style="margin: 2px 0; text-align: center;">
-                        32-36 Bd d'Avranches, 1160 Bonnevoie-Nord-Verlorenkost / Luxembourg [ EIPU ]
-                    </p>
                     <p style="margin: 2px 0; text-align: center;">
                         <strong>Tel:</strong> +90 5386796595 | +48 579 369 968 | +352 661115815
                     </p>
