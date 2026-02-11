@@ -44,4 +44,23 @@ if (!function_exists('course_to_word')) {
 
         return $words[$course] ?? 'ikinci';
     }
+
+
+    function course_to_word_english(?int $course): string
+    {
+        if ($course === null) {
+            return 'second';
+        }
+
+        $words = [
+            1 => 'first',
+            2 => 'second',
+            3 => 'third',
+            4 => 'fourth',
+            5 => 'fifth',
+            6 => 'sixth',
+        ];
+
+        return $words[$course] ?? 'second';
+    }
 }

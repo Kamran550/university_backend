@@ -288,8 +288,28 @@
                             d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z">
                         </path>
                     </svg>
-                    <span wire:loading.remove wire:target="sendTransferLetter">Transfer Letter</span>
+                    <span wire:loading.remove wire:target="sendTransferLetter">Transfer Letter (TR)</span>
                     <span wire:loading wire:target="sendTransferLetter">Sending...</span>
+                </button>
+                <button type="button" wire:click="sendTransferLetterEnglish" wire:loading.attr="disabled"
+                    wire:target="sendTransferLetterEnglish"
+                    class="inline-flex items-center justify-center px-3 py-1.5 text-xs font-medium text-white bg-indigo-600 hover:bg-indigo-700 rounded-md transition duration-150 ease-in-out disabled:opacity-50 disabled:cursor-not-allowed"
+                    title="Send Transfer Letter (English)">
+                    <svg wire:loading.remove wire:target="sendTransferLetterEnglish" class="w-3 h-3 mr-1.5" fill="none"
+                        stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                    </svg>
+                    <svg wire:loading wire:target="sendTransferLetterEnglish" class="animate-spin w-3 h-3 mr-1.5"
+                        fill="none" viewBox="0 0 24 24">
+                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor"
+                            stroke-width="4"></circle>
+                        <path class="opacity-75" fill="currentColor"
+                            d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z">
+                        </path>
+                    </svg>
+                    <span wire:loading.remove wire:target="sendTransferLetterEnglish">Transfer Letter (EN)</span>
+                    <span wire:loading wire:target="sendTransferLetterEnglish">Sending...</span>
                 </button>
                 <button type="button" wire:click="sendScholarshipAcceptanceLetter" wire:loading.attr="disabled"
                     wire:target="sendScholarshipAcceptanceLetter"
