@@ -228,7 +228,7 @@
 
         <p>
             The student's academic records have been carefully reviewed, and it has been decided to place them
-            directly in the {{ course_to_word($student->current_course) }} year of the program in accordance with
+            directly in the {{ course_to_word_english($student->current_course) }} year of the program in accordance with
             their qualifications.
         </p>
     </div>
