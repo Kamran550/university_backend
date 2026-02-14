@@ -159,6 +159,21 @@
             </p>
         </div>
 
+        <!-- Thesis -->
+        <div class="mb-6">
+            <label class="flex items-center">
+                <input 
+                    type="checkbox" 
+                    wire:model="is_thesis"
+                    class="w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500"
+                >
+                <span class="ml-2 text-sm font-medium text-gray-700">Thesis</span>
+            </label>
+            <p class="mt-1 ml-6 text-xs text-gray-500">
+                Program requires a thesis (default: yes).
+            </p>
+        </div>
+
         <!-- Form Actions -->
         <div class="flex items-center justify-end gap-4 pt-6 border-t border-gray-200">
             <button 

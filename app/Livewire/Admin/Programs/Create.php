@@ -19,6 +19,7 @@ class Create extends Component
     public ?int $price_per_year = null;
     public bool $study_language_en = true;
     public bool $study_language_tr = false;
+    public bool $is_thesis = true;
 
     public function updatedDegreeId()
     {
@@ -36,6 +37,7 @@ class Create extends Component
             'price_per_year' => ['required', 'integer', 'min:0'],
             'study_language_en' => ['boolean'],
             'study_language_tr' => ['boolean'],
+            'is_thesis' => ['boolean'],
         ];
     }
 
@@ -78,6 +80,7 @@ class Create extends Component
                 'degree_id' => $this->degree_id,
                 'faculty_id' => $this->faculty_id,
                 'price_per_year' => $this->price_per_year,
+                'is_thesis' => $this->is_thesis,
             ]);
 
             // Create EN translation
@@ -122,9 +125,11 @@ class Create extends Component
             'faculty_id', 
             'price_per_year',
             'study_language_en',
-            'study_language_tr'
+            'study_language_tr',
+            'is_thesis'
         ]);
         $this->study_language_en = true; // Default value
+        $this->is_thesis = true; // Default value
         $this->resetValidation();
 
         // Dispatch event to close modal and refresh list
@@ -142,9 +147,11 @@ class Create extends Component
             'faculty_id', 
             'price_per_year',
             'study_language_en',
-            'study_language_tr'
+            'study_language_tr',
+            'is_thesis'
         ]);
         $this->study_language_en = true; // Default value
+        $this->is_thesis = true; // Default value
         $this->resetValidation();
     }
 
