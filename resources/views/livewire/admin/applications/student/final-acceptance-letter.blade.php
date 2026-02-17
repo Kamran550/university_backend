@@ -316,7 +316,7 @@
                 </div>
                 <div class="info-row">
                     <div class="info-label">Nationality</div>
-                    <div class="info-value">{{ tr_upper($student->nationality ?? 'N/A') }}</div>
+                    <div class="info-value">{{ strtoupper($student->nationality ?? 'N/A') }}</div>
                 </div>
                 <div class="info-row">
                     <div class="info-label">Education Level</div>
@@ -328,11 +328,11 @@
                 <div class="info-row">
                     <div class="info-label">Institue / Faculty</div>
                     <div class="info-value">
-                        {{ tr_upper($student->application->program?->faculty?->name ?? 'GRADUATE SCHOOL') }}</div>
+                        {{ strtoupper($student->application->program?->faculty?->name ?? 'GRADUATE SCHOOL') }}</div>
                 </div>
                 <div class="info-row">
                     <div class="info-label">Department</div>
-                    <div class="info-value">{{ tr_upper($student->application->program?->name ?? 'N/A') }}</div>
+                    <div class="info-value">{{ strtoupper($student->application->program?->name ?? 'N/A') }}</div>
                 </div>
                 <div class="info-row">
                     <div class="info-label">Education Language</div>
