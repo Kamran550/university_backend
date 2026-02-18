@@ -116,16 +116,16 @@ class Edit extends Component
         $this->validate();
 
         // Unique constraint yoxla (current program-ni istisna et, name_en-ə görə)
-        $exists = Program::where('degree_id', $this->degree_id)
-            ->where('faculty_id', $this->faculty_id)
-            ->where('name', $this->name_en)
-            ->where('id', '!=', $this->program->id)
-            ->exists();
+        // $exists = Program::where('degree_id', $this->degree_id)
+        //     ->where('faculty_id', $this->faculty_id)
+        //     ->where('name', $this->name_en)
+        //     ->where('id', '!=', $this->program->id)
+        //     ->exists();
 
-        if ($exists) {
-            $this->addError('name_en', 'Bu dərəcə və fakültə üçün bu proqram adı (EN) artıq mövcuddur.');
-            return;
-        }
+        // if ($exists) {
+        //     $this->addError('name_en', 'Bu dərəcə və fakültə üçün bu proqram adı (EN) artıq mövcuddur.');
+        //     return;
+        // }
 
         DB::transaction(function () {
             // Update programs table with EN name
