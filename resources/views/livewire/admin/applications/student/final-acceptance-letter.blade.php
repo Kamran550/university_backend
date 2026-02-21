@@ -280,7 +280,7 @@
             STUDENT CERTIFICATE
         </div>
         <div style="font-size: 9pt; font-weight: normal;">
-            {{ now()->format('d/m/Y') }}
+            25/09/2025
         </div>
     </div>
 
@@ -353,7 +353,7 @@
                 </div>
                 <div class="info-row">
                     <div class="info-label">Date of Registration</div>
-                    <div class="info-value">{{ now()->format('d/m/Y') }}</div>
+                    <div class="info-value">25/09/2025</div>
                 </div>
             </div>
         </div>
