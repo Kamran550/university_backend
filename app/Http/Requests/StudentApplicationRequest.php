@@ -75,7 +75,7 @@ class StudentApplicationRequest extends ApiFormRequest
             'teachingLanguage' => ['required', 'string', 'max:50'],
             // Optional metadata
             'locale' => ['nullable', 'string', 'max:5'],
-            'degree_type' => ['required', Rule::in(DegreeTypeEnum::values())],
+            'degree_type' => ['required', 'string', 'max:50'],
             
         ];
     }

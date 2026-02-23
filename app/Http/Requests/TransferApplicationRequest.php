@@ -68,7 +68,7 @@ class TransferApplicationRequest extends FormRequest
             'teachingLanguage' => ['required', 'string', 'max:50'],
             // Optional metadata
             'locale' => ['nullable', 'string', 'max:5'],
-            'degree_type' => ['required', Rule::in(DegreeTypeEnum::values())],
+            'degree_type' => ['required', 'string', 'max:50'],
             'current_university' => ['required', 'string', 'max:255'],
             'current_course' => ['required', 'integer', 'min:1', 'max:10'],
         ];
