@@ -30,7 +30,6 @@ class ProgramResource extends JsonResource
                     'name' => $this->faculty->name,
                 ];
             }),
-            'is_thesis' => $this->is_thesis ? "Thesis" : "Without Thesis",
         ];
     }
 }

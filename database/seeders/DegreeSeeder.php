@@ -45,6 +45,21 @@ class DegreeSeeder extends Seeder
                 ],
             ],
             [
+                'name' => "Master's (Without Thesis)",
+                'description' => "Master's Degree (Without Thesis)",
+                'duration' => 1,
+                'translations' => [
+                    'EN' => [
+                        'name' => "Master's (Without Thesis)",
+                        'description' => "Master's Degree (Without Thesis)",
+                    ],
+                    'TR' => [
+                        'name' => 'YÜKSEK LİSANS (TEZSİZ)',
+                        'description' => 'YÜKSEK LİSANS (TEZSİZ)',
+                    ],
+                ],
+            ],
+            [
                 'name' => 'PhD',
                 'description' => 'Doctorate (PhD)',
                 'duration' => 4,

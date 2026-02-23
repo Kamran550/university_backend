@@ -65,29 +65,29 @@ if (!function_exists('course_to_word')) {
     }
 }
 
-if (!function_exists('degree_type_to_word')) {
-    function degree_type_to_word(string $degreeName, bool $thesis): string
-    {
-        $isThesis = $thesis ? "(THESIS)" : "(Without THESIS)";
-        $degrees = [
-            "Bachelor's" => "UNDERGRADUATE",
-            "Master's" => "MASTER'S DEGREE " . $isThesis,
-            "PhD" => "DOCTORATE (PhD)",
-        ];
-        return $degrees[$degreeName] ?? $degreeName;
-    }
-}
+// if (!function_exists('degree_type_to_word')) {
+//     function degree_type_to_word(string $degreeName, bool $thesis): string
+//     {
+//         $isThesis = $thesis ? "(THESIS)" : "(Without THESIS)";
+//         $degrees = [
+//             "Bachelor's" => "UNDERGRADUATE",
+//             "Master's" => "MASTER'S DEGREE " . $isThesis,
+//             "PhD" => "DOCTORATE (PhD)",
+//         ];
+//         return $degrees[$degreeName] ?? $degreeName;
+//     }
+// }
 
 
-if (!function_exists('degree_type_to_word_turkish')) {
-    function degree_type_to_word_turkish(string $degreeName, bool $thesis): string
-    {
-        $isThesis = $thesis ? "(TEZLİ)" : "(TEZSİZ)";
-        $degrees = [
-            "Bachelor's" => "Lisans",
-            "Master's" => "YÜKSEK LİSANS " . $isThesis,
-            "PhD" => "DOKTORA",
-        ];
-        return $degrees[$degreeName] ?? $degreeName;
-    }
-}
+// if (!function_exists('degree_type_to_word_turkish')) {
+//     function degree_type_to_word_turkish(string $degreeName, bool $thesis): string
+//     {
+//         $isThesis = $thesis ? "(TEZLİ)" : "(TEZSİZ)";
+//         $degrees = [
+//             "Bachelor's" => "Lisans",
+//             "Master's" => "YÜKSEK LİSANS " . $isThesis,
+//             "PhD" => "DOKTORA",
+//         ];
+//         return $degrees[$degreeName] ?? $degreeName;
+//     }
+// }
