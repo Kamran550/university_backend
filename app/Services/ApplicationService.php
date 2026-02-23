@@ -231,6 +231,11 @@ class ApplicationService
                     $masterDiplomaPath = $this->handleFileUpload($data['master_diploma'] ?? null, 'applications/student/diplomas/master');
                     $masterTranscriptPath = $this->handleFileUpload($data['master_transcript'] ?? null, 'applications/student/transcripts/master');
                     break;
+                case DegreeTypeEnum::MASTER_WITHOUT_THESIS->value:
+                    // Master without thesis applicants provide bachelor documents
+                    $bachelorDiplomaPath = $this->handleFileUpload($data['bachelor_diploma'] ?? null, 'applications/student/diplomas/bachelor');
+                    $bachelorTranscriptPath = $this->handleFileUpload($data['bachelor_transcript'] ?? null, 'applications/student/transcripts/bachelor');
+                    break;
             }
             // Generate numbers
             $applicationNumber = $this->generateApplicationNumber();
