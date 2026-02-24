@@ -280,7 +280,7 @@
             STUDENT CERTIFICATE
         </div>
         <div style="font-size: 9pt; font-weight: normal;">
-            24/02/2026
+             {{ now()->format('d/m/Y') }}
         </div>
     </div>
 
@@ -352,7 +352,7 @@
                 </div>
                 <div class="info-row">
                     <div class="info-label">Date of Registration</div>
-                    <div class="info-value">24/02/2026</div>
+                    <div class="info-value"> {{ now()->format('d/m/Y') }}</div>
                 </div>
             </div>
         </div>
@@ -414,10 +414,8 @@
         <div class="footer-note">
             * It is expected that the person will reach the graduation stage in the
             @php
-                // $startYear = $student->graduation_year;
-                // $endYear = $student->graduation_year + 1;
-                $startYear = 2030;
-                $endYear = 2031;
+                $startYear = $student->graduation_year;
+                $endYear = $student->graduation_year + 1;
             @endphp
             {{ $startYear }}-{{ $endYear }} academic year.
         </div>
@@ -440,7 +438,7 @@
     <div class="verification-footer">
         <!-- Date -->
         <div class="date-line">
-            Date: 24/02/2026
+            Date:  {{ now()->format('d/m/Y') }}
         </div>
 
         <!-- Verification Box with QR Code -->
@@ -454,7 +452,7 @@
                         style="background: #f0f0f0; padding: 12px 15px; border-radius: 8px; font-size: 11px; line-height: 1.4;">
                         This document was e-signed for
                         <strong>{{ strtoupper($student->first_name . ' ' . $student->last_name) }}</strong> on
-                        24/02/2026 with document number
+                         {{ now()->format('d/m/Y') }} with document number
                         <strong>{{ $verificationCode ?? strtoupper(Str::random(12)) }}</strong>
                         The validity of the document can be confirmed by scanning the QR code or by document number at
                         <strong>{{ $student->getVerificationUrl() }}</strong>

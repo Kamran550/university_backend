@@ -278,7 +278,7 @@
             ÖĞRENCİ BELGESİ
         </div>
         <div style="font-size: 9pt; font-weight: normal;">
-            24/02/2026
+            {{ now()->format('d/m/Y') }}
         </div>
     </div>
 
@@ -352,7 +352,7 @@
                 </div>
                 <div class="info-row">
                     <div class="info-label">Kayıt Tarihi</div>
-                    <div class="info-value">24/02/2026</div>
+                    <div class="info-value"> {{ now()->format('d/m/Y') }}</div>
                 </div>
             </div>
         </div>
@@ -417,10 +417,8 @@
             * İlgilisinin
             @php
                 $duration = $student->application->program?->degree?->duration ?? 4;
-                // $startYear = $student->graduation_year;
-                // $endYear = $student->graduation_year + 1;
-                $startYear = 2030;
-                $endYear = 2031;
+                $startYear = $student->graduation_year;
+                $endYear = $student->graduation_year + 1;
             @endphp
             {{ $startYear }}-{{ $endYear }} akademik yılında mezuniyet aşamasına gelmesi beklenmektedir
         </div>
@@ -443,7 +441,7 @@
     <div class="verification-footer">
         <!-- Date -->
         <div class="date-line">
-            Tarih: 24/02/2026
+            Tarih: {{ now()->format('d/m/Y') }}
         </div>
 
         <!-- Verification Box with QR Code -->
@@ -456,7 +454,7 @@
                     <div
                         style="background: #f0f0f0; padding: 12px 15px; border-radius: 8px; font-size: 11px; line-height: 1.2;">
                         Bu belge,
-                        24/02/2026 tarihinde
+                        {{ now()->format('d/m/Y') }} tarihinde
                         <strong>{{ strtoupper($student->first_name . ' ' . $student->last_name) }}</strong> adına
                         <strong>{{ $verificationCode ?? tr_upper(Str::random(12)) }}</strong>
                         belge numarasıyla elektronik olarak imzalanmıştır. Belgenin geçerliliği, QR kodunu tarayarak
