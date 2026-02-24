@@ -280,7 +280,7 @@
             STUDENT CERTIFICATE
         </div>
         <div style="font-size: 9pt; font-weight: normal;">
-            25/09/2025
+            24/02/2026
         </div>
     </div>
 
@@ -352,7 +352,7 @@
                 </div>
                 <div class="info-row">
                     <div class="info-label">Date of Registration</div>
-                    <div class="info-value">25/09/2025</div>
+                    <div class="info-value">24/02/2026</div>
                 </div>
             </div>
         </div>
@@ -416,8 +416,8 @@
             @php
                 // $startYear = $student->graduation_year;
                 // $endYear = $student->graduation_year + 1;
-                $startYear = 2029;
-                $endYear = 2030;
+                $startYear = 2030;
+                $endYear = 2031;
             @endphp
             {{ $startYear }}-{{ $endYear }} academic year.
         </div>
@@ -440,7 +440,7 @@
     <div class="verification-footer">
         <!-- Date -->
         <div class="date-line">
-            Date: 25/09/2025
+            Date: 24/02/2026
         </div>
 
         <!-- Verification Box with QR Code -->
@@ -454,7 +454,7 @@
                         style="background: #f0f0f0; padding: 12px 15px; border-radius: 8px; font-size: 11px; line-height: 1.4;">
                         This document was e-signed for
                         <strong>{{ strtoupper($student->first_name . ' ' . $student->last_name) }}</strong> on
-                        25/09/2025 with document number
+                        24/02/2026 with document number
                         <strong>{{ $verificationCode ?? strtoupper(Str::random(12)) }}</strong>
                         The validity of the document can be confirmed by scanning the QR code or by document number at
                         <strong>{{ $student->getVerificationUrl() }}</strong>
