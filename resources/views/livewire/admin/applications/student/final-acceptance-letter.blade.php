@@ -321,7 +321,7 @@
                 <div class="info-row">
                     <div class="info-label">Education Level</div>
                     <div class="info-value">
-                        {{ tr_upper($student->application->program?->degree?->getDescription('EN') ?: $student->application->program?->degree?->getName('EN') ?? 'N/A') }}
+                        {{ strtoupper($student->application->program?->degree?->getDescription('EN') ?: $student->application->program?->degree?->getName('EN') ?? 'N/A') }}
                     </div>
                 </div>
                 <div class="info-row">
