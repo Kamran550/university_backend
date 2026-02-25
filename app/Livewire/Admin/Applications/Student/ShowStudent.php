@@ -3,6 +3,7 @@
 namespace App\Livewire\Admin\Applications\Student;
 
 use App\Enums\ApplicationStatusEnum;
+use App\Enums\DegreeTypeEnum;
 use App\Mail\AcceptanceLetterMail;
 use App\Mail\FinalAcceptanceLetterMail;
 use App\Mail\FinalAcceptanceLetterTurkishMail;
@@ -276,21 +277,21 @@ class ShowStudent extends Component
             }
 
             // Reload student with application relationship
-            $this->student->load('application.program.degree.translations', 'application.program.translations');
+            $this->student->load('application.program.degree.translations', 'application.program.translations', 'application.program.faculty.translations');
 
-            // Generate diploma text in EN and TR
+            // Generate diploma text in EN and TR (degree type-a görə)
             $program = $this->student->application->program;
             $degree = $program?->degree;
+            $faculty = $program?->faculty;
 
             $programNameEn = $program?->getName('EN') ?: $program?->name;
             $programNameTr = $program?->getName('TR') ?: $program?->name;
             $degreeNameEn = $degree?->getName('EN') ?: $degree?->name;
             $degreeNameTr = $degree?->getName('TR') ?: $degree?->name;
+            $facultyNameEn = $faculty?->getName('EN') ?: $faculty?->name;
+            $facultyNameTr = $faculty?->getName('TR') ?: $faculty?->name;
 
-            $diplomaText = [
-                'en' => "Having successfully completed all the requirements of the\n{$programNameEn} Program\nin the Institute of Graduate Education,\nhas been awarded the {$degreeNameEn} Degree.",
-                'tr' => "Lisansüstü Eğitim Enstitüsünde\n{$programNameTr} Programındaki\ntüm yükümlülükleri başarıyla tamamlayarak\n{$degreeNameTr} Derecesini almaya hak kazanmıştır.",
-            ];
+            $diplomaText = $this->generateDiplomaText($programNameEn, $programNameTr, $degreeNameEn, $degreeNameTr, $facultyNameEn, $facultyNameTr);
 
             // Save diploma text to student application
             $this->student->update([
@@ -397,21 +398,21 @@ class ShowStudent extends Component
             }
 
             // Reload student with application relationship
-            $this->student->load('application.program.degree.translations', 'application.program.translations');
+            $this->student->load('application.program.degree.translations', 'application.program.translations', 'application.program.faculty.translations');
 
-            // Generate diploma text in EN and TR
+            // Generate diploma text in EN and TR (degree type-a görə)
             $program = $this->student->application->program;
             $degree = $program?->degree;
+            $faculty = $program?->faculty;
 
             $programNameEn = $program?->getName('EN') ?: $program?->name;
             $programNameTr = $program?->getName('TR') ?: $program?->name;
             $degreeNameEn = $degree?->getName('EN') ?: $degree?->name;
             $degreeNameTr = $degree?->getName('TR') ?: $degree?->name;
+            $facultyNameEn = $faculty?->getName('EN') ?: $faculty?->name;
+            $facultyNameTr = $faculty?->getName('TR') ?: $faculty?->name;
 
-            $diplomaText = [
-                'en' => "Having successfully completed all the requirements of the\n{$programNameEn} Program\nin the Institute of Graduate Education,\nhas been awarded the {$degreeNameEn} Degree.",
-                'tr' => "Lisansüstü Eğitim Enstitüsünde\n{$programNameTr} Programındaki\ntüm yükümlülükleri başarıyla tamamlayarak\n{$degreeNameTr} Derecesini almaya hak kazanmıştır.",
-            ];
+            $diplomaText = $this->generateDiplomaText($programNameEn, $programNameTr, $degreeNameEn, $degreeNameTr, $facultyNameEn, $facultyNameTr);
 
             // Save diploma text to student application
             $this->student->update([
@@ -501,6 +502,69 @@ class ShowStudent extends Component
     }
 
 
+
+    /**
+     * Resolve DegreeTypeEnum from degree name (EN).
+     * degreeNameEn-dən müraciət olunmuş degree type-ı təyin edir.
+     */
+    private function resolveDegreeType(?string $degreeNameEn): ?DegreeTypeEnum
+    {
+        if (!$degreeNameEn) {
+            return null;
+        }
+        $name = strtolower($degreeNameEn);
+        if (str_contains($name, 'phd') || str_contains($name, 'doctor')) {
+            return DegreeTypeEnum::phD;
+        }
+        if (str_contains($name, 'without thesis') || str_contains($name, 'tezsiz')) {
+            return DegreeTypeEnum::MASTER_WITHOUT_THESIS;
+        }
+        if (str_contains($name, 'master') || str_contains($name, 'mba') || str_contains($name, 'ma ') || str_contains($name, 'ms ')) {
+            return DegreeTypeEnum::MASTER;
+        }
+        if (str_contains($name, 'bachelor') || str_contains($name, 'bba') || str_contains($name, 'lisans')) {
+            return DegreeTypeEnum::BACHELOR;
+        }
+        return null;
+    }
+
+    /**
+     * Generate diploma text based on degree type.
+     * Degree type-a görə diploma mətni yaradır (programNameEn, degreeNameEn, programNameTr, degreeNameTr, facultyNameEn, facultyNameTr istifadə edir).
+     */
+    private function generateDiplomaText(
+        string $programNameEn,
+        string $programNameTr,
+        string $degreeNameEn,
+        string $degreeNameTr,
+        ?string $facultyNameEn = null,
+        ?string $facultyNameTr = null
+    ): array {
+        $degreeType = $this->resolveDegreeType($degreeNameEn);
+
+        return match ($degreeType) {
+            DegreeTypeEnum::BACHELOR => [
+                'en' => "This is to certify that has successfully completed all required academic studies in the Bachelor's Program in {$programNameEn} and has qualified to receive the {$degreeNameEn}.",
+                'tr' => trim(($facultyNameTr ? $facultyNameTr . ' ' : '') . "{$programNameTr} Lisans Programı'nda gerekli tüm akademik çalışmaları başarıyla tamamlamış ve {$degreeNameTr} almaya hak kazanmıştır."),
+            ],
+            DegreeTypeEnum::MASTER => [
+                'en' => "This is to certify that has successfully completed all required academic studies in the Master's Program with Thesis in {$programNameEn} under the Institute of Graduate Studies, has defended the master's thesis, and has qualified to receive the {$degreeNameEn}.",
+                'tr' => "Lisansüstü Eğitim Enstitüsü {$programNameTr} Tezli Yüksek Lisans Programı'nda gerekli tüm akademik çalışmaları başarıyla tamamlamış, yüksek lisans tezini savunmuş ve {$degreeNameTr} almaya hak kazanmıştır.",
+            ],
+            DegreeTypeEnum::phD => [
+                'en' => "This is to certify that has successfully completed all required academic and research studies in the Doctoral Program in {$programNameEn} under the Institute of Graduate Studies, has defended the doctoral dissertation, and has qualified to receive the {$degreeNameEn}.",
+                'tr' => "Lisansüstü Eğitim Enstitüsü {$programNameTr} Doktora Programı'nda gerekli tüm akademik ve bilimsel çalışmaları başarıyla tamamlamış, doktora tezini savunmuş ve {$degreeNameTr} almaya hak kazanmıştır.",
+            ],
+            DegreeTypeEnum::MASTER_WITHOUT_THESIS => [
+                'en' => "This is to certify that has successfully completed all required academic studies in the Non-Thesis Master's Program in {$programNameEn} under the Institute of Graduate Studies and has qualified to receive the {$degreeNameEn}.",
+                'tr' => "Lisansüstü Eğitim Enstitüsü {$programNameTr} Tezsiz Yüksek Lisans Programı'nda gerekli tüm akademik çalışmaları başarıyla tamamlamış ve {$degreeNameTr} almaya hak kazanmıştır.",
+            ],
+            default => [
+                'en' => "Having successfully completed all the requirements of the\n{$programNameEn} Program\nin the Institute of Graduate Education,\nhas been awarded the {$degreeNameEn} Degree.",
+                'tr' => "Lisansüstü Eğitim Enstitüsünde\n{$programNameTr} Programındaki\ntüm yükümlülükleri başarıyla tamamlayarak\n{$degreeNameTr} Derecesini almaya hak kazanmıştır.",
+            ],
+        };
+    }
 
     public function render()
     {
