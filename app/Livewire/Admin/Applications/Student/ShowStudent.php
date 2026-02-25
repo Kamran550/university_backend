@@ -11,6 +11,7 @@ use App\Mail\FinalScholarshipAcceptanceLetterMail;
 use App\Mail\ScholarshipAcceptanceLetterMail;
 use App\Mail\TransferLetterMail;
 use App\Mail\TransferLetterEnglishMail;
+use App\Models\Degree;
 use App\Models\StudentApplication;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
@@ -291,7 +292,7 @@ class ShowStudent extends Component
             $facultyNameEn = $faculty?->getName('EN') ?: $faculty?->name;
             $facultyNameTr = $faculty?->getName('TR') ?: $faculty?->name;
 
-            $diplomaText = $this->generateDiplomaText($programNameEn, $programNameTr, $degreeNameEn, $degreeNameTr, $facultyNameEn, $facultyNameTr);
+            $diplomaText = $this->generateDiplomaText($degree, $programNameEn, $programNameTr, $degreeNameEn, $degreeNameTr, $facultyNameEn, $facultyNameTr);
 
             // Save diploma text to student application
             $this->student->update([
@@ -412,7 +413,7 @@ class ShowStudent extends Component
             $facultyNameEn = $faculty?->getName('EN') ?: $faculty?->name;
             $facultyNameTr = $faculty?->getName('TR') ?: $faculty?->name;
 
-            $diplomaText = $this->generateDiplomaText($programNameEn, $programNameTr, $degreeNameEn, $degreeNameTr, $facultyNameEn, $facultyNameTr);
+            $diplomaText = $this->generateDiplomaText($degree, $programNameEn, $programNameTr, $degreeNameEn, $degreeNameTr, $facultyNameEn, $facultyNameTr);
 
             // Save diploma text to student application
             $this->student->update([
@@ -504,11 +505,12 @@ class ShowStudent extends Component
 
 
     /**
-     * Resolve DegreeTypeEnum from degree name (EN).
-     * degreeNameEn-dən müraciət olunmuş degree type-ı təyin edir.
+     * Resolve DegreeTypeEnum from $degree (tələbənin müraciət etdiyi degree).
+     * $degree ilə switch üçün tələbənin apply etdiyi degree type-ı təyin edir.
      */
-    private function resolveDegreeType(?string $degreeNameEn): ?DegreeTypeEnum
+    private function resolveDegreeType(?Degree $degree): ?DegreeTypeEnum
     {
+        $degreeNameEn = $degree?->getName('EN') ?: $degree?->name;
         if (!$degreeNameEn) {
             return null;
         }
@@ -530,9 +532,10 @@ class ShowStudent extends Component
 
     /**
      * Generate diploma text based on degree type.
-     * Degree type-a görə diploma mətni yaradır (programNameEn, degreeNameEn, programNameTr, degreeNameTr, facultyNameEn, facultyNameTr istifadə edir).
+     * $degree ilə switch - tələbənin apply etdiyi degree-ə görə diploma mətni yaradır.
      */
     private function generateDiplomaText(
+        ?Degree $degree,
         string $programNameEn,
         string $programNameTr,
         string $degreeNameEn,
@@ -540,12 +543,15 @@ class ShowStudent extends Component
         ?string $facultyNameEn = null,
         ?string $facultyNameTr = null
     ): array {
-        $degreeType = $this->resolveDegreeType($degreeNameEn);
-
-        Log::info('Faculty Name: ', ['faculty_name:', $facultyNameEn, $facultyNameTr]);
-        Log::info('Program Name: ', ['program_name:', $programNameEn, $programNameTr]);
-        Log::info('Degree Name: ', ['degree_name:', $degreeNameEn, $degreeNameTr]);
+        $degreeType = $this->resolveDegreeType($degree);
         Log::info('Degree Type: ', ['degree_type:', $degreeType]);
+        Log::info('degree: ', ['degree:', $degree]);
+        Log::info('degree name: ', ['degree_name:', $degreeNameEn]);
+        Log::info('degree name tr: ', ['degree_name_tr:', $degreeNameTr]);
+        Log::info('faculty name en: ', ['faculty_name_en:', $facultyNameEn]);
+        Log::info('faculty name tr: ', ['faculty_name_tr:', $facultyNameTr]);
+        Log::info('program name en: ', ['program_name_en:', $programNameEn]);
+        Log::info('program name tr: ', ['program_name_tr:', $programNameTr]);
         return match ($degreeType) {
             DegreeTypeEnum::BACHELOR => [
                 'en' => "This is to certify that has successfully completed all required academic studies in the Bachelor's Program in {$programNameEn} and has qualified to receive the {$degreeNameEn}.",
