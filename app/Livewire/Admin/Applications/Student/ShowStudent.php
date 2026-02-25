@@ -542,6 +542,10 @@ class ShowStudent extends Component
     ): array {
         $degreeType = $this->resolveDegreeType($degreeNameEn);
 
+        Log::info('Faculty Name: ', ['faculty_name:', $facultyNameEn, $facultyNameTr]);
+        Log::info('Program Name: ', ['program_name:', $programNameEn, $programNameTr]);
+        Log::info('Degree Name: ', ['degree_name:', $degreeNameEn, $degreeNameTr]);
+        Log::info('Degree Type: ', ['degree_type:', $degreeType]);
         return match ($degreeType) {
             DegreeTypeEnum::BACHELOR => [
                 'en' => "This is to certify that has successfully completed all required academic studies in the Bachelor's Program in {$programNameEn} and has qualified to receive the {$degreeNameEn}.",
