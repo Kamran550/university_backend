@@ -161,9 +161,14 @@ class ApplicationService
 
         return $currentYear + $duration;
     }
-    protected function calculateGraduationYearForTransferApplication(int $duration, int $currentCourse)
+    protected function calculateGraduationYearForTransferApplication(int $duration, int $currentCourse, ?string $degreeType = null)
     {
         $currentYear = (int) date('Y');
+
+        if ($degreeType === DegreeTypeEnum::MASTER_WITHOUT_THESIS->value) {
+            return $currentYear;
+        }
+
         return $currentYear + ($duration - $currentCourse + 1);
     }
 
@@ -354,7 +359,7 @@ class ApplicationService
              $applicationNumber = $this->generateApplicationNumber();
              $studentNumber = $this->generateStudentNumber();
              $diplomaNumber = $this->generateDiplomaNumber();
-             $graduationYear = $this->calculateGraduationYearForTransferApplication($duration, $data['current_course']);
+             $graduationYear = $this->calculateGraduationYearForTransferApplication($duration, $data['current_course'], $data['degree_type'] ?? null);
 
  
              // Prepare student application data

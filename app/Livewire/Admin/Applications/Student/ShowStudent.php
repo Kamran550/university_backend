@@ -554,24 +554,24 @@ class ShowStudent extends Component
         Log::info('program name tr: ', ['program_name_tr:', $programNameTr]);
         return match ($degreeType) {
             DegreeTypeEnum::BACHELOR => [
-                'en' => "This is to certify that has successfully completed all required academic studies in the Bachelor's Program in {$programNameEn} and has qualified to receive the {$degreeNameEn}.",
-                'tr' => trim(($facultyNameTr ? $facultyNameTr . ' ' : '') . "{$programNameTr} Lisans Programı'nda gerekli tüm akademik çalışmaları başarıyla tamamlamış ve {$degreeNameTr} almaya hak kazanmıştır."),
+                'en' => "This is to certify that has successfully completed all required academic studies in the Bachelor's Program in {$programNameEn} and has qualified to receive the {$degreeNameEn} degree.",
+                'tr' => trim(($facultyNameTr ? $facultyNameTr . ' ' : '') . "{$programNameTr} Lisans Programı'nda gerekli tüm akademik çalışmaları başarıyla tamamlamış ve {$degreeNameTr} derecesini almaya hak kazanmıştır."),
             ],
             DegreeTypeEnum::MASTER => [
-                'en' => "This is to certify that has successfully completed all required academic studies in the Master's Program with Thesis in {$programNameEn} under the Institute of Graduate Studies, has defended the master's thesis, and has qualified to receive the {$degreeNameEn}.",
-                'tr' => "Lisansüstü Eğitim Enstitüsü {$programNameTr} Tezli Yüksek Lisans Programı'nda gerekli tüm akademik çalışmaları başarıyla tamamlamış, yüksek lisans tezini savunmuş ve {$degreeNameTr} almaya hak kazanmıştır.",
+                'en' => "This is to certify that has successfully completed all required academic studies in the Master's Program with Thesis in {$programNameEn} under the Institute of Graduate Studies, has defended the master's thesis, and has qualified to receive the {$degreeNameEn} degree.",
+                'tr' => "Lisansüstü Eğitim Enstitüsü {$programNameTr} Tezli Yüksek Lisans Programı'nda gerekli tüm akademik çalışmaları başarıyla tamamlamış, yüksek lisans tezini savunmuş ve {$degreeNameTr} derecesini almaya hak kazanmıştır.",
             ],
             DegreeTypeEnum::phD => [
-                'en' => "This is to certify that has successfully completed all required academic and research studies in the Doctoral Program in {$programNameEn} under the Institute of Graduate Studies, has defended the doctoral dissertation, and has qualified to receive the {$degreeNameEn}.",
-                'tr' => "Lisansüstü Eğitim Enstitüsü {$programNameTr} Doktora Programı'nda gerekli tüm akademik ve bilimsel çalışmaları başarıyla tamamlamış, doktora tezini savunmuş ve {$degreeNameTr} almaya hak kazanmıştır.",
+                'en' => "This is to certify that has successfully completed all required academic and research studies in the Doctoral Program in {$programNameEn} under the Institute of Graduate Studies, has defended the doctoral dissertation, and has qualified to receive the {$degreeNameEn} degree.",
+                'tr' => "Lisansüstü Eğitim Enstitüsü {$programNameTr} Doktora Programı'nda gerekli tüm akademik ve bilimsel çalışmaları başarıyla tamamlamış, doktora tezini savunmuş ve {$degreeNameTr} derecesini almaya hak kazanmıştır.",
             ],
             DegreeTypeEnum::MASTER_WITHOUT_THESIS => [
                 'en' => "This is to certify that has successfully completed all required academic studies in the Non-Thesis Master's Program in {$programNameEn} under the Institute of Graduate Studies and has qualified to receive the {$degreeNameEn}.",
                 'tr' => "Lisansüstü Eğitim Enstitüsü {$programNameTr} Tezsiz Yüksek Lisans Programı'nda gerekli tüm akademik çalışmaları başarıyla tamamlamış ve {$degreeNameTr} almaya hak kazanmıştır.",
             ],
             default => [
-                'en' => "Having successfully completed all the requirements of the\n{$programNameEn} Program\nin the Institute of Graduate Education,\nhas been awarded the {$degreeNameEn} Degree.",
-                'tr' => "Lisansüstü Eğitim Enstitüsünde\n{$programNameTr} Programındaki\ntüm yükümlülükleri başarıyla tamamlayarak\n{$degreeNameTr} Derecesini almaya hak kazanmıştır.",
+                'en' => "Having successfully completed all the requirements of the\n{$programNameEn} Program\nin the Institute of Graduate Education,\nhas been awarded the {$degreeNameEn} degree.",
+                'tr' => "Lisansüstü Eğitim Enstitüsünde\n{$programNameTr} Programındaki\ntüm yükümlülükleri başarıyla tamamlayarak\n{$degreeNameTr} derecesini almaya hak kazanmıştır.",
             ],
         };
     }
