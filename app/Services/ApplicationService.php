@@ -168,8 +168,8 @@ class ApplicationService
         if ($degreeType === DegreeTypeEnum::MASTER_WITHOUT_THESIS->value) {
             return $currentYear;
         }
-
-        return $currentYear + ($duration - $currentCourse + 1);
+       
+        return $currentYear + ($duration - $currentCourse);
     }
 
     /**
