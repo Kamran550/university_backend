@@ -51,7 +51,7 @@
 
         <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #ddd; font-size: 12px; color: #666;">
             <p>Sincerely,<br>
-            <strong>Prof Dr. Serdar KORAL</strong><br>
+            <strong>Prof Dr. Kenan Kerimov</strong><br>
             Director of International Student Office<br>
             <strong>World Peace University</strong></p>
             <p style="margin-top: 15px;">

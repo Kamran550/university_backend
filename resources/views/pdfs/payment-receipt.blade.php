@@ -344,7 +344,7 @@
     <br>
     <div class="signature-section">
         <div class="signature-name">
-            Prof. Dr. Serdar KORAL
+            Prof. Dr. Kenan Kerimov
         </div>
         <div class="signature-title">
             Rektor
