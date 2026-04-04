@@ -344,7 +344,7 @@
     <br>
     <div class="signature-section">
         <div class="signature-name">
-            Prof. Dr. Kenan Kerimov
+            Prof. Dr. hab. Mirosław Kędrzyński-Woźniak
         </div>
         <div class="signature-title">
             Rektor

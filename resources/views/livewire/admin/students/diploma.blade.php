@@ -467,14 +467,14 @@
                                         {{ $studentApplication->diploma_text['en'] ?? '' }}
                                     </div>
                                     <div class="e-signature">✓ e-signed / e-imzalıdır</div>
-                                    <div class="location-item">Secretary General / Genel Sekreter: Martin Dravoski</div>
+                                    <div class="location-item">General Secretary / Genel Sekreter: Mgr. Karolina Pawłowska-Mirecka</div>
                                 </td>
                                 <td>
                                     <div class="diploma-text-content">
                                         {{ $studentApplication->diploma_text['tr'] ?? '' }}
                                     </div>
                                     <div class="e-signature">✓ e-signed / e-imzalıdır</div>
-                                    <div class="location-item">Rektor / Rectör: Prof. Dr. Kenan Kerimov</div>
+                                    <div class="location-item">Rektor / Rectör: Prof. Dr. hab. Mirosław Kędrzyński-Woźniak</div>
                                 </td>
                             </tr>
                         </table>
@@ -484,8 +484,8 @@
                 <!-- Location & Date -->
                 <div class="location-date">
                     {{-- <div class="location-row">
-                        <div class="location-item">Rector: Prof. Dr. Kenan Kerimov</div>
-                        <div class="location-item">Secretary General: Martin Dravoski</div>
+                        <div class="location-item">Rector: Prof. Dr. hab. Mirosław Kędrzyński-Woźniak</div>
+                        <div class="location-item">General Secretary: Martin Dravoski</div>
                     </div> --}}
                     <div class="date">{{ $graduationDate ?? now()->format('F d, Y') }}</div>
                 </div>

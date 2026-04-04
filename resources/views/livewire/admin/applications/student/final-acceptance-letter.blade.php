@@ -427,10 +427,10 @@
     <!-- Signature Section -->
     <div class="signature-section">
         <div class="signature-name">
-            Prof. Dr. Kenan Kerimov
+            Mgr. Karolina Pawłowska-Mirecka
         </div>
         <div class="signature-title">
-            Rector
+            General Secretary
         </div>
     </div>
 

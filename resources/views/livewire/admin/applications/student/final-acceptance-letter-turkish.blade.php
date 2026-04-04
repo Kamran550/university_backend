@@ -430,10 +430,10 @@
     <!-- Signature Section -->
     <div class="signature-section">
         <div class="signature-name">
-            Prof. Dr. Kenan Kerimov
+            Mgr. Karolina Pawłowska-Mirecka
         </div>
         <div class="signature-title">
-            Rektör
+        General Secretary
         </div>
     </div>
 
@@ -491,7 +491,7 @@
                     </p>
                     <p style="margin: 2px 0; text-align: center;">
                         <strong>e-mail:</strong> info@eipu.edu.pl | rectorate@eipu.edu.pl | <strong>Web:</strong>
-                        www.eipu.edu.pl | www.eipu.edu.rs
+                        www.eipu.edu.pl | www.eipu.edu.pl
                     </p>
                 </td>
             </tr>
