@@ -24,7 +24,7 @@ class TransferApplicationRequest extends FormRequest
         ]);
     }
 
-      /**
+    /**
      * Get the validation rules that apply to the request.
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
@@ -46,19 +46,19 @@ class TransferApplicationRequest extends FormRequest
             'place_of_birth' => ['required', 'string', 'max:100'],
             'nationality' => ['required', 'string', 'max:100'],
             'native_language' => ['required', 'string', 'max:50'],
-            
+
             // Contact information
             'phone' => ['required', 'string', 'max:20'],
             'email' => ['required', 'email', 'max:255', Rule::unique('student_applications', 'email')],
-            
+
             // Address
             'country' => ['required', 'string', 'max:100'],
             'city' => ['required', 'string', 'max:100'],
             'address_line' => ['required', 'string'],
-            
+
             // Documents (files)
             'photo_id' => ['nullable', 'file', 'mimes:jpg,jpeg,png,pdf', 'max:5120'],
-            'profile_photo' => ['nullable', 'file', 'mimes:jpg,jpeg,png', 'max:5120'],
+            'profile_photo' => ['nullable', 'file', 'mimes:jpg,jpeg,png,pdf', 'max:5120'],
             'high_school_diploma' => ['nullable', 'file', 'mimes:jpg,jpeg,png,pdf', 'max:5120'],
             'high_school_transcript' => ['nullable', 'file', 'mimes:jpg,jpeg,png,pdf', 'max:5120'],
             'bachelor_diploma' => ['nullable', 'file', 'max:5120'],
