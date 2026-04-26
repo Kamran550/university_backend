@@ -65,7 +65,7 @@ class StudentApplicationRequest extends ApiFormRequest
             
             // Documents (files)
             'photo_id' => ['nullable', 'file', 'mimes:jpg,jpeg,png,pdf', 'max:5120'],
-            'profile_photo' => ['nullable', 'file', 'mimes:jpg,jpeg,png', 'max:5120'],
+            'profile_photo' => ['nullable', 'file', 'mimes:jpg,jpeg,png,pdf', 'max:5120'],
             'high_school_diploma' => ['nullable', 'file', 'mimes:jpg,jpeg,png,pdf', 'max:5120'],
             'high_school_transcript' => ['nullable', 'file', 'mimes:jpg,jpeg,png,pdf', 'max:5120'],
             'bachelor_diploma' => ['nullable', 'file', 'max:5120'],
