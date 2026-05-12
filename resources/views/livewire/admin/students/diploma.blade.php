@@ -474,7 +474,7 @@
                                         {{ $studentApplication->diploma_text['tr'] ?? '' }}
                                     </div>
                                     <div class="e-signature">✓ e-signed / e-imzalıdır</div>
-                                    <div class="location-item">Rektor / Rectör: Prof. Dr. hab. Mirosław Kędrzyński-Woźniak</div>
+                                    <div class="location-item">Rektor / Rektör: Prof. Dr. hab. Mirosław Kędrzyński-Woźniak</div>
                                 </td>
                             </tr>
                         </table>
