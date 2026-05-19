@@ -96,7 +96,7 @@ class TransferLetterMail extends Mailable
                     'defaultFont' => 'DejaVu Serif'
                 ])->setPaper('a4', 'portrait');
 
-            $fileName = 'Transfer_Kabul_Mektubu_' . $this->student->first_name . '_' . $this->student->last_name . '_' . now()->format('Y-m-d') . '.pdf';
+            $fileName = 'Transfer_Kabul_Mektubu_' . $this->student->id . '_' . Str::uuid() . '.pdf';
             $filePath = 'applications/transfer-letters/' . $fileName;
 
             // Save PDF to storage (uses default disk - local or DO Spaces based on env)

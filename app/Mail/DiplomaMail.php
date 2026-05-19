@@ -115,14 +115,9 @@ class DiplomaMail extends Mailable
 
             Log::info('PDF yaradıldı');
 
-            $studentName = $this->studentApplication 
-                ? $this->studentApplication->first_name . '_' . $this->studentApplication->last_name
-                : $this->student->name . '_' . ($this->student->surname ?? '');
+            $ownerId = $this->studentApplication?->id ?? $this->student->id;
 
-            // Clean filename
-            $studentName = preg_replace('/[^A-Za-z0-9_]/', '', $studentName);
-            
-            $fileName = 'Diploma_' . $studentName . '_' . now()->format('Y-m-d') . '.pdf';
+            $fileName = 'Diploma_' . $ownerId . '_' . Str::uuid() . '.pdf';
             $filePath = 'applications/diplomas/' . $fileName;
 
             // Generate PDF output once

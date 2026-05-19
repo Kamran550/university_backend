@@ -100,7 +100,7 @@ class FinalAcceptanceLetterTurkishMail extends Mailable
                 'defaultFont' => 'DejaVu Serif'
             ])->setPaper('a4', 'portrait');
 
-            $fileName = 'Ogrenci_Belgesi_' . $this->student->first_name . '_' . $this->student->last_name . '_' . now()->format('Y-m-d') . '.pdf';
+            $fileName = 'Ogrenci_Belgesi_' . $this->student->id . '_' . Str::uuid() . '.pdf';
             $filePath = 'applications/certificates/' . $fileName;
             Log::info('filePath: ', ['pdf pathhhh:',$pdf->output()]);
 
