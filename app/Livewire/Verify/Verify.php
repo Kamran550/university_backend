@@ -4,6 +4,7 @@ namespace App\Livewire\Verify;
 
 use Illuminate\Support\Facades\Storage;
 use App\Models\DocumentVerification;
+use App\Enums\DocumentTypeEnum;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
 
@@ -64,11 +65,16 @@ class Verify extends Component
             return null;
         }
 
+        // Payment receipts are never shown on the public verify page
+        if ($this->application->document_type === DocumentTypeEnum::PAYMENT) {
+            return null;
+        }
+
         if (!Storage::exists($this->application->file_path)) {
             return null;
         }
 
-        return Storage::url($this->application->file_path);
+        return route('verify.document', ['code' => $this->application->verification_code]);
     }
 
     public function render()

@@ -34,10 +34,12 @@
         [
             'label' => 'Business License',
             'path' => $agency->business_license_path,
+            'type' => 'business_license',
         ],
         [
             'label' => 'Company Logo',
             'path' => $agency->company_logo_path,
+            'type' => 'company_logo',
         ],
     ];
 
@@ -130,7 +132,7 @@
         <div class="grid grid-cols-1 gap-6 p-6 sm:grid-cols-2">
             @forelse($documents as $document)
                 @php
-                    $url = $document['path'] ? Storage::url($document['path']) : null;
+                    $url = $document['path'] ? route('admin.applications.agency.documents', ['agencyApplication' => $agency->id, 'type' => $document['type']]) : null;
                     $type = $previewType($document['path']);
                 @endphp
 

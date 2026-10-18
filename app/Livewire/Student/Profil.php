@@ -66,13 +66,7 @@ class Profil extends Component
         $this->username = $user->username;
         $this->phone = $user->phone;
 
-        if ($user->profile_photo) {
-            /** @var \Illuminate\Filesystem\FilesystemAdapter $disk */
-            $disk = Storage::disk('do_spaces');
-            $this->profile_photo_preview = $disk->url($user->profile_photo);
-        } else {
-            $this->profile_photo_preview = '';
-        }
+        $this->profile_photo_preview = $user->profile_photo_url ?? '';
     }
 
     public function updatedProfilePhoto()
@@ -144,7 +138,8 @@ class Profil extends Component
                 Log::info('Photo stored successfully', ['path' => $path]);
 
                 $updateData['profile_photo'] = $path;
-                $this->profile_photo_preview = $disk->url($path);
+                $user->profile_photo = $path;
+                $this->profile_photo_preview = $user->profile_photo_url;
             } catch (\Exception $e) {
                 Log::error('Failed to upload photo', [
                     'error' => $e->getMessage(),

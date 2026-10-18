@@ -16,6 +16,7 @@ use App\Livewire\Admin\Payments\Index as PaymentsIndex;
 use App\Livewire\Admin\Payments\Show as PaymentsShow;
 use Illuminate\Support\Facades\Route;
 use App\Livewire\Admin\Applications\Agency\ShowAgency;
+use App\Http\Controllers\FileController;
 
 
 
@@ -63,11 +64,18 @@ Route::name('admin.')->group(function () {
             Route::prefix('student')->name('student.')->group(function () {
                 Route::get('/', StudentApplicationsIndex::class)->name('index');
                 Route::get('/{student}', ShowStudent::class)->name('show')->where('student', '[0-9]+');
+                // Private application documents (streamed, not public on Spaces)
+                Route::get('/{studentApplication}/documents/{type}', [FileController::class, 'studentDocument'])
+                    ->name('documents')
+                    ->where(['studentApplication' => '[0-9]+', 'type' => '[a-z_]+']);
             });
 
             Route::prefix('agency')->name('agency.')->group(function () {
                 Route::get('/', AgencyApplicationsIndex::class)->name('index');
                 Route::get('/{agency}', ShowAgency::class)->name('show');
+                Route::get('/{agencyApplication}/documents/{type}', [FileController::class, 'agencyDocument'])
+                    ->name('documents')
+                    ->where(['agencyApplication' => '[0-9]+', 'type' => '[a-z_]+']);
             });
         });
     });

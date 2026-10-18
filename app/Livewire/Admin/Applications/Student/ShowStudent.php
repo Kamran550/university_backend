@@ -36,6 +36,8 @@ class ShowStudent extends Component
     public function sendAcceptanceLetter()
     {
         try {
+            // ini_set('max_execution_time', '120');
+
             Log::info('=== sendAcceptanceLetter metodu çağırıldı ===');
             Log::info('Student ID: ' . $this->student->id);
             Log::info('Student Email: ' . ($this->student->email ?? 'YOXDUR'));

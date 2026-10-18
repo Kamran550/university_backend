@@ -51,7 +51,7 @@ class ApplicationService
         ]);
 
         try {
-            $path = Storage::disk($disk)->putFileAs($directory, $file, $filename, 'public');
+            $path = Storage::disk($disk)->putFileAs($directory, $file, $filename);
             Log::info('File uploaded successfully', ['path' => $path]);
             return $path;
         } catch (\Exception $e) {
