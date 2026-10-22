@@ -40,6 +40,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        // Re-run admin auth + 2FA checks on Livewire update requests (/livewire/update),
+        // not only on the initial page load.
+        \Livewire\Livewire::addPersistentMiddleware([
+            \App\Http\Middleware\AdminMiddleware::class,
+        ]);
     }
 }

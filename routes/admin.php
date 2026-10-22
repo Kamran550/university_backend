@@ -23,6 +23,8 @@ use App\Http\Controllers\FileController;
 Route::name('admin.')->group(function () {
     // Login route (without middleware)
     Route::get('/login', \App\Livewire\Admin\Auth\Login::class)->name('login');
+    // Google Authenticator setup / OTP step (requires a password-verified pending login)
+    Route::get('/two-factor', \App\Livewire\Admin\Auth\TwoFactorChallenge::class)->name('two-factor');
     Route::post('/logout', \App\Livewire\Admin\Auth\Logout::class)->name('logout')->middleware('admin');
 
     // Protected routes (with admin middleware)
